@@ -1,10 +1,10 @@
 package com.infoshareacademy;
 
-public class HolidaysJSONData {
+public class HolidaysJsonData {
     private ServerInfo serverInfo;
     private ServerResponse serverResponse;
 
-    public HolidaysJSONData(ServerInfo serverInfo, ServerResponse serverResponse) {
+    public HolidaysJsonData(ServerInfo serverInfo, ServerResponse serverResponse) {
         this.serverInfo = serverInfo;
         this.serverResponse = serverResponse;
     }
