@@ -1,14 +1,31 @@
 package com.infoshareacademy;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Holidays {
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("description")
+    @Expose
     private String description;
+    @SerializedName("country")
+    @Expose
     private Country country;
+    @SerializedName("date")
+    @Expose
     private HolidayDate holidayDate;
-    private List<String> type;
+    @SerializedName("type")
+    @Expose
+    private List<String> type = null;
+    @SerializedName("locations")
+    @Expose
     private String locations;
+    @SerializedName("states")
+    @Expose
     private String states;
 
     public Holidays(String name, String description, Country country, HolidayDate holidayDate, List<String> type, String locations, String states) {
@@ -75,5 +92,10 @@ public class Holidays {
 
     public String getStates() {
         return states;
+    }
+
+    @Override
+    public String toString() {
+        return "name: " + name + "\n" + "description: " + description + "\n" + country.toString() + "\n" + holidayDate.toString() + "\n" + "type: " + type + "\n" + "locations: " + locations + "\n" + "states: " + states + "\n" + "\n";
     }
 }
