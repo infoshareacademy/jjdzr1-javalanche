@@ -12,11 +12,11 @@ public class App {
     public static void main(String[] args) {
         STDOUT.info("jAvalanche \n");
 
-        HolidaysJSONData holidaysJSONData = HolidaysJSONData.readDataFromJsonFile();
-        for (int i = 0; i < holidaysJSONData.getServerResponse().getHolidays().size(); i++) {
-            String temp = holidaysJSONData.getServerResponse().getHolidays().get(i).toString();
+        HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
+        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
+            String temp = holidaysJsonData.getServerResponse().getHolidays().get(i).toString();
             STDOUT.info(temp);
         }
-        STDOUT.info(holidaysJSONData.toString());
+        STDOUT.info(holidaysJsonData.toString());
     }
 }

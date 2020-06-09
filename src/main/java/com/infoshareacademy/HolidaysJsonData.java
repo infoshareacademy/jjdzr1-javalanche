@@ -8,7 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 
-public class HolidaysJSONData {
+public class HolidaysJsonData {
     @SerializedName("meta")
     @Expose
     private ServerInfo serverInfo;
@@ -16,10 +16,10 @@ public class HolidaysJSONData {
     @Expose
     private ServerResponse serverResponse;
 
-    public HolidaysJSONData() {
+    public HolidaysJsonData() {
     }
 
-    public HolidaysJSONData(ServerInfo serverInfo, ServerResponse serverResponse) {
+    public HolidaysJsonData(ServerInfo serverInfo, ServerResponse serverResponse) {
         this.serverInfo = serverInfo;
         this.serverResponse = serverResponse;
     }
@@ -45,11 +45,11 @@ public class HolidaysJSONData {
         return "Server info: " + serverInfo.toString() + "\n";
     }
 
-    public static HolidaysJSONData readDataFromJsonFile() {
+    public static HolidaysJsonData readDataFromJsonFile() {
         Gson gson = new Gson();
-        HolidaysJSONData holidaysJSONData = new HolidaysJSONData();
+        HolidaysJsonData holidaysJSONData = new HolidaysJsonData();
         try (Reader reader1 = new FileReader("src/main/resources/db_holidaysNational.json")) {
-            holidaysJSONData = gson.fromJson(reader1, HolidaysJSONData.class);
+            holidaysJSONData = gson.fromJson(reader1, HolidaysJsonData.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
