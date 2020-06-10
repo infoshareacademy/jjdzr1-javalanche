@@ -1,8 +1,17 @@
 package com.infoshareacademy;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class HolidayDateTime {
+    @SerializedName("year")
+    @Expose
     private Integer year;
+    @SerializedName("month")
+    @Expose
     private Integer month;
+    @SerializedName("day")
+    @Expose
     private Integer day;
 
     public HolidayDateTime(Integer year, Integer month, Integer day) {
@@ -33,5 +42,10 @@ public class HolidayDateTime {
 
     public Integer getDay() {
         return day;
+    }
+
+    @Override
+    public String toString() {
+        return "year: " + year + "\n" + "month: " + month + "\n" + "day: " + day;
     }
 }

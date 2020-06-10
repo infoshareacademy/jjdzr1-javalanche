@@ -1,9 +1,14 @@
 package com.infoshareacademy;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class ServerResponse {
-    private List<Holidays> holidays;
+    @SerializedName("holidays")
+    @Expose
+    private List<Holidays> holidays = null;
 
     public ServerResponse(List<Holidays> holidays) {
         this.holidays = holidays;
