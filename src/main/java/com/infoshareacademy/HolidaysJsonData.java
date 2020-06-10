@@ -18,7 +18,6 @@ public class HolidaysJsonData {
 
     public HolidaysJsonData() {
     }
-
     public HolidaysJsonData(ServerInfo serverInfo, ServerResponse serverResponse) {
         this.serverInfo = serverInfo;
         this.serverResponse = serverResponse;
@@ -39,7 +38,7 @@ public class HolidaysJsonData {
     public ServerResponse getServerResponse() {
         return serverResponse;
     }
-
+  
     @Override
     public String toString() {
         return "Server info: " + serverInfo.toString() + "\n";
