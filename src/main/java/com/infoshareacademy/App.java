@@ -1,7 +1,10 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.configurations.PropertiesReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 /**
  * jAvalanche
@@ -18,5 +21,6 @@ public class App {
             STDOUT.info(temp);
         }
         STDOUT.info(holidaysJsonData.toString());
+
     }
 }
