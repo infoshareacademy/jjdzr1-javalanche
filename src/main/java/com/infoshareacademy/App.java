@@ -25,12 +25,19 @@ public class App {
 //            holidaysList = (List<Holidays>) holidaysJsonData.getServerResponse().getHolidays().get(i);
 //            STDOUT.info(String.valueOf(holidaysList));
 //        }
+
 //        STDOUT.info(holidaysJsonData.toString());
 //            List<Holidays> holidaysList = new ArrayList<>();
 //        ServerResponse serverResponse = new ServerResponse(holidaysList);
 //        STDOUT.info(serverResponse.getHolidays().toString());
-            HolidaysJsonData holidaysJson = new HolidaysJsonData();
-            STDOUT.info(holidaysJson.printAllHolidays().toString());
+
+//            HolidaysJsonData holidaysJson = new HolidaysJsonData();
+//            STDOUT.info(holidaysJson.printAllHolidays().toString());
+
+            //1
+            List<Holidays> holidaysList = new ArrayList<>();
+            ServerResponse serverResponse = new ServerResponse(holidaysList);
+            System.out.println(serverResponse.getHolidays());
 
 
     }

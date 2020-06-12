@@ -23,7 +23,8 @@ public class ServerResponse {
 
     // public List<Holidays> getHolidays() {
     //       return holidays;
-    //  }
+
+    //1
     public List<Holidays> getHolidays() {
         List<Holidays> allHolidayList = new ArrayList<>();
         for (Holidays holidays : holidays) {
@@ -34,9 +35,6 @@ public class ServerResponse {
             allHolidayList.remove(holidays.getCountry());
             allHolidayList.remove(holidays.getLocations());
             allHolidayList.remove(holidays.getStates());
-            int i = allHolidayList.size();
-            i++;
-            //    allHolidayList.add(holidays.getName());
         }
         return allHolidayList;
 
