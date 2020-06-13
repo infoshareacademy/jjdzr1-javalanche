@@ -9,6 +9,21 @@ import org.slf4j.LoggerFactory;
 public class App {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
+    public static void clearConsole(){
+        try{
+            final String os = System.getProperty("os.name");
+            if (os.contains("Windows")){
+                Runtime.getRuntime().exec("cls");
+            }
+            else {
+                Runtime.getRuntime().exec("clear");
+            }
+        }
+        catch (final Exception e){
+
+        }
+    }
+
     public static void main(String[] args) {
         STDOUT.info("jAvalanche \n");
 
@@ -18,5 +33,7 @@ public class App {
             STDOUT.info(temp);
         }
         STDOUT.info(holidaysJsonData.toString());
+        MenuHoliday menuHoliday = new MenuHoliday();
+        menuHoliday.menuHoliday();
     }
 }
