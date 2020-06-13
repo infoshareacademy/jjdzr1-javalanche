@@ -1,7 +1,5 @@
 package com.infoshareacademy;
 
-import sun.rmi.rmic.Main;
-
 import java.util.Scanner;
 
 public class UserLogin {
