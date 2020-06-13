@@ -6,10 +6,13 @@ import java.util.Scanner;
 
 public class UserLogin {
     public void userLogin(){
+        App.clearConsole();
         Scanner scanner = new Scanner(System.in);
         MainMenu.STDOUT.info("User:");
         String user = scanner.next();
         MainMenu.STDOUT.info("Password");
         String password = scanner.next();
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.mainMenu();
     }
 }

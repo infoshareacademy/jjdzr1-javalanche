@@ -22,7 +22,15 @@ public class MenuEdit {
                 break;
             }
             case 3:{
-
+                editEmployee();
+                break;
+            }
+            case 4:{
+                loadFromFile();
+                break;
+            }
+            default:{
+                break;
             }
         }
     }
@@ -47,6 +55,9 @@ public class MenuEdit {
             }
             case 3:{
                 editMembersOfTeam();
+                break;
+            }
+            default:{
                 break;
             }
         }

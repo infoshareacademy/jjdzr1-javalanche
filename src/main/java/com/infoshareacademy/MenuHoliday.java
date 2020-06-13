@@ -25,7 +25,9 @@ public class MenuHoliday {
                 acceptHolidayRequest();
                 break;
             }
-            default: break;
+            default:{
+                break;
+            }
         }
     }
 
