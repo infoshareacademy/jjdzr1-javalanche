@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class MenuSearch {
 
     public void menuSearch(){
+        App.clearConsole();
         Scanner scanner = new Scanner(System.in);
         MainMenu.STDOUT.info("Choose option");
         MainMenu.STDOUT.info("1. Searching holidays");
@@ -31,12 +32,15 @@ public class MenuSearch {
     }
 
     public void searchingHolidays(){
+        App.clearConsole();
         MainMenu.STDOUT.info("Searching holidays");
     }
     public void searchingByEmployer(){
+        App.clearConsole();
         MainMenu.STDOUT.info("Searching holidays by employer");
     }
     public void searchingByTeam(){
+        App.clearConsole();
         MainMenu.STDOUT.info("Searching holidays by team");
     }
 }
