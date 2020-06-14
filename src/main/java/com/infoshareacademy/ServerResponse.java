@@ -31,10 +31,10 @@ public class ServerResponse {
 
             allHolidayList.add(new Holidays(holidays.getName(), holidays.getDescription(), holidays.getCountry(),
                     holidays.getHolidayDate(), holidays.getType(), holidays.getLocations(), holidays.getStates()));
-            allHolidayList.remove(holidays.getDescription());
-            allHolidayList.remove(holidays.getCountry());
-            allHolidayList.remove(holidays.getLocations());
-            allHolidayList.remove(holidays.getStates());
+//            allHolidayList.remove(holidays.getDescription());
+//            allHolidayList.remove(holidays.getCountry());
+//            allHolidayList.remove(holidays.getLocations());
+//            allHolidayList.remove(holidays.getStates());
         }
         return allHolidayList;
 

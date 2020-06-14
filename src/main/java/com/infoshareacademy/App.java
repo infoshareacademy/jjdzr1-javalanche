@@ -18,13 +18,13 @@ public class App {
         STDOUT.info("jAvalanche \n");
 
 
-//        HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
-//        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-//            String temp = holidaysJsonData.getServerResponse().getHolidays().get(i).toString();
-//            STDOUT.info(temp);
-//            holidaysList = (List<Holidays>) holidaysJsonData.getServerResponse().getHolidays().get(i);
-//            STDOUT.info(String.valueOf(holidaysList));
-//        }
+        HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
+        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
+            String temp = holidaysJsonData.getServerResponse().getHolidays().get(i).toString();
+            STDOUT.info(temp);
+            //holidaysList = (List<Holidays>) holidaysJsonData.getServerResponse().getHolidays().get(i);
+           // STDOUT.info(String.valueOf(holidaysList));
+        }
 
 //        STDOUT.info(holidaysJsonData.toString());
 //            List<Holidays> holidaysList = new ArrayList<>();
