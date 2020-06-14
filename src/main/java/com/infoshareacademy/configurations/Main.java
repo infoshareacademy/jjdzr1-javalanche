@@ -1,9 +1,6 @@
 package com.infoshareacademy.configurations;
 
 import java.io.IOException;
-import java.util.Date;
-
-import static com.infoshareacademy.configurations.PropertiesReader.sortCategory;
 
 public class Main {
 
@@ -21,18 +18,15 @@ public class Main {
         dateFormats[1] = "MMddyyyy";
         dateFormats[2] = "yyyyMMdd";
 
-        PropertiesReader propRead = new PropertiesReader();
+        PropertiesReader propertiesReader = new PropertiesReader();
 
-        System.out.println(propRead.toString() + "\n");
+        System.out.println(propertiesReader.toString() + "\n");
 
-        propRead.setSortCategory(sortCategories);
-        propRead.setDateFormat(dateFormats);
-        propRead.setSortOrder(sortOrders);
+        propertiesReader.setSortCategory(sortCategories);
+        propertiesReader.setDateFormat(dateFormats);
+        propertiesReader.setSortOrder(sortOrders);
 
-        System.out.println(propRead.toString());
-
-        System.out.println(sortCategory);
-
+        System.out.println("\n" + propertiesReader.toString());
 
     }
 }

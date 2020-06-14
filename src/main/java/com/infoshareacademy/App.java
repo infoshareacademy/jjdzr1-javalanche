@@ -12,7 +12,7 @@ import java.io.IOException;
 public class App {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         STDOUT.info("jAvalanche \n");
 
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
@@ -21,6 +21,11 @@ public class App {
             STDOUT.info(temp);
         }
         STDOUT.info(holidaysJsonData.toString());
+
+        PropertiesReader propertiesReader = new PropertiesReader();
+
+        System.out.println(propertiesReader.getDateFormat());
+
 
     }
 }
