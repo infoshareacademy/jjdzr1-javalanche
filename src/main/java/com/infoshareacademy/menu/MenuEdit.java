@@ -1,13 +1,10 @@
 package com.infoshareacademy.menu;
 
-import com.infoshareacademy.App;
-import com.infoshareacademy.menu.MainMenu;
-
 import java.util.Scanner;
 
 public class MenuEdit {
     public void menuEdit(){
-        App.clearConsole();
+        ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
         MainMenu.STDOUT.info("Choose option:\n");
         MainMenu.STDOUT.info("1. Add team\n");
@@ -40,7 +37,7 @@ public class MenuEdit {
 
     public void addTeam(){
         Scanner scanner = new Scanner(System.in);
-        App.clearConsole();
+        ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Add team\n");
         MainMenu.STDOUT.info("Choose option:\n");
         MainMenu.STDOUT.info("1. Add employee\n");
@@ -66,27 +63,27 @@ public class MenuEdit {
         }
     }
     public void addTeamLeader(){
-        App.clearConsole();
+        ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Add TeamLeader");
     }
     public void addEmployee(){
-        App.clearConsole();
+        ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Add employee");
     }
     public void editEmployee(){
-        App.clearConsole();
+        ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Edit Employee");
     }
     public void deleteEmplyee(){
-        App.clearConsole();
+        ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Delete employee");
     }
     public void editMembersOfTeam(){
-        App.clearConsole();
+        ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Edit members of team");
     }
     public void loadFromFile(){
-        App.clearConsole();
+        ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Load from file");
     }
 }

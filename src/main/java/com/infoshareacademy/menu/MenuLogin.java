@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class MenuLogin {
     public void Login(){
-        App.clearConsole();
+        ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
         MainMenu.STDOUT.info("User:");
         String user = scanner.next();

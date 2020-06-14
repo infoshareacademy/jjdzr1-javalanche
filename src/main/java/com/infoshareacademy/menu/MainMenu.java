@@ -11,7 +11,7 @@ public class MainMenu {
     public static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
     public void mainMenu(){
-        App.clearConsole();
+        ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
         STDOUT.info("Choose option:\n");
         STDOUT.info("1. Holiday request\n");

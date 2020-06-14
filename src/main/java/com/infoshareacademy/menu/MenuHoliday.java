@@ -1,15 +1,12 @@
 package com.infoshareacademy.menu;
 
-import com.infoshareacademy.App;
-import com.infoshareacademy.menu.MainMenu;
-
 import java.util.Scanner;
 
 public class MenuHoliday {
 
     public void menuHoliday(){
         Scanner scanner = new Scanner(System.in);
-        App.clearConsole();
+        ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Choose option: \n");
         MainMenu.STDOUT.info("1. Add holiday request\n");
         MainMenu.STDOUT.info("2. Cancel holiday request\n");
@@ -35,17 +32,17 @@ public class MenuHoliday {
     }
 
     public void addHolidayRequest(){
-        App.clearConsole();
+        ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Add holiday request");
     }
 
     public void cancelHolidayRequest(){
-        App.clearConsole();
+        ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Cancel holiday request");
     }
 
     public void acceptHolidayRequest(){
-        App.clearConsole();
+        ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Accept holiday request");
     }
 }
