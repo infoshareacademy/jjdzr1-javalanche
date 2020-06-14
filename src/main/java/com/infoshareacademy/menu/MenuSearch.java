@@ -1,4 +1,7 @@
-package com.infoshareacademy;
+package com.infoshareacademy.menu;
+
+import com.infoshareacademy.App;
+import com.infoshareacademy.menu.MainMenu;
 
 import java.util.Scanner;
 
@@ -18,7 +21,7 @@ public class MenuSearch {
                 break;
             }
             case 2:{
-                searchingByEmployer();
+                searchingByEmployee();
                 break;
             }
             case 3:{
@@ -35,7 +38,7 @@ public class MenuSearch {
         App.clearConsole();
         MainMenu.STDOUT.info("Searching holidays");
     }
-    public void searchingByEmployer(){
+    public void searchingByEmployee(){
         App.clearConsole();
         MainMenu.STDOUT.info("Searching holidays by employer");
     }

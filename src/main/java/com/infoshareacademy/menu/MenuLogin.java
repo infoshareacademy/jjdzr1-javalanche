@@ -1,9 +1,11 @@
-package com.infoshareacademy;
+package com.infoshareacademy.menu;
+
+import com.infoshareacademy.App;
 
 import java.util.Scanner;
 
-public class UserLogin {
-    public void userLogin(){
+public class MenuLogin {
+    public void Login(){
         App.clearConsole();
         Scanner scanner = new Scanner(System.in);
         MainMenu.STDOUT.info("User:");

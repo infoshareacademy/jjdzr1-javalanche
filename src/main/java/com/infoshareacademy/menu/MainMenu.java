@@ -1,5 +1,6 @@
-package com.infoshareacademy;
+package com.infoshareacademy.menu;
 
+import com.infoshareacademy.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

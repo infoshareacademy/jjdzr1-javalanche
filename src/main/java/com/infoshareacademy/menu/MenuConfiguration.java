@@ -1,4 +1,7 @@
-package com.infoshareacademy;
+package com.infoshareacademy.menu;
+
+import com.infoshareacademy.App;
+import com.infoshareacademy.menu.MainMenu;
 
 import java.util.Scanner;
 
