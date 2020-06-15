@@ -1,5 +1,7 @@
 package com.infoshareacademy.menu;
-
+/*
+metoda do wyczyszczenia konsoli
+ */
 public class ClearConsole {
     public static void clearConsole(){
         try{
