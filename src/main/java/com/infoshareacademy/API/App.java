@@ -1,6 +1,6 @@
-package com.infoshareacademy;
+package com.infoshareacademy.API;
 
-import com.infoshareacademy.configurations.PropertiesReader;
+import com.infoshareacademy.Configurations.PropertiesReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +26,9 @@ public class App {
 
         System.out.println(propertiesReader.getDateFormat());
 
+        PropertiesReader a = new PropertiesReader();
+
+        System.out.println(a.getKeyProperty("dateFormat"));
 
     }
 }
