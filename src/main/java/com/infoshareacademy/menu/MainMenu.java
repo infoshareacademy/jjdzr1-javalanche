@@ -10,7 +10,7 @@ public class MainMenu {
 
     public static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public void mainMenu(){
+    public static void mainMenu(){
         ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
         STDOUT.info("Choose option:\n");
@@ -21,18 +21,15 @@ public class MainMenu {
         int option = scanner.nextInt();
         switch (option){
             case 1:{
-                MenuHoliday menuHoliday = new MenuHoliday();
-                menuHoliday.menuHoliday();
+                MenuHoliday.menuHoliday();
                 break;
             }
             case 2:{
-                MenuEdit menuEdit = new MenuEdit();
-                menuEdit.menuEdit();
+                MenuEdit.menuEdit();
                 break;
             }
             case 3:{
-                MenuSearch menuSearch = new MenuSearch();
-                menuSearch.menuSearch();
+                MenuSearch.menuSearch();
                 break;
             }
             case 4:{

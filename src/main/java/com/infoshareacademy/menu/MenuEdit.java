@@ -3,7 +3,7 @@ package com.infoshareacademy.menu;
 import java.util.Scanner;
 
 public class MenuEdit {
-    public void menuEdit(){
+    public static void menuEdit(){
         ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
         MainMenu.STDOUT.info("Choose option:\n");
@@ -35,7 +35,7 @@ public class MenuEdit {
         }
     }
 
-    public void addTeam(){
+    private static void addTeam(){
         Scanner scanner = new Scanner(System.in);
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Add team\n");
@@ -62,27 +62,27 @@ public class MenuEdit {
             }
         }
     }
-    public void addTeamLeader(){
+    private static void addTeamLeader(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Add TeamLeader");
     }
-    public void addEmployee(){
+    private static void addEmployee(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Add employee");
     }
-    public void editEmployee(){
+    private static void editEmployee(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Edit Employee");
     }
-    public void deleteEmplyee(){
+    private static void deleteEmplyee(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Delete employee");
     }
-    public void editMembersOfTeam(){
+    private static void editMembersOfTeam(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Edit members of team");
     }
-    public void loadFromFile(){
+    private static void loadFromFile(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Load from file");
     }

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class MenuSearch {
 
-    public void menuSearch(){
+    public static void menuSearch(){
         ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
         MainMenu.STDOUT.info("Choose option");
@@ -31,15 +31,15 @@ public class MenuSearch {
         }
     }
 
-    public void searchingHolidays(){
+    private static void searchingHolidays(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Searching holidays");
     }
-    public void searchingByEmployee(){
+    private static void searchingByEmployee(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Searching holidays by employer");
     }
-    public void searchingByTeam(){
+    private static void searchingByTeam(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Searching holidays by team");
     }

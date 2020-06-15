@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class MenuHoliday {
 
-    public void menuHoliday(){
+    public static void menuHoliday(){
         Scanner scanner = new Scanner(System.in);
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Choose option: \n");
@@ -31,17 +31,17 @@ public class MenuHoliday {
         }
     }
 
-    public void addHolidayRequest(){
+    private static void addHolidayRequest(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Add holiday request");
     }
 
-    public void cancelHolidayRequest(){
+    private static void cancelHolidayRequest(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Cancel holiday request");
     }
 
-    public void acceptHolidayRequest(){
+    private static void acceptHolidayRequest(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Accept holiday request");
     }

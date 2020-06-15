@@ -19,8 +19,6 @@ public class App {
         }
         STDOUT.info(holidaysJsonData.toString());
 
-//        MenuLogin menuLogin = new MenuLogin();
-//        menuLogin.Login();
 
     }
 }

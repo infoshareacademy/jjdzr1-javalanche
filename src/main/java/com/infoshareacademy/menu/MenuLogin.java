@@ -1,7 +1,4 @@
 package com.infoshareacademy.menu;
-
-import com.infoshareacademy.App;
-
 import java.util.Scanner;
 
 public class MenuLogin {
