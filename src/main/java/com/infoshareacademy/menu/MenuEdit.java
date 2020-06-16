@@ -100,14 +100,14 @@ public class MenuEdit {
 
         String option = scanner.next();
         if (option.charAt(0) == '1'){
-            deleteEmplyee();
+            deleteEmployee();
         }
         else {
             editEmployee();
         }
         backToMenu();
     }
-    private static void deleteEmplyee(){
+    private static void deleteEmployee(){
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Delete employee");
         backToMenu();
