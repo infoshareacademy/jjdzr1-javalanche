@@ -71,9 +71,11 @@ public class MenuEdit {
             }
             case '4':{
                 menuEdit();
+                break;
             }
             case '5':{
                 MainMenu.mainMenu();
+                break;
             }
             default:{
                 addTeam();

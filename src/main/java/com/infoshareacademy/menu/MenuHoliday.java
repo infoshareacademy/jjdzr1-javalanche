@@ -30,6 +30,7 @@ public class MenuHoliday {
             }
             case '4':{
                 MainMenu.mainMenu();
+                break;
             }
             default:{
                 menuHoliday();
