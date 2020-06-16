@@ -37,7 +37,7 @@ public class App {
             //1
             List<Holidays> holidaysList = new ArrayList<>();
             ServerResponse serverResponse = new ServerResponse(holidaysList);
-            System.out.println(serverResponse.getHolidays());
+            ServerResponse.getHolidays1(holidaysJsonData);
 
 
     }

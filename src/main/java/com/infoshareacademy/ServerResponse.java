@@ -23,43 +23,49 @@ public class ServerResponse {
         this.holidays = holidays;
     }
 
-    // public List<Holidays> getHolidays() {
-    //       return holidays;
-    //HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
+     public List<Holidays> getHolidays() {
 
+         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
+         return holidays;
+     }
 
     //1
-    public List<Holidays> getHolidays () {
+    public static List<Holidays> getHolidays1(HolidaysJsonData holidaysJsonData) {
 
-        Function<HolidaysJsonData,Holidays> externalToHolidays = new Function<HolidaysJsonData, Holidays>() {
-            @Override
-            public Holidays apply(HolidaysJsonData holidaysJsonData) {
-                List<Holidays> list = new ArrayList<>();
-                list.add(holidays.get().getName())       //nie wiem co dać get
-            }
-        }
-        HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
-        List<HolidaysJsonData> jsonList = new ArrayList<>();
-        jsonList.add(holidaysJsonData);
-
-        List<Holidays> allHolidayList = jsonList.stream().map(jsonList).collect(Collectors.<Holidays> toList());
-        for (Holidays holidays : holidays) {
-
-            allHolidayList.add(new Holidays(holidays.getName(), holidays.getDescription(), holidays.getCountry(),
-                    holidays.getHolidayDate(), holidays.getType(), holidays.getLocations(), holidays.getStates()));
-
-//        List<Holidays> allHolidayList = new ArrayList<>();
+//        Function<HolidaysJsonData,Holidays> externalToHolidays = new Function<HolidaysJsonData, Holidays>() {
+//            @Override
+//            public Holidays apply(HolidaysJsonData holidaysJsonData) {
+//                List<Holidays> list = new ArrayList<>();
+//                list.add(holidays.get().getName())       //nie wiem co dać get
+//            }
+//        }
+//        HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
+//        List<HolidaysJsonData> jsonList = new ArrayList<>();
+//        jsonList.add(holidaysJsonData);
+//
+//        List<Holidays> allHolidayList = jsonList.stream().map(jsonList).collect(Collectors.<Holidays> toList());
 //        for (Holidays holidays : holidays) {
 //
+//            allHolidayList.add(new Holidays(holidays.getName(), holidays.getDescription(), holidays.getCountry(),
+//                    holidays.getHolidayDate(), holidays.getType(), holidays.getLocations(), holidays.getStates()));
+
+        List<Holidays> allHolidayList = new ArrayList<>();
+        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
+            allHolidayList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
+            System.out.println(allHolidayList);
+        }
+//        for (List<Holidays> holidaysJsonData.getServerResponse().getHolidays() : holidays) {
+
+
 //            allHolidayList.add(new Holidays(holidays.getName(), holidays.getDescription(), holidays.getCountry(),
 //                    holidays.getHolidayDate(), holidays.getType(), holidays.getLocations(), holidays.getStates()));
 //            allHolidayList.remove(holidays.getDescription());
 //            allHolidayList.remove(holidays.getCountry());
 //            allHolidayList.remove(holidays.getLocations());
 //            allHolidayList.remove(holidays.getStates());
-        }
-        return allHolidayList;
-
+//        }
+//        return allHolidayList;
+return allHolidayList;
     }
 
 }
