@@ -42,7 +42,7 @@ public class MainMenu {
                 break;
             }
             case '5': {
-                MenuLogin.Login();
+                MenuLogin.login();
                 break;
             }
             default: {

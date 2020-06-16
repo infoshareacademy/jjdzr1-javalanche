@@ -6,7 +6,7 @@ public class MenuLogin {
     /*
     Metoda przygotowana do logowania użytkownika, po zalogowaniu zostanie wywołane MainMenu
      */
-    public static void Login(){
+    public static void login(){
         ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
 
