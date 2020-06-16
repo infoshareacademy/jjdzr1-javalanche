@@ -20,7 +20,7 @@ public class App {
         }
         STDOUT.info(holidaysJsonData.toString());
 
-        MenuLogin.Login();
+        MenuLogin.login();
 
     }
 }
