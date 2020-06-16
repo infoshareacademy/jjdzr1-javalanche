@@ -1,5 +1,6 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.menu.MenuLogin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,5 +19,8 @@ public class App {
             STDOUT.info(temp);
         }
         STDOUT.info(holidaysJsonData.toString());
+
+        MenuLogin.login();
+
     }
 }
