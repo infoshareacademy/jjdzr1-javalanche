@@ -22,13 +22,5 @@ public class App {
         }
         STDOUT.info(holidaysJsonData.toString());
 
-        PropertiesReader propertiesReader = new PropertiesReader();
-
-        System.out.println(propertiesReader.getDateFormat());
-
-        PropertiesReader a = new PropertiesReader();
-
-        System.out.println(a.getKeyProperty("dateFormat"));
-
     }
 }

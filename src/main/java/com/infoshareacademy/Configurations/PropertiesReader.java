@@ -3,10 +3,7 @@ package com.infoshareacademy.Configurations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.text.DateFormatter;
 import java.io.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -50,7 +47,6 @@ public class PropertiesReader {
         }
     }
 
-
     public void setDateFormat() throws IOException {
 
         scanner = new Scanner(System.in);
@@ -73,8 +69,6 @@ public class PropertiesReader {
                 String exampleDate = currentDate.format(dateTimeFormatter);
 
                 LocalDate parseExample = LocalDate.parse(exampleDate, dateTimeFormatter);
-
-                System.out.println(exampleDate);
 
             } catch (IllegalArgumentException | UnsupportedTemporalTypeException | DateTimeParseException e) {
                 STDOUT.error("Wrong format: " + e + "\n");
