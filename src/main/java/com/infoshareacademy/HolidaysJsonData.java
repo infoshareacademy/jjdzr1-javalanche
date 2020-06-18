@@ -39,9 +39,16 @@ public class HolidaysJsonData {
         return serverResponse;
     }
   
+//    @Override
+//    public String toString() {
+//        return "Server info: " + serverInfo.toString() + "\n";
+//    }
+
     @Override
     public String toString() {
-        return "Server info: " + serverInfo.toString() + "\n";
+        return "HolidaysJsonData{" +
+                "serverResponse=" + serverResponse +
+                '}';
     }
 
     public static HolidaysJsonData readDataFromJsonFile() {
