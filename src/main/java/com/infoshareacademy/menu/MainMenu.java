@@ -1,9 +1,9 @@
 package com.infoshareacademy.menu;
 
+import com.infoshareacademy.api.HolidaysJsonData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -20,8 +20,9 @@ public class MainMenu {
         STDOUT.info("1. Holiday request\n");
         STDOUT.info("2. Edit\n");
         STDOUT.info("3. Searching\n");
-        STDOUT.info("4. Configuration\n");
-        STDOUT.info("5. Logout(back to MenuLogin)\n");
+        STDOUT.info("4. View Calendar\n");
+        STDOUT.info("5. Configuration\n");
+        STDOUT.info("6. Logout(back to MenuLogin)\n");
 
         option = scanner.next();
 
@@ -39,10 +40,20 @@ public class MainMenu {
                 break;
             }
             case '4': {
-                MenuConfiguration.menuConfiguration();
+                HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
+                for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
+                    String temp = holidaysJsonData.getServerResponse().getHolidays().get(i).toString();
+                    STDOUT.info(temp);
+                }
+                STDOUT.info(holidaysJsonData.toString());
+                backToMenu();
                 break;
             }
             case '5': {
+                MenuConfiguration.menuConfiguration();
+                break;
+            }
+            case '6':{
                 MenuLogin.login();
                 break;
             }
@@ -50,6 +61,18 @@ public class MainMenu {
                 mainMenu();
                 break;
             }
+        }
+    }
+
+    private static void backToMenu(){
+        MainMenu.STDOUT.info("Back to main menu press 1.\n");
+        Scanner scanner = new Scanner(System.in);
+        String option = scanner.next();
+        if (option.charAt(0) == '1'){
+            mainMenu();
+        }
+        else {
+            backToMenu();
         }
     }
 }
