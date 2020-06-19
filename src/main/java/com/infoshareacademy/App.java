@@ -1,8 +1,6 @@
 package com.infoshareacademy;
 
-import com.infoshareacademy.api.HolidaysJsonData;
-import com.infoshareacademy.configurations.PropertiesReader;
-import com.infoshareacademy.menu.MenuLogin;
+import com.infoshareacademy.menu.MainMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,13 +15,6 @@ public class App {
     public static void main(String[] args) throws IOException {
         STDOUT.info("jAvalanche \n");
 
-        HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
-        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            String temp = holidaysJsonData.getServerResponse().getHolidays().get(i).toString();
-            STDOUT.info(temp);
-        }
-        STDOUT.info(holidaysJsonData.toString());
-
-        MenuLogin.login();
+        MainMenu.mainMenu();
     }
 }
