@@ -1,6 +1,7 @@
-package com.infoshareacademy.API;
+package com.infoshareacademy;
 
-import com.infoshareacademy.Configurations.PropertiesReader;
+import com.infoshareacademy.api.HolidaysJsonData;
+import com.infoshareacademy.configurations.PropertiesReader;
 import com.infoshareacademy.menu.MenuLogin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,10 +1,9 @@
 package com.infoshareacademy.menu;
-
 import java.util.Scanner;
 
 public class MenuSearch {
 
-    public static void menuSearch(){
+    public static void menuSearch() {
         ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
 
@@ -39,22 +38,22 @@ public class MenuSearch {
         }
     }
 
-    private static void searchingHolidays(){
+    private static void searchingHolidays() {
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Searching holidays");
         backToMenu();
     }
-    private static void searchingByEmployee(){
+    private static void searchingByEmployee() {
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Searching holidays by employer");
         backToMenu();
     }
-    private static void searchingByTeam(){
+    private static void searchingByTeam() {
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Searching holidays by team");
         backToMenu();
     }
-    private static void backToMenu(){
+    private static void backToMenu() {
         MainMenu.STDOUT.info("Back to search menu press 1.\n");
         MainMenu.STDOUT.info("Back to main menu press 2.\n");
         Scanner scanner = new Scanner(System.in);

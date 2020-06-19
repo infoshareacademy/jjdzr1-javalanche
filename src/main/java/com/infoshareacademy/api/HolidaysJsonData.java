@@ -1,4 +1,4 @@
-package com.infoshareacademy.API;
+package com.infoshareacademy.api;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;

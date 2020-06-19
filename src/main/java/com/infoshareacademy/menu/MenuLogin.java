@@ -1,4 +1,5 @@
 package com.infoshareacademy.menu;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MenuLogin {
@@ -6,7 +7,7 @@ public class MenuLogin {
     /*
     Metoda przygotowana do logowania użytkownika, po zalogowaniu zostanie wywołane MainMenu
      */
-    public static void login(){
+    public static void login() {
         ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
 

@@ -1,4 +1,4 @@
-package com.infoshareacademy.Configurations;
+package com.infoshareacademy.configurations;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,46 +14,40 @@ public class PropertiesReader {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    String dateFormat;
-    String sortOrder;
+    private String dateFormat;
+    private String sortOrder;
+    private InputStream inputStream;
+    private Scanner scanner;
+    private Properties properties;
+    private String propertiesFileName = "src/main/resources/formatsConfigurations.properties";
 
-    InputStream inputStream;
-    Scanner scanner;
+    public PropertiesReader() {
 
-    Properties properties;
-    String propertiesFileName = "src/main/resources/formatsConfigurations.properties";
-
-    public PropertiesReader() throws IOException {
+        properties = new Properties();
 
         try {
-            properties = new Properties();
-
             inputStream = new FileInputStream(propertiesFileName);
-
-            if (inputStream != null) {
-                properties.load(inputStream);
-
-                this.properties = properties;
-            } else {
-                throw new FileNotFoundException("File at '" + propertiesFileName + "' has not been found.");
-            }
-
+            properties.load(inputStream);
             this.dateFormat = properties.getProperty("dateFormat");
             this.sortOrder = properties.getProperty("sortOrder");
         } catch (Exception e) {
             STDOUT.error("Error found:" + e);
         } finally {
-            inputStream.close();
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public void setDateFormat() throws IOException {
+    public void setDateFormat() {
 
         scanner = new Scanner(System.in);
         DateTimeFormatter dateTimeFormatter;
         LocalDate localDate;
 
-        boolean isFormatIncorrect = false;
+        boolean isFormatIncorrect;
         String givenDateFormat = null;
 
         do {
@@ -68,23 +62,32 @@ public class PropertiesReader {
                 LocalDate currentDate = LocalDate.now();
                 String exampleDate = currentDate.format(dateTimeFormatter);
 
-                LocalDate parseExample = LocalDate.parse(exampleDate, dateTimeFormatter);
+                LocalDate.parse(exampleDate, dateTimeFormatter);
 
-            } catch (IllegalArgumentException | UnsupportedTemporalTypeException | DateTimeParseException e) {
+            } catch (Exception e) {
                 STDOUT.error("Wrong format: " + e + "\n");
                 isFormatIncorrect = true;
             }
         }
         while (isFormatIncorrect);
 
-        FileWriter output = new FileWriter(propertiesFileName);
+        FileWriter output = null;
+        try {
+            output = new FileWriter(propertiesFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         properties.setProperty("dateFormat", givenDateFormat);
-        properties.store(output, null);
+        try {
+            properties.store(output, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.dateFormat = properties.getProperty("dateFormat");
     }
 
-    public void setSortOrder() throws IOException {
+    public void setSortOrder() {
 
         String ascendingOrder = "ASC";
         String descendingOrder = "DESC";
@@ -95,7 +98,12 @@ public class PropertiesReader {
 
         int decision = usersDecisionInterpreter(2);
 
-        FileWriter output = new FileWriter(propertiesFileName);
+        FileWriter output = null;
+        try {
+            output = new FileWriter(propertiesFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if (decision == 1) {
             properties.setProperty("sortOrder", ascendingOrder);
@@ -103,7 +111,11 @@ public class PropertiesReader {
             properties.setProperty("sortOrder", descendingOrder);
         }
 
-        properties.store(output, null);
+        try {
+            properties.store(output, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.sortOrder = properties.getProperty("sortOrder");
 
         STDOUT.info("Chosen option is '" + this.sortOrder + "'.\n\n");
@@ -115,14 +127,6 @@ public class PropertiesReader {
 
     public String getSortOrder() {
         return this.sortOrder;
-    }
-
-    @Override
-    public String toString() {
-        return "Chosen options are: {" +
-                ", dateFormat='" + dateFormat + '\'' +
-                ", sortOrder='" + sortOrder + '\'' +
-                '}';
     }
 
     public int usersDecisionInterpreter(Integer numberOfOptions) {
