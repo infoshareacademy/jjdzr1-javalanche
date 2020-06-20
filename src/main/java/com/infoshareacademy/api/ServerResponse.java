@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.api;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -26,14 +26,4 @@ public class ServerResponse {
     public List<Holidays> getHolidays() {
         return holidays;
     }
-
-    public static List<Holidays> getHolidays1(HolidaysJsonData holidaysJsonData) {
-        List<Holidays> allHolidayList = new ArrayList<>();
-        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            allHolidayList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
-        }
-        System.out.println(allHolidayList);
-        return allHolidayList;
-    }
-
 }

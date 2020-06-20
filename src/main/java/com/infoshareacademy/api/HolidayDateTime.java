@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.api;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
