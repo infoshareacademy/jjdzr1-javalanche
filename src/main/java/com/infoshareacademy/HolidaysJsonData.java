@@ -61,37 +61,5 @@ public class HolidaysJsonData {
         }
         return holidaysJSONData;
     }
-
-    public List<Holidays> printAllHolidays() throws IOException {
-
-        //2.
-//        HolidaysJsonData holidaysJsonData = new HolidaysJsonData();
-//        Reader fileReader = new FileReader("src/main/resources/db_holidaysNational1.json");
-//        Type holidayListType = new TypeToken<ArrayList<Holidays>>() {
-//        }.getType();
-//        List<Holidays> holidaysArray = new Gson().fromJson(fileReader, holidayListType);
-//        return holidaysArray;
-
-        //3.
-        HolidaysJsonData jsonData = new HolidaysJsonData();
-
-        Gson gson = new Gson();
-
-        Type listType = new TypeToken<List<Holidays>>() {}.getType();
-
-        List<Holidays> list = gson.fromJson(jsonData.loadFileFromClasspath("src/main/resources/db_holidaysNational1.json"), listType);
-
-        System.out.println(gson.toJson(list));
-        return list;
-
-    }
-    //3.
-    public String loadFileFromClasspath(String fileName) throws IOException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        try (InputStream inputStream = classLoader.getResourceAsStream(fileName)) {
-            return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-        }
-    }
-
 }
 
