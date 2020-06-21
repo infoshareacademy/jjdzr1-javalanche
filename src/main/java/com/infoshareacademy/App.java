@@ -25,7 +25,6 @@ public class App {
 
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
         Printer.listBuilder(holidaysJsonData);
-
         MainMenu.mainMenu();
     }
 }

@@ -15,4 +15,21 @@ public class Printer {
         //System.out.println(allHolidayList);
         return allHolidayList;
     }
+
+    public static List<String> getImportantInfo (HolidaysJsonData holidaysJsonData) {
+
+        List<String> importantInfoList = new ArrayList<>();
+        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
+            importantInfoList.add(holidaysJsonData.getServerResponse().getHolidays().get(i).getName() + " - " +holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getIso());
+            //importantInfoList.add(holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getIso());
+            //importantInfoList.add(holidaysJsonData.getServerResponse().getHolidays().get(i).getType().toString());
+
+        }
+        // Check for printing importantInfo list
+        //System.out.println(importantInfoList);
+        return importantInfoList;
+    }
+
+
+
 }
