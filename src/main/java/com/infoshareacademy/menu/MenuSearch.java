@@ -1,4 +1,6 @@
 package com.infoshareacademy.menu;
+import com.infoshareacademy.SearchingInApi;
+
 import java.util.Scanner;
 
 public class MenuSearch {
@@ -41,6 +43,7 @@ public class MenuSearch {
     private static void searchingHolidays() {
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Searching holidays");
+        SearchingInApi.search();
         backToMenu();
     }
     private static void searchingByEmployee() {

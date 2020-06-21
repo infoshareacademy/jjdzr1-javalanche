@@ -1,5 +1,8 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.api.Holidays;
+import com.infoshareacademy.api.HolidaysJsonData;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
