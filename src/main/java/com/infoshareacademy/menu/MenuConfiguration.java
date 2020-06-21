@@ -1,10 +1,15 @@
 package com.infoshareacademy.menu;
 
+import com.infoshareacademy.configurations.PropertiesReader;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MenuConfiguration {
 
-    public static void menuConfiguration(){
+    private static PropertiesReader propertiesReader = new PropertiesReader();
+
+    public static void menuConfiguration() {
         ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
 
@@ -15,58 +20,60 @@ public class MenuConfiguration {
         MainMenu.STDOUT.info("4. Back to main menu\n");
 
         String option = scanner.next();
-        switch (option.charAt(0)){
-            case '1':{
+        switch (option.charAt(0)) {
+            case '1': {
                 loadFromFile();
                 break;
             }
-            case '2':{
+            case '2': {
                 sorting();
                 break;
             }
-            case '3':{
+            case '3': {
                 dateFormat();
                 break;
             }
-            case '4':{
+            case '4': {
                 MainMenu.mainMenu();
                 break;
             }
-            default:{
+            default: {
                 menuConfiguration();
                 break;
             }
         }
     }
 
-    private static void loadFromFile(){
+    private static void loadFromFile() {
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Load from file\n");
         backToMenu();
     }
-    private static void sorting(){
+
+    private static void sorting() {
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("Sorting ASC/DESC\n");
-        backToMenu();
-    }
-    private static void dateFormat(){
-        ClearConsole.clearConsole();
-        MainMenu.STDOUT.info("Date Format\n");
+        propertiesReader.setSortOrder();
         backToMenu();
     }
 
-    private static void backToMenu(){
+    private static void dateFormat() {
+        ClearConsole.clearConsole();
+        MainMenu.STDOUT.info("Date Format\n");
+        propertiesReader.setDateFormat();
+        backToMenu();
+    }
+
+    private static void backToMenu() {
         MainMenu.STDOUT.info("Back to configuration menu press 1.\n");
         MainMenu.STDOUT.info("Back to main menu press 2.\n");
         Scanner scanner = new Scanner(System.in);
         String option = scanner.next();
-        if (option.charAt(0) == '1'){
+        if (option.charAt(0) == '1') {
             menuConfiguration();
-        }
-        else if (option.charAt(0) == '2'){
+        } else if (option.charAt(0) == '2') {
             MainMenu.mainMenu();
-        }
-        else {
+        } else {
             backToMenu();
         }
     }
