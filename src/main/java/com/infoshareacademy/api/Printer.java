@@ -22,17 +22,10 @@ public class Printer {
 
         List<String> importantInfoList = new ArrayList<>();
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-//            importantInfoList.add(holidaysJsonData.getServerResponse().getHolidays().get(i).getName() + " - " + holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getIso()
-//            + "\n "+holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription()+"\n");
-            importantInfoList.add(holidaysJsonData.getServerResponse().getHolidays().get(i).toString());
-            importantInfoList.remove(holidaysJsonData.getServerResponse().getHolidays().get(i).getLocations());
-            importantInfoList.remove(holidaysJsonData.getServerResponse().getHolidays().get(i).getStates());
-            importantInfoList.remove(holidaysJsonData.getServerResponse().getHolidays().get(i).getCountry().getName());
-            importantInfoList.remove(holidaysJsonData.getServerResponse().getHolidays().get(i).getCountry().getName());
-            importantInfoList.remove(holidaysJsonData.getServerResponse().getHolidays().get(i).getType());
-
+            importantInfoList.add("\n" + holidaysJsonData.getServerResponse().getHolidays().get(i).getName() + " - " + holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getIso()
+                    + "\n" + holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription() + "\n");
         }
-        STDOUT.info(String.valueOf(importantInfoList));
+        STDOUT.info(importantInfoList + "\n");
         return importantInfoList;
     }
 
