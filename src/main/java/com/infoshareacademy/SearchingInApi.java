@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SearchingInApi {
+
+
     public static void search() {
         Scanner scanner = new Scanner(System.in);
 
@@ -37,6 +39,17 @@ public class SearchingInApi {
         }
     }
 
+    private static Integer numberOfFoundObjects;
+
+    public static void noObjectsFound() {
+        App.STDOUT.info( "\n" + "******* no objects found," +
+                "search again using other keywords *******" + "\n" + "\n");
+    }
+    public static void objectsFound() {
+        App.STDOUT.info("\n" + "******* " + numberOfFoundObjects +
+                " object(s) found *******" + "\n" + "\n");
+    }
+
     public static List<Holidays> searchByName() {
         Scanner scanner = new Scanner(System.in);
 
@@ -49,12 +62,18 @@ public class SearchingInApi {
             searchByName();
         } else {
             for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-                if (holidaysJsonData.getServerResponse().getHolidays().get(i).getName().contains(queryName)) {
+                if (holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toLowerCase().contains(queryName.toLowerCase())) {
                     holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
                 }
             }
+            numberOfFoundObjects = holidaysList.size();
         }
-        App.STDOUT.info(String.valueOf(holidaysList));
+        if (holidaysList.isEmpty()) {
+            noObjectsFound();
+        } else {
+            App.STDOUT.info(String.valueOf(holidaysList));
+            objectsFound();
+        }
         return holidaysList;
     }
 
@@ -70,12 +89,18 @@ public class SearchingInApi {
             searchByDescr();
         } else {
             for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-                if (holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription().contains(queryDescr)) {
+                if (holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription().toLowerCase().contains(queryDescr.toLowerCase())) {
                     holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
                 }
             }
+            numberOfFoundObjects = holidaysList.size();
         }
-        App.STDOUT.info(String.valueOf(holidaysList));
+        if (holidaysList.isEmpty()) {
+            noObjectsFound();
+        } else {
+            App.STDOUT.info(String.valueOf(holidaysList));
+            objectsFound();
+        }
         return holidaysList;
     }
 
@@ -95,8 +120,14 @@ public class SearchingInApi {
                     holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
                 }
             }
+            numberOfFoundObjects = holidaysList.size();
         }
-        App.STDOUT.info(String.valueOf(holidaysList));
+        if (holidaysList.isEmpty()) {
+            noObjectsFound();
+        } else {
+            App.STDOUT.info(String.valueOf(holidaysList));
+            objectsFound();
+        }
         return holidaysList;
     }
 }
