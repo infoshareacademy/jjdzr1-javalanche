@@ -1,5 +1,6 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.configurations.PropertiesReader;
 import com.infoshareacademy.menu.MainMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,5 +17,6 @@ public class App {
         STDOUT.info("jAvalanche \n");
 
         MainMenu.mainMenu();
+
     }
 }
