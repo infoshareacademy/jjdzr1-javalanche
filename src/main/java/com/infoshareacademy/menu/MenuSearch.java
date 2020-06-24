@@ -1,7 +1,7 @@
 package com.infoshareacademy.menu;
-import com.infoshareacademy.search.SearchingInApi;
 
 import java.util.Scanner;
+import com.infoshareacademy.search.*;
 
 public class MenuSearch {
 
@@ -57,7 +57,7 @@ public class MenuSearch {
         backToMenu();
     }
     private static void backToMenu() {
-        MainMenu.STDOUT.info("Back to com.infoshareacademy.search menu press 1.\n");
+        MainMenu.STDOUT.info("Back to search menu press 1.\n");
         MainMenu.STDOUT.info("Back to main menu press 2.\n");
         Scanner scanner = new Scanner(System.in);
         String option = scanner.next();
