@@ -25,6 +25,7 @@ public class Printer {
             importantInfoList.add("\n" + holidaysJsonData.getServerResponse().getHolidays().get(i).getName() + " - " + holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getIso()
                     + "\n" + holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription() + "\n");
         }
+
         STDOUT.info(importantInfoList + "\n");
         return importantInfoList;
     }
