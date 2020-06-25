@@ -1,5 +1,7 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.api.HolidaysDataEditor;
+import com.infoshareacademy.api.HolidaysJsonData;
 import com.infoshareacademy.menu.MainMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
