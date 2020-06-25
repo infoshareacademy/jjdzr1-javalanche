@@ -79,8 +79,7 @@ public class SearchingInApi {
         do {
             App.STDOUT.info("Type the text you want to search by (min 3 digits): ");
             queryName = scanner.nextLine();
-        }
-        while (queryName.length() < 3);
+        } while (queryName.length() < 3);
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
             if (holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toLowerCase().contains(queryName.toLowerCase())) {
                 holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
@@ -96,19 +95,20 @@ public class SearchingInApi {
     }
 
     public static List<Holidays> searchByDescr() {
-        App.STDOUT.info("Type the text you want to search by (min 3 digits): ");
-        String queryDescr = scanner.nextLine();
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
-        if (queryDescr.length() < 3) {
-            searchByDescr();
-        } else {
-            for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-                if (holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription().toLowerCase().contains(queryDescr.toLowerCase())) {
-                    holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
-                }
-            }
-            numberOfFoundObjects = holidaysList.size();
+        String queryDescr;
+        do {
+            App.STDOUT.info("Type the text you want to search by (min 3 digits): ");
+            queryDescr = scanner.nextLine();
         }
+        while (queryDescr.length() < 3);
+
+        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
+            if (holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription().toLowerCase().contains(queryDescr.toLowerCase())) {
+                holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
+            }
+        }
+        numberOfFoundObjects = holidaysList.size();
         if (holidaysList.isEmpty()) {
             noObjectsFound();
         } else {
@@ -122,24 +122,24 @@ public class SearchingInApi {
         PropertiesReader propertiesReader = new PropertiesReader();
         String dateFormat = propertiesReader.getDateFormat();
 
-        App.STDOUT.info("Type part of the date in format " + dateFormat + " you want to search by (min 2 digits): ");
-        String queryDate = scanner.nextLine();
-
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
-        if (queryDate.length() < 2) {
-            searchByDate();
-        } else {
-            for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-                //set holiday date to localDate format
-                LocalDate takenData = getLocalDate(holidaysJsonData, i);
-
-                //compare holiday date (takenData) to queryDate both in same format from properties file
-                if (takenData.format(DateTimeFormatter.ofPattern(dateFormat)).contains(queryDate)) {
-                    holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
-                }
-            }
-            numberOfFoundObjects = holidaysList.size();
+        String queryDate;
+        do {
+            App.STDOUT.info("Type part of the date in format " + dateFormat + " you want to search by (min 2 digits): ");
+            queryDate = scanner.nextLine();
         }
+        while (queryDate.length() < 2);
+
+        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
+            //set holiday date to localDate format
+            LocalDate takenData = getLocalDate(holidaysJsonData, i);
+
+            //compare holiday date (takenData) to queryDate both in same format from properties file
+            if (takenData.format(DateTimeFormatter.ofPattern(dateFormat)).contains(queryDate)) {
+                holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
+            }
+        }
+        numberOfFoundObjects = holidaysList.size();
         if (holidaysList.isEmpty()) {
             noObjectsFound();
         } else {
@@ -152,25 +152,25 @@ public class SearchingInApi {
         PropertiesReader propertiesReader = new PropertiesReader();
         String dateFormat = propertiesReader.getDateFormat();
 
-        App.STDOUT.info("Type the text you want to search by (min 3 digits): ");
-        String queryName = scanner.nextLine();
-
-        App.STDOUT.info("Type part of the date in format " + dateFormat + " you want to search by (min 2 digits): ");
-        String queryDate = scanner.nextLine();
-
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
 
-        if (queryName.length() < 3 || queryDate.length() < 2) {
-            searchByNameAndDate();
-        } else {
-            for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-                LocalDate takenData = getLocalDate(holidaysJsonData, i);
-                if (takenData.format(DateTimeFormatter.ofPattern(dateFormat)).contains(queryDate) && holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toLowerCase().contains(queryName.toLowerCase())) {
-                    holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
-                }
-            }
-            numberOfFoundObjects = holidaysList.size();
+        String queryName;
+        String queryDate;
+        do {
+            App.STDOUT.info("Type the text you want to search by (min 3 digits): ");
+            queryName = scanner.nextLine();
+
+            App.STDOUT.info("Type part of the date in format " + dateFormat + " you want to search by (min 2 digits): ");
+            queryDate = scanner.nextLine();
         }
+        while (queryName.length() < 3 || queryDate.length() < 2);
+        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
+            LocalDate takenData = getLocalDate(holidaysJsonData, i);
+            if (takenData.format(DateTimeFormatter.ofPattern(dateFormat)).contains(queryDate) && holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toLowerCase().contains(queryName.toLowerCase())) {
+                holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
+            }
+        }
+        numberOfFoundObjects = holidaysList.size();
         if (holidaysList.isEmpty()) {
             noObjectsFound();
         } else {
