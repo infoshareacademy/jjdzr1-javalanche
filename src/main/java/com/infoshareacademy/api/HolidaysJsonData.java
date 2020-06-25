@@ -1,12 +1,18 @@
 package com.infoshareacademy.api;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+import org.apache.commons.io.IOUtils;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HolidaysJsonData {
     @SerializedName("meta")
@@ -18,6 +24,7 @@ public class HolidaysJsonData {
 
     public HolidaysJsonData() {
     }
+
     public HolidaysJsonData(ServerInfo serverInfo, ServerResponse serverResponse) {
         this.serverInfo = serverInfo;
         this.serverResponse = serverResponse;
@@ -38,7 +45,7 @@ public class HolidaysJsonData {
     public ServerResponse getServerResponse() {
         return serverResponse;
     }
-  
+
     @Override
     public String toString() {
         return "Server info: " + serverInfo.toString() + "\n";
@@ -54,5 +61,5 @@ public class HolidaysJsonData {
         }
         return holidaysJSONData;
     }
-
 }
+
