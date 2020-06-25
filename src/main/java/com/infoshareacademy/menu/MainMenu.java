@@ -1,6 +1,7 @@
 package com.infoshareacademy.menu;
 
 import com.infoshareacademy.api.HolidaysJsonData;
+import com.infoshareacademy.api.Printer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,11 +42,7 @@ public class MainMenu {
             }
             case '4': {
                 HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
-                for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-                    String temp = holidaysJsonData.getServerResponse().getHolidays().get(i).toString();
-                    STDOUT.info(temp);
-                }
-                STDOUT.info(holidaysJsonData.toString());
+                Printer.getImportantInfo(holidaysJsonData);
                 backToMenu();
                 break;
             }
