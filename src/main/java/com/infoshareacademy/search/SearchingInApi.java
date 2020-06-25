@@ -74,20 +74,19 @@ public class SearchingInApi {
     }
 
     public static List<Holidays> searchByName() {
-        App.STDOUT.info("Type the text you want to search by (min 3 digits): ");
-        String queryName = scanner.nextLine();
-        holidaysList.clear();
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
-        if (queryName.length() < 3) {
-            searchByName();
-        } else {
-            for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-                if (holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toLowerCase().contains(queryName.toLowerCase())) {
-                    holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
-                }
-            }
-            numberOfFoundObjects = holidaysList.size();
+        String queryName;
+        do {
+            App.STDOUT.info("Type the text you want to search by (min 3 digits): ");
+            queryName = scanner.nextLine();
         }
+        while (queryName.length() < 3);
+        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
+            if (holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toLowerCase().contains(queryName.toLowerCase())) {
+                holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
+            }
+        }
+        numberOfFoundObjects = holidaysList.size();
         if (holidaysList.isEmpty()) {
             noObjectsFound();
         } else {
@@ -99,7 +98,6 @@ public class SearchingInApi {
     public static List<Holidays> searchByDescr() {
         App.STDOUT.info("Type the text you want to search by (min 3 digits): ");
         String queryDescr = scanner.nextLine();
-        holidaysList.clear();
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
         if (queryDescr.length() < 3) {
             searchByDescr();
@@ -126,7 +124,7 @@ public class SearchingInApi {
 
         App.STDOUT.info("Type part of the date in format " + dateFormat + " you want to search by (min 2 digits): ");
         String queryDate = scanner.nextLine();
-        holidaysList.clear();
+
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
         if (queryDate.length() < 2) {
             searchByDate();
@@ -159,7 +157,7 @@ public class SearchingInApi {
 
         App.STDOUT.info("Type part of the date in format " + dateFormat + " you want to search by (min 2 digits): ");
         String queryDate = scanner.nextLine();
-        holidaysList.clear();
+
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
 
         if (queryName.length() < 3 || queryDate.length() < 2) {
