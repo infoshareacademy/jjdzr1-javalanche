@@ -1,22 +1,23 @@
 package com.infoshareacademy;
 
-import com.infoshareacademy.configurations.PropertiesReader;
+import com.infoshareacademy.api.HolidaysJsonData;
+import com.infoshareacademy.api.Printer;
 import com.infoshareacademy.menu.MainMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 
 /**
  * jAvalanche
  */
 public class App {
-    public static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
+    private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         STDOUT.info("jAvalanche \n");
 
+        HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
+        Printer.listBuilder(holidaysJsonData);
         MainMenu.mainMenu();
-
     }
 }
