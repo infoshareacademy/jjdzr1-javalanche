@@ -151,7 +151,6 @@ public class SearchingInApi {
     }
 
     public static List<Holidays> searchByNameAndDate() {
-        //get date format from properties file
         PropertiesReader propertiesReader = new PropertiesReader();
         String dateFormat = propertiesReader.getDateFormat();
 
