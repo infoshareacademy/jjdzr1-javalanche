@@ -49,7 +49,8 @@ public class MenuSearch {
         MainMenu.STDOUT.info("2. Search by description: \n");
         MainMenu.STDOUT.info("3. Search by date: \n");
         MainMenu.STDOUT.info("4. Search by name and date: \n");
-        MainMenu.STDOUT.info("5. Back to menu\n");
+        MainMenu.STDOUT.info("5. Back\n");
+        MainMenu.STDOUT.info("6. Back to main menu\n");
 
         String option = scanner.next();
         switch (option.charAt(0)){
@@ -70,15 +71,17 @@ public class MenuSearch {
                 break;
             }
             case '5':{
-                backToMenu();
+                menuSearch();
                 break;
+            }
+            case '6':{
+                MainMenu.mainMenu();
             }
             default:{
                 searchingHolidays();
                 break;
             }
         }
-        backToMenu();
     }
     private static void searchingByEmployee() {
         ClearConsole.clearConsole();
