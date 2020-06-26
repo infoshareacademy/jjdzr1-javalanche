@@ -2,7 +2,6 @@ package com.infoshareacademy.api;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,5 +73,17 @@ public class Printer {
         }
         return holidayNamesList;
     }
+
+    public static List<Holidays> getHolidaysInSpecifyMonth(HolidaysJsonData holidaysJsonData, Integer integer){
+        List<Holidays> holidaysOnThisMonthList = new ArrayList<>();
+        for (Holidays holiday: holidaysJsonData.getServerResponse().getHolidays()) {
+            if(holiday.getHolidayDate().getHolidayDateTime().getMonth() == integer){
+                holidaysOnThisMonthList.add(holiday);
+            }
+        }
+        return holidaysOnThisMonthList;
+    }
+
+
 
 }
