@@ -85,20 +85,20 @@ public class MenuEdit {
     }
     private static void addTeamLeader(){
         ClearConsole.clearConsole();
-        MainMenu.STDOUT.info("Add TeamLeader");
+        MainMenu.STDOUT.info("Add TeamLeader\n");
         backToMenu();
     }
     private static void addEmployee(){
         ClearConsole.clearConsole();
-        MainMenu.STDOUT.info("Add employee");
+        MainMenu.STDOUT.info("Add employee\n");
         backToMenu();
     }
     private static void editEmployee(){
         ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
 
-        MainMenu.STDOUT.info("Edit Employee");
-        MainMenu.STDOUT.info("To delete employee press 1.");
+        MainMenu.STDOUT.info("Edit Employee\n");
+        MainMenu.STDOUT.info("To delete employee press 1.\n");
 
         String option = scanner.next();
         if (option.charAt(0) == '1'){
@@ -111,14 +111,14 @@ public class MenuEdit {
     }
     private static void deleteEmployee(){
         ClearConsole.clearConsole();
-        MainMenu.STDOUT.info("Delete employee");
+        MainMenu.STDOUT.info("Delete employee\n");
         backToMenu();
     }
     private static void editMembersOfTeam(){
         ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
 
-        MainMenu.STDOUT.info("Edit members of team");
+        MainMenu.STDOUT.info("Edit members of team\n");
         MainMenu.STDOUT.info("1. Add TeamLeader\n");
         String option = scanner.next();
 
@@ -132,7 +132,7 @@ public class MenuEdit {
     }
     private static void loadFromFile(){
         ClearConsole.clearConsole();
-        MainMenu.STDOUT.info("Load from file");
+        MainMenu.STDOUT.info("Load from file\n");
         backToMenu();
     }
 
