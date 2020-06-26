@@ -1,4 +1,6 @@
 package com.infoshareacademy.menu;
+import com.sun.tools.javac.Main;
+
 import java.util.Scanner;
 
 public class MenuSearch {
@@ -40,17 +42,75 @@ public class MenuSearch {
 
     private static void searchingHolidays() {
         ClearConsole.clearConsole();
-        MainMenu.STDOUT.info("Searching holidays");
-        backToMenu();
+        Scanner scanner = new Scanner(System.in);
+
+        MainMenu.STDOUT.info("Choose searching option: \n");
+        MainMenu.STDOUT.info("1. Search by name: \n");
+        MainMenu.STDOUT.info("2. Search by description: \n");
+        MainMenu.STDOUT.info("3. Search by date: \n");
+        MainMenu.STDOUT.info("4. Search by name and date: \n");
+        MainMenu.STDOUT.info("5. Back\n");
+        MainMenu.STDOUT.info("6. Back to main menu\n");
+
+        String option = scanner.next();
+        switch (option.charAt(0)){
+            case '1':{
+                searchHolidaysByName();
+                break;
+            }
+            case '2':{
+                searchHolidaysByDescription();
+                break;
+            }
+            case '3':{
+                searchHolidaysByDate();
+                break;
+            }
+            case '4':{
+                searchHolidaysByNameAndDate();
+                break;
+            }
+            case '5':{
+                menuSearch();
+                break;
+            }
+            case '6':{
+                MainMenu.mainMenu();
+            }
+            default:{
+                searchingHolidays();
+                break;
+            }
+        }
     }
     private static void searchingByEmployee() {
         ClearConsole.clearConsole();
-        MainMenu.STDOUT.info("Searching holidays by employer");
+        MainMenu.STDOUT.info("Searching holidays by employer\n");
         backToMenu();
     }
     private static void searchingByTeam() {
         ClearConsole.clearConsole();
-        MainMenu.STDOUT.info("Searching holidays by team");
+        MainMenu.STDOUT.info("Searching holidays by team\n");
+        backToMenu();
+    }
+    private static void searchHolidaysByName(){
+        ClearConsole.clearConsole();
+        MainMenu.STDOUT.info("Searching by name\n");
+        backToMenu();
+    }
+    private static void searchHolidaysByDescription(){
+        ClearConsole.clearConsole();
+        MainMenu.STDOUT.info("Searching by description\n");
+        backToMenu();
+    }
+    private static void searchHolidaysByDate(){
+        ClearConsole.clearConsole();
+        MainMenu.STDOUT.info("Searching by date\n");
+        backToMenu();
+    }
+    private static void searchHolidaysByNameAndDate(){
+        ClearConsole.clearConsole();
+        MainMenu.STDOUT.info("Searching by name and date: \n");
         backToMenu();
     }
     private static void backToMenu() {
