@@ -71,6 +71,7 @@ public class SearchingInApi {
         int takenMonth = holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getHolidayDateTime().getMonth();
         int takenDay = holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getHolidayDateTime().getDay();
         return LocalDate.of(takenYear, takenMonth, takenDay);
+
     }
 
     public static List<Holidays> searchByName() {
@@ -81,7 +82,7 @@ public class SearchingInApi {
             queryName = scanner.nextLine();
         } while (queryName.length() < 3);
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            if (holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toLowerCase().contains(queryName.toLowerCase())) {
+            if (holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toUpperCase().contains(queryName.toUpperCase())) {
                 holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
             }
         }
@@ -104,7 +105,7 @@ public class SearchingInApi {
         while (queryDescr.length() < 3);
 
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            if (holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription().toLowerCase().contains(queryDescr.toLowerCase())) {
+            if (holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription().toUpperCase().contains(queryDescr.toUpperCase())) {
                 holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
             }
         }
@@ -166,7 +167,7 @@ public class SearchingInApi {
         while (queryName.length() < 3 || queryDate.length() < 2);
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
             LocalDate takenData = getLocalDate(holidaysJsonData, i);
-            if (takenData.format(DateTimeFormatter.ofPattern(dateFormat)).contains(queryDate) && holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toLowerCase().contains(queryName.toLowerCase())) {
+            if (takenData.format(DateTimeFormatter.ofPattern(dateFormat)).contains(queryDate) && holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toUpperCase().contains(queryName.toUpperCase())) {
                 holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
             }
         }
