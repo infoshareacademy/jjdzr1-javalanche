@@ -16,18 +16,32 @@ public class HolidaysEditor {
     private List<Holidays> holidayEdition = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
-    private List<Holidays> testList = new ArrayList<>(holidayEdition);
+    private List<Holidays> testList;
 
     private boolean isInputInvalid;
-    private int requestedYear;
-    private int requestedMonth;
-    private int requestedDay;
+    private Integer requestedYear;
+    private Integer requestedMonth;
+    private Integer requestedDay;
+    private Integer foundHolidayIndex;
 
     public HolidaysEditor(HolidaysJsonData holidaysJsonData) {
         for(int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++){
             this.holidayEdition.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
         }
 
+    }
+
+    public void printList(){
+        /*for (Holidays holiday : holidayEdition){
+            System.out.println(holiday.toString());
+        }
+
+        System.out.println();*/
+        testList = new ArrayList<>(holidayEdition);
+
+        for (Holidays holiday : testList){
+            System.out.println(holiday.toString());
+        }
     }
 
     public void createElement() {
@@ -44,7 +58,57 @@ public class HolidaysEditor {
     }
 
     public void updateElement() {
+        testList = new ArrayList<>(holidayEdition);
 
+        foundHolidayIndex = findHoliday();
+
+        Holidays updateHoliday = testList.get(foundHolidayIndex);
+
+        System.out.println(updateHoliday.toString());
+
+        STDOUT.info("Enter which element of the holiday's query would you like to change:\n" +
+                "\t1: Holiday's name.\n" +
+                "\t2: Holiday's description\n" +
+                "\t3: Holiday's date\n");
+
+        Integer usersInput = 0;
+
+        do{
+            isInputInvalid = false;
+
+            try {
+                scanner = new Scanner(System.in);
+
+                usersInput = scanner.nextInt();
+
+
+                if(usersInput < 1 || usersInput > 3){
+                    System.out.println("loop response");
+                    isInputInvalid = true;
+                }
+            }
+            catch (Exception e){
+                STDOUT.error("Error found: " + e + "\n" +
+                        "Enter a number between 1 and 3:\n");
+                isInputInvalid = true;
+            }
+        }
+        while (isInputInvalid);
+
+        System.out.println(usersInput);
+
+        switch (usersInput) {
+            case 1:
+                String updatedHolidaysName = name();
+                updateHoliday.setName(updatedHolidaysName);
+            case 2:
+                String updatedHolidaysDescription = description();
+                updateHoliday.setDescription(updatedHolidaysDescription);
+            case 3:
+                HolidayDate updatedHolidaysDate = holidayDate();
+                updateHoliday.setHolidayDate(updatedHolidaysDate);
+
+        }
     }
 
     public void deleteElement() {
@@ -53,12 +117,12 @@ public class HolidaysEditor {
 
 
 
-    private Holidays findHoliday(){
+    private Integer findHoliday(){
 
         Holidays foundHoliday = null;
         String searchedHoliday;
         Integer foundHolidaysCounter;
-
+        foundHolidayIndex = 0;
 
         do{
             isInputInvalid = false;
@@ -76,6 +140,12 @@ public class HolidaysEditor {
 
                     if(holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())){
                         foundHolidaysCounter++;
+
+                        foundHoliday = holiday;
+                    }
+
+                    if (foundHolidaysCounter == 0){
+                        foundHolidayIndex++;
                     }
                 }
 
@@ -92,15 +162,7 @@ public class HolidaysEditor {
         }
         while (isInputInvalid);
 
-        for(Holidays holiday : holidayEdition){
-
-            if(holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())){
-                foundHoliday = holiday;
-            }
-
-        }
-        System.out.println("aaa" + foundHoliday.toString());
-        return foundHoliday;
+        return foundHolidayIndex;
     }
 
     private String name(){
@@ -218,6 +280,5 @@ public class HolidaysEditor {
 
         return requestedDay;
     }
-
 
 }

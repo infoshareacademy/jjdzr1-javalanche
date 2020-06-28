@@ -20,9 +20,9 @@ public class App {
         Printer.listBuilder(holidaysJsonData);
         /*MainMenu.mainMenu();*/
 
-        HolidaysEditor holidaysDataEditor = new HolidaysEditor(holidaysJsonData);
+        HolidaysEditor holidaysEditor = new HolidaysEditor(holidaysJsonData);
 
-        holidaysDataEditor.createElement();
+        holidaysEditor.updateElement();
 
     }
 }
