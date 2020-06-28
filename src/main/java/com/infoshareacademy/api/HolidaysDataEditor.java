@@ -11,7 +11,6 @@ public class HolidaysDataEditor {
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
 
-    private HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
     private Scanner scanner = new Scanner(System.in);
 
     private boolean isInputInvalid;
@@ -24,15 +23,6 @@ public class HolidaysDataEditor {
     }
 
     public void readElement() {
-        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            if (holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getHolidayDateTime().getYear() == requestedYear &&
-                    holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getHolidayDateTime().getMonth() == requestedMonth &&
-                    holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getHolidayDateTime().getDay() == requestedDay) {
-                STDOUT.info(holidaysJsonData.getServerResponse().getHolidays().get(i).toString());
-                break;
-            }
-
-        }
     }
 
     public void updateElement() {

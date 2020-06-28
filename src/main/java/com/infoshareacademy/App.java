@@ -1,5 +1,6 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.api.HolidaysDataEditor;
 import com.infoshareacademy.api.HolidaysJsonData;
 import com.infoshareacademy.api.Printer;
 import com.infoshareacademy.menu.MainMenu;
@@ -18,6 +19,11 @@ public class App {
 
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
         Printer.listBuilder(holidaysJsonData);
-        MainMenu.mainMenu();
+        /*MainMenu.mainMenu();*/
+
+        HolidaysDataEditor holidaysDataEditor = new HolidaysDataEditor();
+
+        holidaysDataEditor.readElement();
+
     }
 }
