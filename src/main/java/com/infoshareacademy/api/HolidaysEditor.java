@@ -2,6 +2,7 @@ package com.infoshareacademy.api;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,8 +14,6 @@ public class HolidaysEditor {
     private List<Holidays> holidayEdition = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
-    private List<Holidays> testList;
-
     private boolean isInputInvalid;
     private Integer requestedYear;
     private Integer requestedMonth;
@@ -22,32 +21,21 @@ public class HolidaysEditor {
     private Integer foundHolidayIndex;
 
     public HolidaysEditor(HolidaysJsonData holidaysJsonData) {
-        for(int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++){
+        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
             this.holidayEdition.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
         }
 
     }
 
-    public void printList(){
-        /*for (Holidays holiday : holidayEdition){
-            System.out.println(holiday.toString());
-        }
-
-        System.out.println();*/
-        testList = new ArrayList<>(holidayEdition);
-
-        for (Holidays holiday : testList){
-            System.out.println(holiday.toString());
-        }
-    }
-
     public void createElement() {
         STDOUT.info("Creating a holiday query. \n ******************** \n\n");
 
-        Holidays createHoliday = new Holidays(name(), description(), country(), holidayDate(), type(), locations(), states());
-        testList.add(createHoliday);
+        List<Holidays> createList = new ArrayList<>(holidayEdition);
 
-        for(Holidays holiday : testList){
+        Holidays createHoliday = new Holidays(name(), description(), country(), holidayDate(), type(), locations(), states());
+        createList.add(createHoliday);
+
+        for (Holidays holiday : createList) {
             System.out.println(holiday.toString());
         }
     }
@@ -69,11 +57,8 @@ public class HolidaysEditor {
 
         System.out.println(updateHoliday.toString());
 
-
-
         Integer usersInput = 0;
-
-        do{
+        do {
 
             isInputInvalid = false;
 
@@ -87,22 +72,17 @@ public class HolidaysEditor {
                 usersInput = scanner.nextInt();
 
 
-                if(usersInput < 1 || usersInput > 3){
+                if (usersInput < 1 || usersInput > 3) {
                     STDOUT.error("Input not within required range.\n\n");
                     isInputInvalid = true;
                 }
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 STDOUT.error("Error found: " + e + "\n" + "Enter a number between 1 and 3:\n");
                 isInputInvalid = true;
             }
 
         }
         while (isInputInvalid);
-
-        System.out.println("loop response 4a");
-
-        System.out.println(usersInput);
 
         switch (usersInput) {
             case 1:
@@ -130,31 +110,29 @@ public class HolidaysEditor {
 
         List<Holidays> deleteTest = new ArrayList<>(holidayEdition);
 
-        foundHolidayIndex = findHoliday();
+        int foundHolidayIndex = findHoliday();
 
-        System.out.println(foundHolidayIndex + "\n\n");
+        System.out.println("foundHolidayIndex:" + foundHolidayIndex + "\n\n");
 
+        //Why doesn't it work on Integer?
         deleteTest.remove(foundHolidayIndex);
 
         int i = 0;
-
-        for (Holidays holiday : deleteTest){
+        for (Holidays holiday : deleteTest) {
             System.out.println(i);
             System.out.println(holiday.toString());
             i++;
         }
     }
 
-
-
-    private Integer findHoliday(){
+    private Integer findHoliday() {
 
         Holidays foundHoliday = null;
         String searchedHoliday;
         Integer foundHolidaysCounter;
         foundHolidayIndex = 0;
 
-        do{
+        do {
             isInputInvalid = false;
             foundHolidaysCounter = 0;
             STDOUT.info("Enter sequence of at least three letters.\n");
@@ -163,27 +141,25 @@ public class HolidaysEditor {
             if (searchedHoliday.length() < 3) {
                 STDOUT.error("Input has to got at least 3 letters\n");
                 isInputInvalid = true;
-            }
-            else {
+            } else {
 
-                for(Holidays holiday : holidayEdition){
+                for (Holidays holiday : holidayEdition) {
 
-                    if(holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())){
+                    if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
                         foundHolidaysCounter++;
 
                         foundHoliday = holiday;
                     }
 
-                    if (foundHolidaysCounter == 0){
+                    if (foundHolidaysCounter == 0) {
                         foundHolidayIndex++;
                     }
                 }
 
-                if(foundHolidaysCounter == 0){
+                if (foundHolidaysCounter == 0) {
                     STDOUT.error("No results found.\n");
                     isInputInvalid = true;
-                }
-                else if (foundHolidaysCounter != 1) {
+                } else if (foundHolidaysCounter != 1) {
                     STDOUT.error("More the one result found, narrow your search.\n");
                     isInputInvalid = true;
                 }
@@ -195,7 +171,7 @@ public class HolidaysEditor {
         return foundHolidayIndex;
     }
 
-    private String name(){
+    private String name() {
         STDOUT.info("Enter holiday's name\n");
         scanner = new Scanner(System.in);
         String name = scanner.nextLine();
@@ -203,7 +179,7 @@ public class HolidaysEditor {
         return name;
     }
 
-    private String description(){
+    private String description() {
         STDOUT.info("Enter holiday's description\n");
         scanner = new Scanner(System.in);
         String description = scanner.nextLine();
@@ -211,12 +187,12 @@ public class HolidaysEditor {
         return description;
     }
 
-    private Country country(){
+    private Country country() {
         Country enteredCountry = new Country("pl", "Poland");
         return enteredCountry;
     }
 
-    private HolidayDate holidayDate(){
+    private HolidayDate holidayDate() {
         HolidayDate enteredHolidayDate;
         HolidayDateTime enteredHolidayDateTime;
 
@@ -240,23 +216,23 @@ public class HolidaysEditor {
         return enteredHolidayDate;
     }
 
-    private List<String> type(){
-        List<String>enteredTypes = new ArrayList<>();
+    private List<String> type() {
+        List<String> enteredTypes = new ArrayList<>();
         enteredTypes.add("National holiday");
         return enteredTypes;
     }
 
-    private String locations(){
+    private String locations() {
         String locations = "All";
         return locations;
     }
 
-    private String states(){
+    private String states() {
         String states = "All";
         return states;
     }
 
-    public Integer giveYear() {
+    private Integer giveYear() {
         isInputInvalid = false;
         requestedYear = 0;
 
@@ -274,7 +250,7 @@ public class HolidaysEditor {
         return requestedYear;
     }
 
-    public Integer giveMonth() {
+    private Integer giveMonth() {
         int requestedMonth = 0;
 
         do {
@@ -295,7 +271,7 @@ public class HolidaysEditor {
         return requestedMonth;
     }
 
-    public Integer giveDay() {
+    private Integer giveDay() {
         isInputInvalid = false;
         int requestedDay = 0;
 
