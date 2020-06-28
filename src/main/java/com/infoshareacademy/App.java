@@ -1,9 +1,8 @@
 package com.infoshareacademy;
 
-import com.infoshareacademy.api.HolidaysDataEditor;
+import com.infoshareacademy.api.HolidaysEditor;
 import com.infoshareacademy.api.HolidaysJsonData;
 import com.infoshareacademy.api.Printer;
-import com.infoshareacademy.menu.MainMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +20,9 @@ public class App {
         Printer.listBuilder(holidaysJsonData);
         /*MainMenu.mainMenu();*/
 
-        HolidaysDataEditor holidaysDataEditor = new HolidaysDataEditor();
+        HolidaysEditor holidaysDataEditor = new HolidaysEditor(holidaysJsonData);
 
-        holidaysDataEditor.readElement();
+        holidaysDataEditor.createElement();
 
     }
 }
