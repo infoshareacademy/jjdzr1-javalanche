@@ -3,6 +3,7 @@ package com.infoshareacademy.api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class HolidaysDataEditor {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-
+    private List<Holidays> holidayEdition = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
     private boolean isInputInvalid;
@@ -18,11 +19,24 @@ public class HolidaysDataEditor {
     private int requestedMonth;
     private int requestedDay;
 
+    public HolidaysDataEditor(HolidaysJsonData holidaysJsonData) {
+        for(int i = 1; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++){/*
+            STDOUT.info(holidaysJsonData.getServerResponse().getHolidays().get(i).toString());
+            STDOUT.info("index: " + i + ", size: " + holidaysJsonData.getServerResponse().getHolidays().size());*/
+
+            this.holidayEdition.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
+        }
+
+    }
+
     public void createElement() {
 
     }
 
     public void readElement() {
+        for(Holidays holiday : holidayEdition){
+            STDOUT.info(holiday.toString() + "\n");
+        }
     }
 
     public void updateElement() {
@@ -87,4 +101,6 @@ public class HolidaysDataEditor {
 
         return requestedDay;
     }
+
+
 }
