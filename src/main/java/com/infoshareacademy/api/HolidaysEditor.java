@@ -24,7 +24,6 @@ public class HolidaysEditor {
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
             this.holidayEdition.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
         }
-
     }
 
     public void createElement() {
