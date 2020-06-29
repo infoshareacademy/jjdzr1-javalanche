@@ -6,10 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class HolidaysEditor {
 
@@ -19,10 +16,9 @@ public class HolidaysEditor {
     private Scanner scanner = new Scanner(System.in);
 
     private boolean isInputInvalid;
-    private Integer requestedYear;
-    private Integer requestedMonth;
-    private Integer requestedDay;
     private Integer foundHolidayIndex;
+
+
 
     public HolidaysEditor(HolidaysJsonData holidaysJsonData) {
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
@@ -37,6 +33,8 @@ public class HolidaysEditor {
 
         Holidays createHoliday = new Holidays(name(), description(), country(), holidayDate(), type(), locations(), states());
         createList.add(createHoliday);
+
+        createList = sortByDate(createList);
 
         for (Holidays holiday : createList) {
             System.out.println(holiday.toString());
@@ -199,9 +197,9 @@ public class HolidaysEditor {
         HolidayDate enteredHolidayDate;
         HolidayDateTime enteredHolidayDateTime;
 
-        Integer enteredYear;
-        Integer enteredMonth;
-        Integer enteredDay;
+        String enteredYear;
+        String enteredMonth;
+        String enteredDay;
         String enteredDate;
 
         do{
@@ -234,7 +232,7 @@ public class HolidaysEditor {
         }
         while (isInputInvalid);
 
-        enteredHolidayDateTime = new HolidayDateTime(enteredYear, enteredMonth, enteredDay);
+        enteredHolidayDateTime = new HolidayDateTime(Integer.parseInt(enteredYear), Integer.parseInt(enteredMonth), Integer.parseInt(enteredDay));
 
         String dateISOformat = enteredYear + "-" + enteredMonth + "-" + enteredDay;
         enteredHolidayDate = new HolidayDate(dateISOformat, enteredHolidayDateTime);
@@ -258,9 +256,9 @@ public class HolidaysEditor {
         return states;
     }
 
-    private Integer giveYear() {
+    private String giveYear() {
         isInputInvalid = false;
-        requestedYear = 0;
+        Integer requestedYear = 0;
 
         do {
             try {
@@ -270,14 +268,17 @@ public class HolidaysEditor {
                 STDOUT.info("Error found:" + e);
                 isInputInvalid = true;
             }
+
+            if (requestedYear < 1899) isInputInvalid = true;
         }
         while (isInputInvalid);
 
-        return requestedYear;
+        return Integer.toString(requestedYear);
     }
 
-    private Integer giveMonth() {
-        int requestedMonth = 0;
+    private String giveMonth() {
+        Integer requestedMonth = 0;
+        String requestedMonthString = "";
 
         do {
             isInputInvalid = false;
@@ -294,12 +295,17 @@ public class HolidaysEditor {
         }
         while (isInputInvalid);
 
-        return requestedMonth;
+        requestedMonthString = Integer.toString(requestedMonth);
+
+        if(requestedMonthString.length() == 1){ requestedMonthString = "0" + requestedMonthString; }
+
+        return requestedMonthString;
     }
 
-    private Integer giveDay() {
+    private String giveDay() {
         isInputInvalid = false;
-        int requestedDay = 0;
+        Integer requestedDay = 0;
+        String requestedDayString;
 
         do {
             try {
@@ -314,7 +320,30 @@ public class HolidaysEditor {
         }
         while (isInputInvalid);
 
-        return requestedDay;
+        requestedDayString = Integer.toString(requestedDay);
+
+        if(requestedDayString.length() == 1){ requestedDayString = "0" + requestedDayString; }
+
+        return requestedDayString;
+    }
+
+    private List<Holidays>sortByDate(List<Holidays>listToSort){
+
+        Collections.sort(listToSort, new Comparator<Holidays>() {
+
+            @Override
+            public int compare(Holidays holidays1, Holidays holidays2) {
+
+                String holiday1date = holidays1.getHolidayDate().getIso().replaceAll("-", "");
+
+                String holiday2date = holidays2.getHolidayDate().getIso().replaceAll("-", "");
+
+                return Integer.parseInt(holiday1date) - Integer.parseInt(holiday2date);
+            }
+
+        });
+
+        return listToSort;
     }
 
 }
