@@ -1,4 +1,6 @@
 package com.infoshareacademy.menu;
+import com.infoshareacademy.search.SearchingInApi;
+import com.sun.tools.javac.Main;
 
 import java.util.Scanner;
 
@@ -39,7 +41,7 @@ public class MenuSearch {
         }
     }
 
-    private static void searchingHolidays() {
+    public static void searchingHolidays() {
         ClearConsole.clearConsole();
         Scanner scanner = new Scanner(System.in);
 
@@ -54,19 +56,19 @@ public class MenuSearch {
         String option = scanner.next();
         switch (option.charAt(0)){
             case '1':{
-                searchHolidaysByName();
+                SearchingInApi.searchByName();
                 break;
             }
             case '2':{
-                searchHolidaysByDescription();
+                SearchingInApi.searchByDescr();
                 break;
             }
             case '3':{
-                searchHolidaysByDate();
+                SearchingInApi.searchByDate();
                 break;
             }
             case '4':{
-                searchHolidaysByNameAndDate();
+                SearchingInApi.searchByNameAndDate();
                 break;
             }
             case '5':{
