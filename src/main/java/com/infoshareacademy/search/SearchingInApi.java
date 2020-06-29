@@ -13,41 +13,6 @@ import java.util.Scanner;
 
 public class SearchingInApi {
 
-
-    public static void search() {
-        Scanner scanner = new Scanner(System.in);
-
-        App.STDOUT.info("Choose searching option: \n");
-        App.STDOUT.info("1. Search by name: \n");
-        App.STDOUT.info("2. Search by description: \n");
-        App.STDOUT.info("3. Search by date: \n");
-        App.STDOUT.info("4. Search by name and date: \n");
-
-        String query = scanner.nextLine();
-        switch (query.charAt(0)) {
-            case '1': {
-                searchByName();
-                break;
-            }
-            case '2': {
-                searchByDescr();
-                break;
-            }
-            case '3': {
-                searchByDate();
-                break;
-            }
-            case '4': {
-                searchByNameAndDate();
-                break;
-            }
-            default: {
-                search();
-                break;
-            }
-        }
-    }
-
     private static Integer numberOfFoundObjects;
     private static Scanner scanner = new Scanner(System.in);
     private static List<Holidays> holidaysList = new ArrayList<>();
@@ -83,6 +48,7 @@ public class SearchingInApi {
         } while (queryName.length() < 3);
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
             if (holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toUpperCase().contains(queryName.toUpperCase())) {
+
                 holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
             }
         }
