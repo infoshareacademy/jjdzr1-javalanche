@@ -2,6 +2,7 @@ package com.infoshareacademy.api;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +22,14 @@ public class Printer {
 
         List<String> importantInfoList = new ArrayList<>();
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            importantInfoList.add("\n" + holidaysJsonData.getServerResponse().getHolidays().get(i).getName() + " - " + holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getIso()
-                    + "\n" + holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription() + "\n");
+            importantInfoList.add(" \n" + holidaysJsonData.getServerResponse().getHolidays().get(i).getName() + " - " + holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getIso()
+                    + "\n" + holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription() + "\n ");
         }
 
-        STDOUT.info(importantInfoList + "\n");
+        String r = importantInfoList.toString().replace("[","").replace("]","").
+                replace(" , ","");
+
+        STDOUT.info(r + "\n");
         return importantInfoList;
     }
 
