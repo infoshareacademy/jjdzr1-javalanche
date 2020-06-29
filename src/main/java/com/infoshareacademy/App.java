@@ -22,7 +22,7 @@ public class App {
 
         HolidaysEditor holidaysEditor = new HolidaysEditor(holidaysJsonData);
 
-        holidaysEditor.deleteElement();
+        holidaysEditor.updateElement();
 
     }
 }

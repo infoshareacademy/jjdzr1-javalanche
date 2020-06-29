@@ -3,7 +3,11 @@ package com.infoshareacademy.api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -195,17 +199,40 @@ public class HolidaysEditor {
         HolidayDate enteredHolidayDate;
         HolidayDateTime enteredHolidayDateTime;
 
-        STDOUT.info("Enter the holiday's year\n");
-        Integer enteredYear = giveYear();
-        STDOUT.info("\n");
+        Integer enteredYear;
+        Integer enteredMonth;
+        Integer enteredDay;
+        String enteredDate;
 
-        STDOUT.info("Enter the holiday's month\n");
-        Integer enteredMonth = giveMonth();
-        STDOUT.info("\n");
+        do{
+            isInputInvalid = false;
 
-        STDOUT.info("Enter the holiday's day\n");
-        Integer enteredDay = giveDay();
-        STDOUT.info("\n");
+            STDOUT.info("Enter the holiday's year\n");
+            enteredYear = giveYear();
+            STDOUT.info("\n");
+
+            STDOUT.info("Enter the holiday's month\n");
+            enteredMonth = giveMonth();
+            STDOUT.info("\n");
+
+            STDOUT.info("Enter the holiday's day\n");
+            enteredDay = giveDay();
+            STDOUT.info("\n");
+
+            try{
+                enteredDate = enteredDay + "" + enteredMonth + "" + enteredYear;
+
+                SimpleDateFormat dateVerifier = new SimpleDateFormat("ddMMyyyy");
+                Date javaDate = dateVerifier.parse(enteredDate);
+
+            }
+            catch (Exception e){
+                STDOUT.error("Incorrect date! Enter date again.");
+                isInputInvalid = true;
+            }
+
+        }
+        while (isInputInvalid);
 
         enteredHolidayDateTime = new HolidayDateTime(enteredYear, enteredMonth, enteredDay);
 
