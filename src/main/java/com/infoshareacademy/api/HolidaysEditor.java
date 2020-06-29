@@ -19,7 +19,6 @@ public class HolidaysEditor {
     private Integer foundHolidayIndex;
 
 
-
     public HolidaysEditor(HolidaysJsonData holidaysJsonData) {
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
             this.holidayEdition.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
@@ -194,6 +193,7 @@ public class HolidaysEditor {
     }
 
     private HolidayDate holidayDate() {
+
         HolidayDate enteredHolidayDate;
         HolidayDateTime enteredHolidayDateTime;
 
