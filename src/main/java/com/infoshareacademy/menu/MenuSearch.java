@@ -1,5 +1,4 @@
 package com.infoshareacademy.menu;
-import com.sun.tools.javac.Main;
 
 import java.util.Scanner;
 
