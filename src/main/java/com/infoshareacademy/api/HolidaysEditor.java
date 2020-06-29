@@ -3,6 +3,7 @@ package com.infoshareacademy.api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -220,12 +221,15 @@ public class HolidaysEditor {
             try{
                 enteredDate = enteredDay + "" + enteredMonth + "" + enteredYear;
 
-                SimpleDateFormat dateVerifier = new SimpleDateFormat("ddMMyyyy");
-                Date javaDate = dateVerifier.parse(enteredDate);
+                DateFormat df = new SimpleDateFormat("ddMMyyy");
+                df.setLenient(false);
+                df.parse(enteredDate);
+
 
             }
             catch (Exception e){
-                STDOUT.error("Incorrect date! Enter date again.");
+                STDOUT.error("Error: " + e + "\n");
+                STDOUT.error("Incorrect date! Enter date again.\n");
                 isInputInvalid = true;
             }
 
