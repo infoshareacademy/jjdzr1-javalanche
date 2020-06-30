@@ -17,16 +17,39 @@ public class App {
     public static void main(String[] args) {
         STDOUT.info("jAvalanche \n");
 
-        //HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
+        HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
 
-
-        //Printer.listBuilder(holidaysJsonData);
+        Printer.listBuilder(holidaysJsonData);
 
         //MainMenu.mainMenu();
 
-        //HolidaysEditor holidaysEditor = new HolidaysEditor(holidaysJsonData);
+        HolidaysEditor holidaysEditor = new HolidaysEditor(holidaysJsonData);
 
-        //holidaysEditor.createElement();
+/*
+
+        System.out.println("\n\n\n\n\n\nCREATE ELEMENT");
+        holidaysEditor.createElement();
+        System.out.println("CHECK\n");
+        holidaysEditor.printElement();
+        System.out.println("CHECK\n");
+
+        System.out.println("\n\n\n\n\n\nREAD ELEMENT");
+        holidaysEditor.readElement();
+        System.out.println("CHECK\n");
+        holidaysEditor.printElement();
+        System.out.println("CHECK\n");
+
+        System.out.println("\n\n\n\n\n\nUPDATE ELEMENT");
+        holidaysEditor.updateElement();
+        System.out.println("CHECK\n");
+        holidaysEditor.printElement();
+        System.out.println("CHECK\n");
+*/
+
+        System.out.println("\n\n\n\n\n\nDELETE ELEMENT");
+        holidaysEditor.deleteElement();
+        System.out.println("CHANGED LIST\n");
+        holidaysEditor.printElement();
 
     }
 }

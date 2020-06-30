@@ -23,7 +23,6 @@ public class HolidaysJsonData {
     private ServerResponse serverResponse;
 
     public HolidaysJsonData() {
-        HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
     }
 
     public HolidaysJsonData(ServerInfo serverInfo, ServerResponse serverResponse) {

@@ -26,17 +26,21 @@ public class HolidaysEditor {
         }
     }
 
+    public void printElement() {
+        for (Holidays holiday : holidayEdition) {
+            System.out.println(holiday.toString());
+        }
+    }
+
     public void createElement() {
         STDOUT.info("Creating a holiday query. \n ******************** \n\n");
 
-        List<Holidays> createList = new ArrayList<>(holidayEdition);
-
         Holidays createHoliday = new Holidays(name(), description(), country(), holidayDate(), type(), locations(), states());
-        createList.add(createHoliday);
+        holidayEdition.add(createHoliday);
 
-        createList = sortByDate(createList);
+        holidayEdition = sortByDate(holidayEdition);
 
-        for (Holidays holiday : createList) {
+        for (Holidays holiday : holidayEdition) {
             System.out.println(holiday.toString());
         }
     }
@@ -50,11 +54,9 @@ public class HolidaysEditor {
     public void updateElement() {
         STDOUT.info("Update a holiday query. \n************************ \n\n");
 
-        List<Holidays> updateList = new ArrayList<>(holidayEdition);
-
         foundHolidayIndex = findHoliday();
 
-        Holidays updateHoliday = updateList.get(foundHolidayIndex);
+        Holidays updateHoliday = holidayEdition.get(foundHolidayIndex);
 
         System.out.println(updateHoliday.toString());
 
@@ -89,24 +91,23 @@ public class HolidaysEditor {
             case 1:
                 String updatedHolidaysName = name();
 
-                updateList.get(foundHolidayIndex).setName(updatedHolidaysName);
-                //updateHoliday.setName(updatedHolidaysName);
+                holidayEdition.get(foundHolidayIndex).setName(updatedHolidaysName);
                 break;
             case 2:
                 String updatedHolidaysDescription = description();
-                updateHoliday.setDescription(updatedHolidaysDescription);
+
+                holidayEdition.get(foundHolidayIndex).setDescription(updatedHolidaysDescription);
                 break;
             case 3:
                 HolidayDate updatedHolidaysDate = holidayDate();
-                updateHoliday.setHolidayDate(updatedHolidaysDate);
+
+                holidayEdition.get(foundHolidayIndex).setHolidayDate(updatedHolidaysDate);
                 break;
         }
 
-        System.out.println(updateList.get(foundHolidayIndex).toString());
+        holidayEdition = sortByDate(holidayEdition);
 
-        updateList = sortByDate(updateList);
-
-        for(Holidays holiday : updateList){
+        for (Holidays holiday : holidayEdition) {
             System.out.println(holiday.toString());
         }
 
@@ -115,21 +116,25 @@ public class HolidaysEditor {
     public void deleteElement() {
         STDOUT.info("Delete a holiday query. \n************************ \n\n");
 
-        List<Holidays> deleteTest = new ArrayList<>(holidayEdition);
+        int foundHolidayIndex;
+        String decision;
 
-        int foundHolidayIndex = findHoliday();
+        foundHolidayIndex = findHoliday();
 
-        System.out.println("foundHolidayIndex:" + foundHolidayIndex + "\n\n");
+        STDOUT.info(holidayEdition.get(foundHolidayIndex).toString() + "Are you sure you want to delete this query?\n");
 
-        //Why doesn't it work on Integer?
-        deleteTest.remove(foundHolidayIndex);
-
-        int i = 0;
-        for (Holidays holiday : deleteTest) {
-            System.out.println(i);
-            System.out.println(holiday.toString());
-            i++;
+        do {
+            STDOUT.info("\nEnter your decision Y/N\n");
+            scanner = new Scanner(System.in);
+            decision = scanner.nextLine();
         }
+        while (!decision.toLowerCase().equals("y") && !decision.toLowerCase().equals("n"));
+
+        if (decision.toLowerCase().equals("y")) {
+            holidayEdition.remove(foundHolidayIndex);
+        }
+
+
     }
 
     private Integer findHoliday() {
@@ -138,6 +143,8 @@ public class HolidaysEditor {
         String searchedHoliday;
         Integer foundHolidaysCounter;
         foundHolidayIndex = 0;
+
+        printElement();
 
         do {
             isInputInvalid = false;
@@ -154,8 +161,6 @@ public class HolidaysEditor {
 
                     if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
                         foundHolidaysCounter++;
-
-                        foundHoliday = holiday;
                     }
 
                     if (foundHolidaysCounter == 0) {
@@ -209,7 +214,7 @@ public class HolidaysEditor {
         String enteredDay;
         String enteredDate;
 
-        do{
+        do {
             isInputInvalid = false;
 
             STDOUT.info("Enter the holiday's year\n");
@@ -224,14 +229,13 @@ public class HolidaysEditor {
             enteredDay = giveDay();
             STDOUT.info("\n");
 
-            try{
+            try {
                 enteredDate = enteredDay + "" + enteredMonth + "" + enteredYear;
 
                 DateFormat df = new SimpleDateFormat("ddMMyyy");
                 df.setLenient(false);
                 df.parse(enteredDate);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 STDOUT.error("Error: " + e + "\n");
                 STDOUT.error("Incorrect date! Enter date again.\n");
                 isInputInvalid = true;
@@ -305,7 +309,9 @@ public class HolidaysEditor {
 
         requestedMonthString = Integer.toString(requestedMonth);
 
-        if(requestedMonthString.length() == 1){ requestedMonthString = "0" + requestedMonthString; }
+        if (requestedMonthString.length() == 1) {
+            requestedMonthString = "0" + requestedMonthString;
+        }
 
         return requestedMonthString;
     }
@@ -330,12 +336,14 @@ public class HolidaysEditor {
 
         requestedDayString = Integer.toString(requestedDay);
 
-        if(requestedDayString.length() == 1){ requestedDayString = "0" + requestedDayString; }
+        if (requestedDayString.length() == 1) {
+            requestedDayString = "0" + requestedDayString;
+        }
 
         return requestedDayString;
     }
 
-    private List<Holidays>sortByDate(List<Holidays>listToSort){
+    private List<Holidays> sortByDate(List<Holidays> listToSort) {
 
         Collections.sort(listToSort, new Comparator<Holidays>() {
 
