@@ -4,6 +4,8 @@ import com.infoshareacademy.api.HolidaysEditor;
 import com.infoshareacademy.api.HolidaysJsonData;
 import com.infoshareacademy.api.Printer;
 import com.infoshareacademy.menu.MainMenu;
+import com.infoshareacademy.menu.MenuSearch;
+import com.infoshareacademy.search.SearchingInApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +23,9 @@ public class App {
 
         Printer.listBuilder(holidaysJsonData);
 
-        //MainMenu.mainMenu();
+        MenuSearch.menuSearch();
 
-        HolidaysEditor holidaysEditor = new HolidaysEditor(holidaysJsonData);
+        //HolidaysEditor holidaysEditor = new HolidaysEditor(holidaysJsonData);
 
 /*
 
@@ -45,11 +47,13 @@ public class App {
         holidaysEditor.printElement();
         System.out.println("CHECK\n");
 */
-
+/*
         System.out.println("\n\n\n\n\n\nDELETE ELEMENT");
         holidaysEditor.deleteElement();
         System.out.println("CHANGED LIST\n");
-        holidaysEditor.printElement();
+        holidaysEditor.printElement();*/
+
+
 
     }
 }

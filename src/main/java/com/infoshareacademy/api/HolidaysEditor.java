@@ -1,38 +1,110 @@
 package com.infoshareacademy.api;
 
+import com.infoshareacademy.menu.MenuSearch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.List;
 
 public class HolidaysEditor {
 
     private static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
-    private List<Holidays> holidayEdition = new ArrayList<>();
+    private List<Holidays> holidayEdition = HolidaysJsonData.readDataFromJsonFile().getServerResponse().getHolidays();
     private Scanner scanner = new Scanner(System.in);
 
     private boolean isInputInvalid;
-    private Integer foundHolidayIndex;
 
 
-    public HolidaysEditor(HolidaysJsonData holidaysJsonData) {
+    public void setHolidayEdition() {
+        HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
+
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            this.holidayEdition.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
+            holidayEdition.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
         }
     }
 
-    public void printElement() {
-        for (Holidays holiday : holidayEdition) {
-            System.out.println(holiday.toString());
+    public List<Holidays> editHolidaysList(List<Holidays> listToEdit) {
+
+        //setHolidayEdition();
+
+        boolean isSearchValid;
+
+
+        List<Integer> queriesIndexes = findIndexes(listToEdit);
+        System.out.println(queriesIndexes.toString());
+
+        for (Integer queryIndex : queriesIndexes) {
+            System.out.println(holidayEdition.get(queryIndex).toString());
         }
+
+        if (queriesIndexes.size() == 1) {
+
+            Integer usersInput = 0;
+
+            do {
+
+                isInputInvalid = false;
+
+                try {
+                    STDOUT.info("Enter if you would like to:\n" +
+                            "1: Create new holiday.\n" +
+                            "2: Edit this holiday. \n" +
+                            "3: Delete this holiday. \n");
+                    scanner = new Scanner(System.in);
+
+                    usersInput = scanner.nextInt();
+
+
+                    if (usersInput < 1 || usersInput > 3) {
+                        STDOUT.error("Input not within required range.\n\n");
+                        isInputInvalid = true;
+                    }
+                } catch (Exception e) {
+                    STDOUT.error("Error found: " + e + "\n" + "Enter a number between 1 and 3:\n");
+                    isInputInvalid = true;
+                }
+
+            }
+            while (isInputInvalid);
+
+            System.out.println(queriesIndexes.get(0).toString());
+
+            switch (usersInput) {
+                case 1:
+                    holidayEdition = createElement();
+                    break;
+                case 2:
+                    holidayEdition = updateElement(queriesIndexes.get(0));
+                    break;
+                case 3:
+                    holidayEdition = deleteElement(queriesIndexes.get(0));
+                    break;
+            }
+        }
+        else if (queriesIndexes.size() > 1){
+            STDOUT.info("Limit your search to one holiday query.\n\n");
+            MenuSearch.menuSearch();
+        }
+        else {
+            MenuSearch.menuSearch();
+        }
+
+        for (Holidays holidays : holidayEdition){
+            System.out.println(holidays.toString());
+        }
+
+        return holidayEdition;
+
     }
 
-    public void createElement() {
+    public List<Holidays> createElement() {
         STDOUT.info("Creating a holiday query. \n ******************** \n\n");
 
         Holidays createHoliday = new Holidays(name(), description(), country(), holidayDate(), type(), locations(), states());
@@ -43,20 +115,22 @@ public class HolidaysEditor {
         for (Holidays holiday : holidayEdition) {
             System.out.println(holiday.toString());
         }
+
+        return holidayEdition;
     }
 
-    public void readElement() {
+    public List<Holidays> readElement(Integer holidayIndex) {
         STDOUT.info("Read a holiday query. \n************************ \n\n");
 
-        STDOUT.info(holidayEdition.get(findHoliday()).toString());
+        STDOUT.info(holidayEdition.get(holidayIndex).toString());
+
+        return holidayEdition;
     }
 
-    public void updateElement() {
+    public List<Holidays> updateElement(Integer holidayIndex) {
         STDOUT.info("Update a holiday query. \n************************ \n\n");
 
-        foundHolidayIndex = findHoliday();
-
-        Holidays updateHoliday = holidayEdition.get(foundHolidayIndex);
+        Holidays updateHoliday = holidayEdition.get(holidayIndex);
 
         System.out.println(updateHoliday.toString());
 
@@ -91,17 +165,17 @@ public class HolidaysEditor {
             case 1:
                 String updatedHolidaysName = name();
 
-                holidayEdition.get(foundHolidayIndex).setName(updatedHolidaysName);
+                holidayEdition.get(holidayIndex).setName(updatedHolidaysName);
                 break;
             case 2:
                 String updatedHolidaysDescription = description();
 
-                holidayEdition.get(foundHolidayIndex).setDescription(updatedHolidaysDescription);
+                holidayEdition.get(holidayIndex).setDescription(updatedHolidaysDescription);
                 break;
             case 3:
                 HolidayDate updatedHolidaysDate = holidayDate();
 
-                holidayEdition.get(foundHolidayIndex).setHolidayDate(updatedHolidaysDate);
+                holidayEdition.get(holidayIndex).setHolidayDate(updatedHolidaysDate);
                 break;
         }
 
@@ -111,17 +185,19 @@ public class HolidaysEditor {
             System.out.println(holiday.toString());
         }
 
+        return holidayEdition;
     }
 
-    public void deleteElement() {
+    public List<Holidays> deleteElement(Integer holidayIndex) {
         STDOUT.info("Delete a holiday query. \n************************ \n\n");
 
-        int foundHolidayIndex;
+        List<Holidays> deleteElement = new ArrayList<>(holidayEdition);
+        System.out.println(deleteElement.get(holidayIndex));
+        System.out.println(holidayIndex);
+
         String decision;
 
-        foundHolidayIndex = findHoliday();
-
-        STDOUT.info(holidayEdition.get(foundHolidayIndex).toString() + "Are you sure you want to delete this query?\n");
+        STDOUT.info(holidayEdition.get(holidayIndex).toString() + "Are you sure you want to delete this query?\n");
 
         do {
             STDOUT.info("\nEnter your decision Y/N\n");
@@ -131,13 +207,17 @@ public class HolidaysEditor {
         while (!decision.toLowerCase().equals("y") && !decision.toLowerCase().equals("n"));
 
         if (decision.toLowerCase().equals("y")) {
-            holidayEdition.remove(foundHolidayIndex);
+
+            int intIndexForList = holidayIndex;
+            holidayEdition.remove(intIndexForList);
+
         }
 
+        return holidayEdition;
 
     }
 
-    private Integer findHoliday() {
+    /*private static Integer findHoliday() {
 
         Holidays foundHoliday = null;
         String searchedHoliday;
@@ -181,7 +261,7 @@ public class HolidaysEditor {
         while (isInputInvalid);
 
         return foundHolidayIndex;
-    }
+    }*/
 
     private String name() {
         STDOUT.info("Enter holiday's name\n");
@@ -360,6 +440,32 @@ public class HolidaysEditor {
         });
 
         return listToSort;
+    }
+
+    private List<Integer> findIndexes(List<Holidays> listToFindMatch) {
+        HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
+
+        List<Integer> queriesIndexes = new ArrayList<>();
+
+        Integer index = 0;
+
+        for (Holidays holiday : holidaysJsonData.getServerResponse().getHolidays()) {
+
+            for (Holidays holidayToEdit : listToFindMatch) {
+
+                if (holiday.getName().toLowerCase().contains(holidayToEdit.getName().toLowerCase())) {
+
+                    queriesIndexes.add(index);
+                }
+
+            }
+
+            index++;
+
+        }
+
+        return queriesIndexes;
+
     }
 
 }
