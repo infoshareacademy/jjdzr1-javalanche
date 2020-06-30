@@ -52,7 +52,7 @@ public class SearchingInApi {
             queryName = scanner.nextLine();
         } while (queryName.length() < 3);
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            if (holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toUpperCase().contains(queryName.toUpperCase())) {
+            if (holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toLowerCase().contains(queryName.toLowerCase())) {
 
                 holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
             }
@@ -80,7 +80,7 @@ public class SearchingInApi {
         while (queryDescr.length() < 3);
 
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            if (holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription().toUpperCase().contains(queryDescr.toUpperCase())) {
+            if (holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription().toLowerCase().contains(queryDescr.toLowerCase())) {
                 holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
             }
         }
@@ -150,7 +150,7 @@ public class SearchingInApi {
         while (queryName.length() < 3 || queryDate.length() < 2);
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
             LocalDate takenData = getLocalDate(holidaysJsonData, i);
-            if (takenData.format(DateTimeFormatter.ofPattern(dateFormat)).contains(queryDate) && holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toUpperCase().contains(queryName.toUpperCase())) {
+            if (takenData.format(DateTimeFormatter.ofPattern(dateFormat)).contains(queryDate) && holidaysJsonData.getServerResponse().getHolidays().get(i).getName().toLowerCase().contains(queryName.toLowerCase())) {
                 holidaysList.add(holidaysJsonData.getServerResponse().getHolidays().get(i));
             }
         }
