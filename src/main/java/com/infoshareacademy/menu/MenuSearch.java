@@ -107,8 +107,8 @@ public class MenuSearch {
         MainMenu.STDOUT.info("Searching holidays by team\n");
         backToMenu();
     }
-
-    private static void searchHolidaysByName() {
+// methods to be removed - replaced by methods in SearchingInApi class
+    /* private static void searchHolidaysByName() {
         ClearConsole.clearConsole();
         MainMenu.STDOUT.info("=============================================================== \n");
         MainMenu.STDOUT.info("Main menu -> Search -> Searching holidays -> Searching by name \n");
@@ -142,9 +142,9 @@ public class MenuSearch {
         MainMenu.STDOUT.info("======================================================================== \n");
         MainMenu.STDOUT.info("Searching by name and date: \n");
         backToMenu();
-    }
+    } */
 
-    private static void backToMenu() {
+    public static void backToMenu() {
         MainMenu.STDOUT.info("Back to search menu press 1.\n");
         MainMenu.STDOUT.info("Back to main menu press 2.\n");
         Scanner scanner = new Scanner(System.in);
