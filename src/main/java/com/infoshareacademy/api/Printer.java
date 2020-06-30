@@ -113,24 +113,36 @@ public class Printer {
             MenuViewHolidays.backToMenu(holidaysJsonData);
         }
     }
-
+    //TODO catch exceptions
     public static void printOneElement(HolidaysJsonData holidaysJsonData) {
 //        Map<Integer, Holidays> holidaysMap = new TreeMap<>();
 //        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
 //            holidaysMap.put(index, holidaysJsonData.getServerResponse().getHolidays().get(i));
 //
 //        }
-        MainMenu.STDOUT.info("Please choose holiday number.\n");
-        Scanner scanner = new Scanner(System.in);
-        Integer option = scanner.nextInt();
-        option--;
-        if (option <1 || option >13){
-            printOneElement(holidaysJsonData);
-        }
-        else {
-            STDOUT.info(listBuilder(holidaysJsonData).get(option).toString());
-            //STDOUT.info(holidaysMap.get(option).toString());
-        }
+        do {
+            MainMenu.STDOUT.info("Please choose holiday number.\n");
+            try {
+                Scanner scanner = new Scanner(System.in);
+                Integer option = scanner.nextInt();
+                option--;
+                STDOUT.info(listBuilder(holidaysJsonData).get(option).toString());
+                break;
+            }
+            catch ( Exception e){
+                printOneElement(holidaysJsonData);
+            }
+
+//            if (option < 1 || option > 13) {
+//                printOneElement(holidaysJsonData);
+//            } else if (option != Integer) {
+//
+//            } else {
+//                STDOUT.info(listBuilder(holidaysJsonData).get(option).toString());
+//                //STDOUT.info(holidaysMap.get(option).toString());
+//            }
+
+        }while (true);
     }
 }
 
