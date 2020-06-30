@@ -1,10 +1,8 @@
 package com.infoshareacademy.menu;
 
 import com.infoshareacademy.api.HolidaysJsonData;
-import com.infoshareacademy.api.Printer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Scanner;
 
 public class MainMenu {
@@ -42,8 +40,7 @@ public class MainMenu {
             }
             case '4': {
                 HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
-                Printer.getImportantInfo(holidaysJsonData);
-                backToMenu();
+                MenuViewHolidays.menuViewHolidays(holidaysJsonData);
                 break;
             }
             case '5': {
@@ -60,7 +57,6 @@ public class MainMenu {
             }
         }
     }
-
     private static void backToMenu(){
         MainMenu.STDOUT.info("Back to main menu press 1.\n");
         Scanner scanner = new Scanner(System.in);
