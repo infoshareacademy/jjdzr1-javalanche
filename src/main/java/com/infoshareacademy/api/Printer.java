@@ -102,8 +102,11 @@ public class Printer {
         Scanner scanner = new Scanner(System.in);
         String option = scanner.next();
         if (option.charAt(0) == '1') {
-        printOneElement(holidaysJsonData);
-        printOneElementOption(holidaysJsonData);
+            MainMenu.STDOUT.info("================================================================================ \n");
+            MainMenu.STDOUT.info("Main menu -> View calendar -> View holidays in this month -> View chosen holiday \n");
+            MainMenu.STDOUT.info("================================================================================ \n");
+            printOneElement(holidaysJsonData);
+            printOneElementOption(holidaysJsonData);
 
         } else if (option.charAt(0) == '2') {
             MenuViewHolidays.menuViewHolidays(holidaysJsonData);
@@ -113,38 +116,26 @@ public class Printer {
             MenuViewHolidays.backToMenu(holidaysJsonData);
         }
     }
-    //TODO catch exceptions
+
     public static void printOneElement(HolidaysJsonData holidaysJsonData) {
-//        Map<Integer, Holidays> holidaysMap = new TreeMap<>();
-//        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-//            holidaysMap.put(index, holidaysJsonData.getServerResponse().getHolidays().get(i));
-//
-//        }
-        do {
-            MainMenu.STDOUT.info("Please choose holiday number.\n");
-            try {
-                Scanner scanner = new Scanner(System.in);
-                Integer option = scanner.nextInt();
-                option--;
-                STDOUT.info(listBuilder(holidaysJsonData).get(option).toString());
-                break;
-            }
-            catch ( Exception e){
-                printOneElement(holidaysJsonData);
-            }
 
-//            if (option < 1 || option > 13) {
-//                printOneElement(holidaysJsonData);
-//            } else if (option != Integer) {
-//
-//            } else {
-//                STDOUT.info(listBuilder(holidaysJsonData).get(option).toString());
-//                //STDOUT.info(holidaysMap.get(option).toString());
-//            }
+        MainMenu.STDOUT.info("Please choose holiday number.\n");
 
-        }while (true);
+        try {
+            Scanner scanner = new Scanner(System.in);
+            Integer option = scanner.nextInt();
+            option--;
+            MainMenu.STDOUT.info("================================================================================ \n");
+            MainMenu.STDOUT.info("Main menu -> View calendar -> View holidays in this month -> View chosen holiday \n");
+            MainMenu.STDOUT.info("================================================================================ \n");
+            STDOUT.info(listBuilder(holidaysJsonData).get(option).toString());
+
+        } catch (Exception e) {
+            printOneElement(holidaysJsonData);
+        }
     }
 }
+
 
 
 

@@ -24,7 +24,6 @@ public class MenuViewHolidays {
             case '1': {
                 Printer.getImportantInfo(holidaysJsonData);
                 Printer.printOneElementOption(holidaysJsonData);
-                //backToMenu(holidaysJsonData);
                 break;
             }
             case '2': {
