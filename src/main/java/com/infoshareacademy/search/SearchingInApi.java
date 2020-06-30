@@ -4,6 +4,7 @@ import com.infoshareacademy.App;
 import com.infoshareacademy.api.Holidays;
 import com.infoshareacademy.api.HolidaysJsonData;
 import com.infoshareacademy.configurations.PropertiesReader;
+import com.infoshareacademy.menu.MenuSearch;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -58,6 +59,7 @@ public class SearchingInApi {
         } else {
             objectsFound();
         }
+       MenuSearch.backToMenu();
         return holidaysList;
     }
 
@@ -81,6 +83,7 @@ public class SearchingInApi {
         } else {
             objectsFound();
         }
+        MenuSearch.backToMenu();
         return holidaysList;
     }
 
@@ -112,6 +115,7 @@ public class SearchingInApi {
         } else {
             objectsFound();
         }
+        MenuSearch.backToMenu();
         return holidaysList;
     }
 
@@ -143,6 +147,7 @@ public class SearchingInApi {
         } else {
             objectsFound();
         }
+        MenuSearch.backToMenu();
         return holidaysList;
     }
 }

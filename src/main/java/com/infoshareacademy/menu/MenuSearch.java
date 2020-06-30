@@ -114,7 +114,7 @@ public class MenuSearch {
         MainMenu.STDOUT.info("Searching by name and date: \n");
         backToMenu();
     }
-    private static void backToMenu() {
+    public static void backToMenu() {
         MainMenu.STDOUT.info("Back to search menu press 1.\n");
         MainMenu.STDOUT.info("Back to main menu press 2.\n");
         Scanner scanner = new Scanner(System.in);
