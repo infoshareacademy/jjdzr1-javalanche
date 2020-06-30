@@ -104,6 +104,12 @@ public class HolidaysEditor {
 
         System.out.println(updateList.get(foundHolidayIndex).toString());
 
+        updateList = sortByDate(updateList);
+
+        for(Holidays holiday : updateList){
+            System.out.println(holiday.toString());
+        }
+
     }
 
     public void deleteElement() {
@@ -224,8 +230,6 @@ public class HolidaysEditor {
                 DateFormat df = new SimpleDateFormat("ddMMyyy");
                 df.setLenient(false);
                 df.parse(enteredDate);
-
-
             }
             catch (Exception e){
                 STDOUT.error("Error: " + e + "\n");
