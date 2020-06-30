@@ -38,11 +38,6 @@ public class HolidaysEditor {
 
 
         List<Integer> queriesIndexes = findIndexes(listToEdit);
-        System.out.println(queriesIndexes.toString());
-
-        for (Integer queryIndex : queriesIndexes) {
-            System.out.println(holidayEdition.get(queryIndex).toString());
-        }
 
         if (queriesIndexes.size() == 1) {
 
@@ -74,8 +69,6 @@ public class HolidaysEditor {
             }
             while (isInputInvalid);
 
-            System.out.println(queriesIndexes.get(0).toString());
-
             switch (usersInput) {
                 case 1:
                     holidayEdition = createElement();
@@ -105,22 +98,18 @@ public class HolidaysEditor {
     }
 
     public List<Holidays> createElement() {
-        STDOUT.info("Creating a holiday query. \n ******************** \n\n");
+        STDOUT.info("\n\nCreating a holiday query. \n ******************** \n\n");
 
         Holidays createHoliday = new Holidays(name(), description(), country(), holidayDate(), type(), locations(), states());
         holidayEdition.add(createHoliday);
 
         holidayEdition = sortByDate(holidayEdition);
 
-        for (Holidays holiday : holidayEdition) {
-            System.out.println(holiday.toString());
-        }
-
         return holidayEdition;
     }
 
     public List<Holidays> readElement(Integer holidayIndex) {
-        STDOUT.info("Read a holiday query. \n************************ \n\n");
+        STDOUT.info("\n\nRead a holiday query. \n************************ \n\n");
 
         STDOUT.info(holidayEdition.get(holidayIndex).toString());
 
@@ -128,7 +117,7 @@ public class HolidaysEditor {
     }
 
     public List<Holidays> updateElement(Integer holidayIndex) {
-        STDOUT.info("Update a holiday query. \n************************ \n\n");
+        STDOUT.info("\n\nUpdate a holiday query. \n************************ \n\n");
 
         Holidays updateHoliday = holidayEdition.get(holidayIndex);
 
@@ -181,19 +170,13 @@ public class HolidaysEditor {
 
         holidayEdition = sortByDate(holidayEdition);
 
-        for (Holidays holiday : holidayEdition) {
-            System.out.println(holiday.toString());
-        }
-
         return holidayEdition;
     }
 
     public List<Holidays> deleteElement(Integer holidayIndex) {
-        STDOUT.info("Delete a holiday query. \n************************ \n\n");
+        STDOUT.info("\n\nDelete a holiday query. \n************************ \n\n");
 
         List<Holidays> deleteElement = new ArrayList<>(holidayEdition);
-        System.out.println(deleteElement.get(holidayIndex));
-        System.out.println(holidayIndex);
 
         String decision;
 

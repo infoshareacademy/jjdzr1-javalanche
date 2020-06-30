@@ -64,7 +64,6 @@ public class MenuSearch {
             case '2':{
                 HolidaysEditor holidaysEditor = new HolidaysEditor();
                 holidaysEditor.editHolidaysList(SearchingInApi.searchByDescr());
-
                 break;
             }
             case '3':{
