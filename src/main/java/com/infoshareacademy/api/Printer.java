@@ -86,7 +86,7 @@ public class Printer {
 
         List<Holidays> holidaysOnThisMonthList = new ArrayList<>();
         for (Holidays holiday: holidaysJsonData.getServerResponse().getHolidays()) {
-            if(holiday.getHolidayDate().getHolidayDateTime().getMonth() == integer){
+            if(holiday.getHolidayDate().getHolidayDateTime().getMonth().equals(integer)){
                 holidaysOnThisMonthList.add(holiday);
             }
         }
