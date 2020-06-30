@@ -23,7 +23,8 @@ public class MenuViewHolidays {
         switch (option.charAt(0)) {
             case '1': {
                 Printer.getImportantInfo(holidaysJsonData);
-                backToMenu(holidaysJsonData);
+                Printer.printOneElementOption(holidaysJsonData);
+                //backToMenu(holidaysJsonData);
                 break;
             }
             case '2': {
@@ -70,7 +71,7 @@ public class MenuViewHolidays {
         }
     }
 
-    private static void backToMenu(HolidaysJsonData holidaysJsonData) {
+    public static void backToMenu(HolidaysJsonData holidaysJsonData) {
         MainMenu.STDOUT.info("Back to view menu press 1.\n");
         MainMenu.STDOUT.info("Back to main menu press 2.\n");
         Scanner scanner = new Scanner(System.in);
