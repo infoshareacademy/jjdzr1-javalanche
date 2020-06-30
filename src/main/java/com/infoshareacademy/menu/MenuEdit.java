@@ -1,5 +1,7 @@
 package com.infoshareacademy.menu;
 
+import com.sun.tools.javac.Main;
+
 import java.util.Scanner;
 
 public class MenuEdit {
@@ -114,11 +116,17 @@ public class MenuEdit {
         MainMenu.STDOUT.info("Main menu -> Edit -> Edit employee \n");
         MainMenu.STDOUT.info("=================================== \n");
         MainMenu.STDOUT.info("Edit Employee\n");
-        MainMenu.STDOUT.info("To delete employee press 1.\n");
+        MainMenu.STDOUT.info("1. Delete employee\n");
+        MainMenu.STDOUT.info("2. Back to edit menu\n");
+        MainMenu.STDOUT.info("3. Back to main menu\n");
 
         String option = scanner.next();
         if (option.charAt(0) == '1') {
             deleteEmployee();
+        } else if (option.charAt(0) == '2') {
+            menuEdit();
+        } else if (option.charAt(0) == '3') {
+            MainMenu.mainMenu();
         } else {
             editEmployee();
         }
@@ -143,14 +151,19 @@ public class MenuEdit {
         MainMenu.STDOUT.info("====================================================== \n");
         MainMenu.STDOUT.info("Edit members of team\n");
         MainMenu.STDOUT.info("1. Add TeamLeader\n");
+        MainMenu.STDOUT.info("2. Back to edit menu\n");
+        MainMenu.STDOUT.info("3. Back to main menu\n");
         String option = scanner.next();
 
         if (option.charAt(0) == '1') {
             addTeamLeader();
+        } else if (option.charAt(0) == '2') {
+            menuEdit();
+        } else if (option.charAt(0) == '3') {
+            MainMenu.mainMenu();
         } else {
             editMembersOfTeam();
         }
-        backToMenu();
     }
 
     private static void loadFromFile() {
