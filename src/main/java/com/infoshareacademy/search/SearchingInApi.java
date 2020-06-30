@@ -5,6 +5,7 @@ import com.infoshareacademy.api.Holidays;
 import com.infoshareacademy.api.HolidaysJsonData;
 import com.infoshareacademy.configurations.PropertiesReader;
 import com.infoshareacademy.menu.MenuSearch;
+import com.infoshareacademy.menu.MainMenu;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -44,6 +45,9 @@ public class SearchingInApi {
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
         String queryName;
         do {
+            MainMenu.STDOUT.info("=============================================================== \n");
+            MainMenu.STDOUT.info("Main menu -> Search -> Searching holidays -> Searching by name \n");
+            MainMenu.STDOUT.info("=============================================================== \n");
             App.STDOUT.info("Type the text you want to search by (min 3 digits): ");
             queryName = scanner.nextLine();
         } while (queryName.length() < 3);
@@ -67,6 +71,9 @@ public class SearchingInApi {
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
         String queryDescr;
         do {
+            MainMenu.STDOUT.info("====================================================================== \n");
+            MainMenu.STDOUT.info("Main menu -> Search -> Searching holidays -> Searching by description  \n");
+            MainMenu.STDOUT.info("====================================================================== \n");
             App.STDOUT.info("Type the text you want to search by (min 3 digits): ");
             queryDescr = scanner.nextLine();
         }
@@ -95,6 +102,9 @@ public class SearchingInApi {
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
         String queryDate;
         do {
+            MainMenu.STDOUT.info("=============================================================== \n");
+            MainMenu.STDOUT.info("Main menu -> Search -> Searching holidays -> Searching by date  \n");
+            MainMenu.STDOUT.info("=============================================================== \n");
             App.STDOUT.info("Type part of the date in format " + dateFormat + " you want to search by (min 2 digits): ");
             queryDate = scanner.nextLine();
         }
@@ -128,6 +138,9 @@ public class SearchingInApi {
         String queryName;
         String queryDate;
         do {
+            MainMenu.STDOUT.info("======================================================================== \n");
+            MainMenu.STDOUT.info("Main menu -> Search -> Searching holidays -> Searching by name and date  \n");
+            MainMenu.STDOUT.info("======================================================================== \n");
             App.STDOUT.info("Type the text you want to search by (min 3 digits): ");
             queryName = scanner.nextLine();
 
