@@ -57,23 +57,23 @@ public class MenuSearch {
         String option = scanner.next();
         switch (option.charAt(0)){
             case '1':{
-                HolidaysEditor holidaysEditor = new HolidaysEditor();
-                holidaysEditor.editHolidaysList(SearchingInApi.searchByName());
+                SearchingInApi.searchByName();
+                MenuSearch.menuSearch();
                 break;
             }
             case '2':{
-                HolidaysEditor holidaysEditor = new HolidaysEditor();
-                holidaysEditor.editHolidaysList(SearchingInApi.searchByDescr());
+                SearchingInApi.searchByDescr();
+                MenuSearch.menuSearch();
                 break;
             }
             case '3':{
-                HolidaysEditor holidaysEditor = new HolidaysEditor();
-                holidaysEditor.editHolidaysList(SearchingInApi.searchByDate());
+                SearchingInApi.searchByDate();
+                MenuSearch.menuSearch();
                 break;
             }
             case '4':{
-                HolidaysEditor holidaysEditor = new HolidaysEditor();
-                holidaysEditor.editHolidaysList(SearchingInApi.searchByNameAndDate());
+                SearchingInApi.searchByNameAndDate();
+                MenuSearch.menuSearch();
                 break;
             }
             case '5':{

@@ -21,38 +21,18 @@ public class App {
 
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
 
-        Printer.listBuilder(holidaysJsonData);
+        /*Printer.listBuilder(holidaysJsonData);
 
-        MenuSearch.menuSearch();
+        MenuSearch.menuSearch();*/
 
-        //HolidaysEditor holidaysEditor = new HolidaysEditor(holidaysJsonData);
 
-/*
+        HolidaysEditor.editHolidaysList(SearchingInApi.searchByName());
 
-        System.out.println("\n\n\n\n\n\nCREATE ELEMENT");
-        holidaysEditor.createElement();
-        System.out.println("CHECK\n");
-        holidaysEditor.printElement();
-        System.out.println("CHECK\n");
+        HolidaysEditor.editHolidaysList(SearchingInApi.searchByDescr());
 
-        System.out.println("\n\n\n\n\n\nREAD ELEMENT");
-        holidaysEditor.readElement();
-        System.out.println("CHECK\n");
-        holidaysEditor.printElement();
-        System.out.println("CHECK\n");
+        HolidaysEditor.editHolidaysList(SearchingInApi.searchByDate());
 
-        System.out.println("\n\n\n\n\n\nUPDATE ELEMENT");
-        holidaysEditor.updateElement();
-        System.out.println("CHECK\n");
-        holidaysEditor.printElement();
-        System.out.println("CHECK\n");
-*/
-/*
-        System.out.println("\n\n\n\n\n\nDELETE ELEMENT");
-        holidaysEditor.deleteElement();
-        System.out.println("CHANGED LIST\n");
-        holidaysEditor.printElement();*/
-
+        HolidaysEditor.editHolidaysList(SearchingInApi.searchByNameAndDate());
 
 
     }
