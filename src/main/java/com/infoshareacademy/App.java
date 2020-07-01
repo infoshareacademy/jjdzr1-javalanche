@@ -23,6 +23,8 @@ public class App {
 
         favoriteHolidaysEditor.addFavoriteHolidays();
         favoriteHolidaysEditor.addFavoriteHolidays();
+        favoriteHolidaysEditor.removeFavoriteHolidays();
+        favoriteHolidaysEditor.removeFavoriteHolidays();
         favoriteHolidaysEditor.printFavoriteHolidays();
     }
 }

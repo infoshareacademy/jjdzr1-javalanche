@@ -14,11 +14,10 @@ public class FavoriteHolidaysEditor {
     private Scanner scanner = new Scanner(System.in);
 
     boolean isInputInvalid;
-    boolean isDecisionNegative;
 
     public void addFavoriteHolidays() {
 
-        Holidays favoriteHolidayToAdd = findFavoriteHoliday();
+        Holidays favoriteHolidayToAdd = findHoliday();
 
         String usersDecision;
 
@@ -33,28 +32,42 @@ public class FavoriteHolidaysEditor {
         while (!usersDecision.toLowerCase().equals("y") && !usersDecision.toLowerCase().equals("n"));
 
         if (usersDecision.toLowerCase().equals("y")) {
-
             favoriteHolidaysList.add(favoriteHolidayToAdd);
-
         }
 
     }
 
     public void removeFavoriteHolidays() {
+
+        Holidays favoriteHolidayToRemove = findFavoriteHoliday();
+
+        String usersDecision;
+
+        STDOUT.info("Do you want to add this holiday to favorites?\n\n" + favoriteHolidayToRemove.toString());
+
+        do {
+            STDOUT.info("\nEnter your decision Y/N\n");
+            scanner = new Scanner(System.in);
+            usersDecision = scanner.nextLine();
+            STDOUT.info("\n");
+        }
+        while (!usersDecision.toLowerCase().equals("y") && !usersDecision.toLowerCase().equals("n"));
+
+        if (usersDecision.toLowerCase().equals("y")) {
+            favoriteHolidaysList.remove(favoriteHolidayToRemove);
+        }
     }
 
     public void printFavoriteHolidays() {
 
-        STDOUT.info("Test print");
-
-        sortFavoriteHolidays();
+        favoriteHolidaysList = sortFavoriteHolidays(favoriteHolidaysList);
 
         for (Holidays holiday : favoriteHolidaysList) {
-            holiday.toString();
+            STDOUT.info(holiday.toString());
         }
     }
 
-    private Holidays findFavoriteHoliday() {
+    private Holidays findHoliday() {
 
         Holidays foundHoliday = null;
         String searchedHoliday;
@@ -100,27 +113,55 @@ public class FavoriteHolidaysEditor {
         return foundHoliday;
     }
 
+    private Holidays findFavoriteHoliday() {
 
-/*        boolean multipleObjectsReturned;
-        List<Holidays> foundHolidays;
+        Holidays foundHoliday = null;
+        String searchedHoliday;
+        Integer foundHolidaysCounter;
+        Integer foundHolidayIndex = 0;
 
-        do{
-            multipleObjectsReturned = false;
-            foundHolidays = SearchingInApi.searchByName();
-            if (foundHolidays.size() != 1){
-                multipleObjectsReturned = true;
+        do {
+            isInputInvalid = false;
+            foundHolidaysCounter = 0;
+            STDOUT.info("Enter sequence of at least three letters.\n");
+            searchedHoliday = scanner.nextLine();
+
+            if (searchedHoliday.length() < 3) {
+                STDOUT.error("Input has to got at least 3 letters\n");
+                isInputInvalid = true;
+            } else {
+
+                for (Holidays holiday : favoriteHolidaysList) {
+
+                    if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
+                        foundHolidaysCounter++;
+
+                        foundHoliday = holiday;
+                    }
+
+                    if (foundHolidaysCounter == 0) {
+                        foundHolidayIndex++;
+                    }
+                }
+
+                if (foundHolidaysCounter == 0) {
+                    STDOUT.error("No results found.\n");
+                    isInputInvalid = true;
+                } else if (foundHolidaysCounter != 1) {
+                    STDOUT.error("More the one result found, narrow your search.\n");
+                    isInputInvalid = true;
+                }
             }
-        }
-        while (multipleObjectsReturned);
 
-        Holidays foundHoliday = foundHolidays.get(0);
+        }
+        while (isInputInvalid);
 
         return foundHoliday;
-    }*/
+    }
 
-    private void sortFavoriteHolidays() {
+    private List<Holidays> sortFavoriteHolidays(List<Holidays> listToSort) {
 
-        Collections.sort(favoriteHolidaysList, new Comparator<Holidays>() {
+        Collections.sort(listToSort, new Comparator<Holidays>() {
 
             @Override
             public int compare(Holidays holidays1, Holidays holidays2) {
@@ -133,6 +174,8 @@ public class FavoriteHolidaysEditor {
             }
 
         });
+
+        return listToSort;
 
     }
 
