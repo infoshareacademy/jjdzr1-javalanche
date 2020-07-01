@@ -26,14 +26,12 @@ public class App {
         MenuSearch.menuSearch();*/
 
 
-        HolidaysEditor.editHolidaysList(SearchingInApi.searchByName());
-
-        HolidaysEditor.editHolidaysList(SearchingInApi.searchByDescr());
-
-        HolidaysEditor.editHolidaysList(SearchingInApi.searchByDate());
-
-        HolidaysEditor.editHolidaysList(SearchingInApi.searchByNameAndDate());
+        holidaysJsonData.getServerResponse().setHolidays(HolidaysEditor.editHolidaysList(holidaysJsonData.getServerResponse().getHolidays()));
 
 
+        holidaysJsonData.getServerResponse().setHolidays(HolidaysEditor.editHolidaysList(holidaysJsonData.getServerResponse().getHolidays()));
+
+
+        holidaysJsonData.getServerResponse().setHolidays(HolidaysEditor.editHolidaysList(holidaysJsonData.getServerResponse().getHolidays()));
     }
 }
