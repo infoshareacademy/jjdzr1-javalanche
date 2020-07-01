@@ -14,8 +14,10 @@ public class FavoriteHolidaysEditor {
     private Scanner scanner = new Scanner(System.in);
 
     boolean isInputInvalid;
+    boolean isDuplicate;
 
     public void addFavoriteHolidays() {
+        STDOUT.info("Add a favorite holiday. \n************************ \n\n");
 
         Holidays favoriteHolidayToAdd = findHoliday();
 
@@ -24,26 +26,34 @@ public class FavoriteHolidaysEditor {
         STDOUT.info("Do you want to add this holiday to favorites?\n\n" + favoriteHolidayToAdd.toString());
 
         do {
-            STDOUT.info("\nEnter your decision Y/N\n");
+            STDOUT.info("Enter your decision Y/N\n");
             scanner = new Scanner(System.in);
             usersDecision = scanner.nextLine();
             STDOUT.info("\n");
         }
         while (!usersDecision.toLowerCase().equals("y") && !usersDecision.toLowerCase().equals("n"));
 
-        if (usersDecision.toLowerCase().equals("y")) {
+
+        if (usersDecision.toLowerCase().equals("n")) {
+            STDOUT.info("Holiday not added\n\n");
+        }
+        else if(noDuplicates(favoriteHolidayToAdd)){
+            STDOUT.info("Holiday already in favorites. Holiday not added\n\n");
+        }
+        else {
+            STDOUT.info("Holiday added\n\n");
             favoriteHolidaysList.add(favoriteHolidayToAdd);
         }
-
     }
 
     public void removeFavoriteHolidays() {
+        STDOUT.info("Remove a favorite holiday. \n************************ \n\n");
 
         Holidays favoriteHolidayToRemove = findFavoriteHoliday();
 
         String usersDecision;
 
-        STDOUT.info("Do you want to add this holiday to favorites?\n\n" + favoriteHolidayToRemove.toString());
+        STDOUT.info("Do you want to remove this holiday from favorites?\n\n" + favoriteHolidayToRemove.toString());
 
         do {
             STDOUT.info("\nEnter your decision Y/N\n");
@@ -157,6 +167,19 @@ public class FavoriteHolidaysEditor {
         while (isInputInvalid);
 
         return foundHoliday;
+    }
+
+    private boolean noDuplicates(Holidays checkForDuplicates){
+
+        isDuplicate = false;
+
+        for(Holidays holiday : favoriteHolidaysList){
+            if(holiday.getName().equals(checkForDuplicates.getName())){
+                isDuplicate = true;
+                break;
+            }
+        }
+        return isDuplicate;
     }
 
     private List<Holidays> sortFavoriteHolidays(List<Holidays> listToSort) {
