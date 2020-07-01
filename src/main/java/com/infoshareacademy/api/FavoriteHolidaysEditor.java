@@ -7,7 +7,7 @@ import java.util.*;
 
 import static com.infoshareacademy.App.STDOUT;
 
-public class FavoriteHolidays {
+public class FavoriteHolidaysEditor {
 
     private List<Holidays> allHolidaysList = HolidaysJsonData.readDataFromJsonFile().getServerResponse().getHolidays();
     private List<Holidays> favoriteHolidaysList = new ArrayList<>();

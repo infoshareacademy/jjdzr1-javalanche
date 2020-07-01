@@ -1,9 +1,7 @@
 package com.infoshareacademy;
 
-import com.infoshareacademy.api.FavoriteHolidays;
+import com.infoshareacademy.api.FavoriteHolidaysEditor;
 import com.infoshareacademy.api.HolidaysJsonData;
-import com.infoshareacademy.api.Printer;
-import com.infoshareacademy.menu.MainMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,10 +19,10 @@ public class App {
        /* Printer.listBuilder(holidaysJsonData);
         MainMenu.mainMenu();*/
 
-        FavoriteHolidays favoriteHolidays = new FavoriteHolidays();
+        FavoriteHolidaysEditor favoriteHolidaysEditor = new FavoriteHolidaysEditor();
 
-        favoriteHolidays.addFavoriteHolidays();
-        favoriteHolidays.addFavoriteHolidays();
-        favoriteHolidays.printFavoriteHolidays();
+        favoriteHolidaysEditor.addFavoriteHolidays();
+        favoriteHolidaysEditor.addFavoriteHolidays();
+        favoriteHolidaysEditor.printFavoriteHolidays();
     }
 }
