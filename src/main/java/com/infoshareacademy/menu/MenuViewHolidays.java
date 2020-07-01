@@ -30,10 +30,12 @@ public class MenuViewHolidays {
                 MainMenu.STDOUT.info("========================================================== \n");
                 MainMenu.STDOUT.info("Main menu -> View calendar -> View holidays in this month \n");
                 MainMenu.STDOUT.info("========================================================== \n");
-                if(Printer.getHolidaysInSpecifyMonth(holidaysJsonData, LocalDateTime.now().getMonthValue()).isEmpty()){
+                if (Printer.getHolidaysInSpecifyMonth(holidaysJsonData, LocalDateTime.now().getMonthValue()).isEmpty()) {
                     MainMenu.STDOUT.info("No holidays in this month \n");
-                }else{
-                    MainMenu.STDOUT.info(String.valueOf(Printer.getHolidaysInSpecifyMonth(holidaysJsonData, LocalDateTime.now().getMonthValue())) + "\n");
+                } else {
+                    String specifyMonthList = Printer.getHolidaysInSpecifyMonth(holidaysJsonData, LocalDateTime.now().getMonthValue()).toString().
+                            replace("[", "").replace("]", "").replace("\n, ", "\n");
+                    MainMenu.STDOUT.info(specifyMonthList + "\n");
                 }
                 backToMenu(holidaysJsonData);
                 break;
@@ -50,10 +52,12 @@ public class MenuViewHolidays {
                         month.equals("4") || month.equals("5") || month.equals("6") ||
                         month.equals("7") || month.equals("8") || month.equals("9") ||
                         month.equals("10") || month.equals("11") || month.equals("12")));
-                if(Printer.getHolidaysInSpecifyMonth(holidaysJsonData, Integer.parseInt(month)).isEmpty()){
+                if (Printer.getHolidaysInSpecifyMonth(holidaysJsonData, Integer.parseInt(month)).isEmpty()) {
                     MainMenu.STDOUT.info("No holidays in specify month \n");
-                }else{
-                    MainMenu.STDOUT.info(String.valueOf(Printer.getHolidaysInSpecifyMonth(holidaysJsonData, Integer.parseInt(month))) + "\n");
+                } else {
+                    String specifyMonthList = Printer.getHolidaysInSpecifyMonth(holidaysJsonData, Integer.parseInt(month)).toString().
+                            replace("[", "").replace("]", "").replace("\n, ", "\n");
+                    MainMenu.STDOUT.info(specifyMonthList + "\n");
                 }
 
                 backToMenu(holidaysJsonData);
