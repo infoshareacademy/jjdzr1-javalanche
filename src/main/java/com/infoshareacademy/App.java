@@ -1,5 +1,6 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.api.FavoriteHolidays;
 import com.infoshareacademy.api.HolidaysJsonData;
 import com.infoshareacademy.api.Printer;
 import com.infoshareacademy.menu.MainMenu;
@@ -17,7 +18,13 @@ public class App {
         STDOUT.info("jAvalanche \n");
 
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
-        Printer.listBuilder(holidaysJsonData);
-        MainMenu.mainMenu();
+       /* Printer.listBuilder(holidaysJsonData);
+        MainMenu.mainMenu();*/
+
+        FavoriteHolidays favoriteHolidays = new FavoriteHolidays();
+
+        favoriteHolidays.addFavoriteHolidays();
+        favoriteHolidays.addFavoriteHolidays();
+        favoriteHolidays.printFavoriteHolidays();
     }
 }
