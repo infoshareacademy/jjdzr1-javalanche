@@ -21,10 +21,9 @@ public class App {
 
         FavoriteHolidaysEditor favoriteHolidaysEditor = new FavoriteHolidaysEditor();
 
-        favoriteHolidaysEditor.addFavoriteHolidays();
-        favoriteHolidaysEditor.addFavoriteHolidays();
-        favoriteHolidaysEditor.removeFavoriteHolidays();
-        favoriteHolidaysEditor.removeFavoriteHolidays();
-        favoriteHolidaysEditor.printFavoriteHolidays();
+        boolean keep = true;
+        while(keep){
+            favoriteHolidaysEditor.editFavoriteHolidays();
+        }
     }
 }

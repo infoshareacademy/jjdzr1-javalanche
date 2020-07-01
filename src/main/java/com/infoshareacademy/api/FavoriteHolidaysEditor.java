@@ -16,6 +16,49 @@ public class FavoriteHolidaysEditor {
     boolean isInputInvalid;
     boolean isDuplicate;
 
+    public void editFavoriteHolidays() {
+
+        Integer usersInput = 0;
+
+        do {
+
+            isInputInvalid = false;
+
+            try {
+                STDOUT.info("Enter if you would like to:\n" +
+                        "1: Print favorite holidays.\n" +
+                        "2: Add a favorite holiday. \n" +
+                        "3: Remove a holiday. \n");
+
+                scanner = new Scanner(System.in);
+                usersInput = scanner.nextInt();
+                STDOUT.info("\n");
+
+                if (usersInput < 1 || usersInput > 3) {
+                    STDOUT.error("Input not within required range.\n\n");
+                    isInputInvalid = true;
+                }
+            } catch (Exception e) {
+                STDOUT.error("Error found: " + e + "\n" + "Enter a number between 1 and 3:\n");
+                isInputInvalid = true;
+            }
+
+        }
+        while (isInputInvalid);
+
+        switch (usersInput) {
+            case 1:
+                printFavoriteHolidays();
+                break;
+            case 2:
+                addFavoriteHolidays();
+                break;
+            case 3:
+                removeFavoriteHolidays();
+                break;
+        }
+    }
+
     public void addFavoriteHolidays() {
         STDOUT.info("Add a favorite holiday. \n************************ \n\n");
 
@@ -23,26 +66,26 @@ public class FavoriteHolidaysEditor {
 
         String usersDecision;
 
-        STDOUT.info("Do you want to add this holiday to favorites?\n\n" + favoriteHolidayToAdd.toString());
+        if (favoriteHolidayToAdd != null) {
+            STDOUT.info("\nDo you want to add this holiday to favorites?\n\n" + favoriteHolidayToAdd.toString());
 
-        do {
-            STDOUT.info("Enter your decision Y/N\n");
-            scanner = new Scanner(System.in);
-            usersDecision = scanner.nextLine();
-            STDOUT.info("\n");
-        }
-        while (!usersDecision.toLowerCase().equals("y") && !usersDecision.toLowerCase().equals("n"));
+            do {
+                STDOUT.info("Enter your decision Y/N\n");
+                scanner = new Scanner(System.in);
+                usersDecision = scanner.nextLine();
+                STDOUT.info("\n");
+            }
+            while (!usersDecision.toLowerCase().equals("y") && !usersDecision.toLowerCase().equals("n"));
 
 
-        if (usersDecision.toLowerCase().equals("n")) {
-            STDOUT.info("Holiday not added\n\n");
-        }
-        else if(noDuplicates(favoriteHolidayToAdd)){
-            STDOUT.info("Holiday already in favorites. Holiday not added\n\n");
-        }
-        else {
-            STDOUT.info("Holiday added\n\n");
-            favoriteHolidaysList.add(favoriteHolidayToAdd);
+            if (usersDecision.toLowerCase().equals("n")) {
+                STDOUT.info("Holiday not added\n\n");
+            } else if (noDuplicates(favoriteHolidayToAdd)) {
+                STDOUT.info("Holiday already in favorites. Holiday not added\n\n");
+            } else {
+                STDOUT.info("Holiday added\n\n");
+                favoriteHolidaysList.add(favoriteHolidayToAdd);
+            }
         }
     }
 
@@ -51,26 +94,33 @@ public class FavoriteHolidaysEditor {
 
         Holidays favoriteHolidayToRemove = findFavoriteHoliday();
 
-        String usersDecision;
+        if (favoriteHolidayToRemove != null) {
+            String usersDecision;
 
-        STDOUT.info("Do you want to remove this holiday from favorites?\n\n" + favoriteHolidayToRemove.toString());
+            STDOUT.info("\nDo you want to remove this holiday from favorites?\n\n" + favoriteHolidayToRemove.toString());
 
-        do {
-            STDOUT.info("\nEnter your decision Y/N\n");
-            scanner = new Scanner(System.in);
-            usersDecision = scanner.nextLine();
-            STDOUT.info("\n");
-        }
-        while (!usersDecision.toLowerCase().equals("y") && !usersDecision.toLowerCase().equals("n"));
+            do {
+                STDOUT.info("Enter your decision Y/N\n");
+                scanner = new Scanner(System.in);
+                usersDecision = scanner.nextLine();
+                STDOUT.info("\n");
+            }
+            while (!usersDecision.toLowerCase().equals("y") && !usersDecision.toLowerCase().equals("n"));
 
-        if (usersDecision.toLowerCase().equals("y")) {
-            favoriteHolidaysList.remove(favoriteHolidayToRemove);
+            if (usersDecision.toLowerCase().equals("y")) {
+                favoriteHolidaysList.remove(favoriteHolidayToRemove);
+            }
+
         }
     }
 
     public void printFavoriteHolidays() {
 
         favoriteHolidaysList = sortFavoriteHolidays(favoriteHolidaysList);
+
+        if(favoriteHolidaysList.size() == 0){
+            STDOUT.info("You have no favorite holidays\n\n");
+        }
 
         for (Holidays holiday : favoriteHolidaysList) {
             STDOUT.info(holiday.toString());
@@ -84,41 +134,39 @@ public class FavoriteHolidaysEditor {
         Integer foundHolidaysCounter;
         Integer foundHolidayIndex = 0;
 
-        do {
-            isInputInvalid = false;
-            foundHolidaysCounter = 0;
-            STDOUT.info("Enter sequence of at least three letters.\n");
-            searchedHoliday = scanner.nextLine();
 
-            if (searchedHoliday.length() < 3) {
-                STDOUT.error("Input has to got at least 3 letters\n");
-                isInputInvalid = true;
-            } else {
+        isInputInvalid = false;
+        foundHolidaysCounter = 0;
+        STDOUT.info("Enter sequence of at least three letters.\n");
+        scanner = new Scanner(System.in);
+        searchedHoliday = scanner.nextLine();
 
-                for (Holidays holiday : allHolidaysList) {
+        if (searchedHoliday.length() < 3) {
+            STDOUT.error("Input has to got at least 3 letters\n");
+            isInputInvalid = true;
+        } else {
 
-                    if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
-                        foundHolidaysCounter++;
+            for (Holidays holiday : allHolidaysList) {
 
-                        foundHoliday = holiday;
-                    }
+                if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
+                    foundHolidaysCounter++;
 
-                    if (foundHolidaysCounter == 0) {
-                        foundHolidayIndex++;
-                    }
+                    foundHoliday = holiday;
                 }
 
                 if (foundHolidaysCounter == 0) {
-                    STDOUT.error("No results found.\n");
-                    isInputInvalid = true;
-                } else if (foundHolidaysCounter != 1) {
-                    STDOUT.error("More the one result found, narrow your search.\n");
-                    isInputInvalid = true;
+                    foundHolidayIndex++;
                 }
             }
 
+            if (foundHolidaysCounter == 0) {
+                STDOUT.error("No results found.\n\n");
+                isInputInvalid = true;
+            } else if (foundHolidaysCounter != 1) {
+                STDOUT.error("More the one result found, narrow your search.\n\n");
+                isInputInvalid = true;
+            }
         }
-        while (isInputInvalid);
 
         return foundHoliday;
     }
@@ -130,51 +178,48 @@ public class FavoriteHolidaysEditor {
         Integer foundHolidaysCounter;
         Integer foundHolidayIndex = 0;
 
-        do {
-            isInputInvalid = false;
-            foundHolidaysCounter = 0;
-            STDOUT.info("Enter sequence of at least three letters.\n");
-            searchedHoliday = scanner.nextLine();
+        isInputInvalid = false;
+        foundHolidaysCounter = 0;
+        STDOUT.info("Enter sequence of at least three letters.\n");
+        scanner = new Scanner(System.in);
+        searchedHoliday = scanner.nextLine();
 
-            if (searchedHoliday.length() < 3) {
-                STDOUT.error("Input has to got at least 3 letters\n");
-                isInputInvalid = true;
-            } else {
+        if (searchedHoliday.length() < 3) {
+            STDOUT.error("Input has to got at least 3 letters\n");
+            isInputInvalid = true;
+        } else {
 
-                for (Holidays holiday : favoriteHolidaysList) {
+            for (Holidays holiday : favoriteHolidaysList) {
 
-                    if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
-                        foundHolidaysCounter++;
+                if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
+                    foundHolidaysCounter++;
 
-                        foundHoliday = holiday;
-                    }
-
-                    if (foundHolidaysCounter == 0) {
-                        foundHolidayIndex++;
-                    }
+                    foundHoliday = holiday;
                 }
 
                 if (foundHolidaysCounter == 0) {
-                    STDOUT.error("No results found.\n");
-                    isInputInvalid = true;
-                } else if (foundHolidaysCounter != 1) {
-                    STDOUT.error("More the one result found, narrow your search.\n");
-                    isInputInvalid = true;
+                    foundHolidayIndex++;
                 }
             }
 
+            if (foundHolidaysCounter == 0) {
+                STDOUT.error("No results found.\n\n");
+                isInputInvalid = true;
+            } else if (foundHolidaysCounter != 1) {
+                STDOUT.error("More the one result found, narrow your search.\n\n");
+                isInputInvalid = true;
+            }
         }
-        while (isInputInvalid);
 
         return foundHoliday;
     }
 
-    private boolean noDuplicates(Holidays checkForDuplicates){
+    private boolean noDuplicates(Holidays checkForDuplicates) {
 
         isDuplicate = false;
 
-        for(Holidays holiday : favoriteHolidaysList){
-            if(holiday.getName().equals(checkForDuplicates.getName())){
+        for (Holidays holiday : favoriteHolidaysList) {
+            if (holiday.getName().equals(checkForDuplicates.getName())) {
                 isDuplicate = true;
                 break;
             }
