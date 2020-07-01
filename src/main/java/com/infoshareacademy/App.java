@@ -21,10 +21,10 @@ public class App {
 
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
 
-        /*Printer.listBuilder(holidaysJsonData);
+       /* Printer.listBuilder(holidaysJsonData);
 
-        MenuSearch.menuSearch();*/
-
+        MenuSearch.menuSearch();
+*/
 
         holidaysJsonData.getServerResponse().setHolidays(HolidaysEditor.editHolidaysList(holidaysJsonData.getServerResponse().getHolidays()));
 

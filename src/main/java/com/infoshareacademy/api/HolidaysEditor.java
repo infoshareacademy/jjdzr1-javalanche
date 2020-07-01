@@ -33,8 +33,8 @@ public class HolidaysEditor {
             try {
                 STDOUT.info("Enter if you would like to:\n" +
                         "1: Create new holiday.\n" +
-                        "2: Edit this holiday. \n" +
-                        "3: Delete this holiday. \n");
+                        "2: Edit a holiday. \n" +
+                        "3: Delete a holiday. \n");
 
                 scanner = new Scanner(System.in);
                 usersInput = scanner.nextInt();
