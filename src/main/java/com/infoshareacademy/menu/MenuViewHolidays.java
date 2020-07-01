@@ -14,7 +14,6 @@ public class MenuViewHolidays {
         MainMenu.STDOUT.info("=========================== \n");
         MainMenu.STDOUT.info("Main menu -> View calendar \n");
         MainMenu.STDOUT.info("=========================== \n");
-        MainMenu.STDOUT.info("Filtering holidays by month:\n");
         MainMenu.STDOUT.info("1. View holidays\n");
         MainMenu.STDOUT.info("2. View holidays in this month\n");
         MainMenu.STDOUT.info("3. View holidays on other month\n");
