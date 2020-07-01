@@ -3,6 +3,7 @@ package com.infoshareacademy.menu;
 import com.infoshareacademy.api.HolidaysJsonData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.Scanner;
 
 public class MainMenu {
@@ -14,7 +15,9 @@ public class MainMenu {
         Scanner scanner = new Scanner(System.in);
 
         String option;
-
+        STDOUT.info("========== \n");
+        STDOUT.info("Main menu \n");
+        STDOUT.info("========== \n");
         STDOUT.info("Choose option:\n");
         STDOUT.info("1. Holiday request\n");
         STDOUT.info("2. Edit\n");
@@ -47,7 +50,7 @@ public class MainMenu {
                 MenuConfiguration.menuConfiguration();
                 break;
             }
-            case '6':{
+            case '6': {
                 MenuLogin.login();
                 break;
             }
@@ -57,14 +60,14 @@ public class MainMenu {
             }
         }
     }
-    private static void backToMenu(){
+
+    private static void backToMenu() {
         MainMenu.STDOUT.info("Back to main menu press 1.\n");
         Scanner scanner = new Scanner(System.in);
         String option = scanner.next();
-        if (option.charAt(0) == '1'){
+        if (option.charAt(0) == '1') {
             mainMenu();
-        }
-        else {
+        } else {
             backToMenu();
         }
     }
