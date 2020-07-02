@@ -324,32 +324,6 @@ public class HolidaysEditor {
         return listToSort;
     }
 
-    private static List<Integer> findIndexes(List<Holidays> listToFindMatch) {
-        HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
-
-        List<Integer> queriesIndexes = new ArrayList<>();
-
-        Integer index = 0;
-
-        for (Holidays holiday : holidaysJsonData.getServerResponse().getHolidays()) {
-
-            for (Holidays holidayToEdit : listToFindMatch) {
-
-                if (holiday.getName().toLowerCase().contains(holidayToEdit.getName().toLowerCase())) {
-
-                    queriesIndexes.add(index);
-                }
-
-            }
-
-            index++;
-
-        }
-
-        return queriesIndexes;
-
-    }
-
     private static Integer findHoliday() {
 
         Holidays foundHoliday = null;
