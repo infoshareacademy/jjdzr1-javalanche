@@ -54,7 +54,7 @@ public class HolidaysEditor {
 
             Holidays updateHoliday = holidayEdition.get(holidayIndex);
 
-            STDOUT.info(updateHoliday.toString() +  "This holiday is to be edited.\n\n");
+            STDOUT.info(updateHoliday.toString() + "This holiday is to be edited.\n\n");
 
             Integer usersInput = 0;
 
