@@ -1,6 +1,8 @@
 package com.infoshareacademy.edit;
 
 import com.infoshareacademy.api.*;
+import com.infoshareacademy.menu.MainMenu;
+import com.infoshareacademy.menu.MenuEdit;
 import com.infoshareacademy.menu.MenuSearch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,81 +24,37 @@ public class HolidaysEditor {
 
     private static boolean isInputInvalid;
 
-    public static List<Holidays> editHolidaysList(List<Holidays> listToEdit) {
-
-        isInputInvalid = false;
-        Integer usersInput = 0;
-
-        do {
-
-            isInputInvalid = false;
-
-            try {
-                STDOUT.info("Enter if you would like to:\n" +
-                        "1: Create new holiday.\n" +
-                        "2: Edit a holiday. \n" +
-                        "3: Delete a holiday. \n");
-
-                scanner = new Scanner(System.in);
-                usersInput = scanner.nextInt();
-
-                if (usersInput < 1 || usersInput > 3) {
-                    STDOUT.error("Input not within required range.\n\n");
-                    isInputInvalid = true;
-                }
-            } catch (Exception e) {
-                STDOUT.error("Error found: " + e + "\n" + "Enter a number between 1 and 3:\n");
-                isInputInvalid = true;
-            }
-
-        }
-        while (isInputInvalid);
-
-        switch (usersInput) {
-            case 1:
-                holidayEdition = createElement();
-                break;
-            case 2:
-                holidayEdition = updateElement(findHoliday());
-                break;
-            case 3:
-                holidayEdition = deleteElement(findHoliday());
-                break;
-        }
-
-        return holidayEdition;
-
-    }
-
-    private static List<Holidays> createElement() {
-        STDOUT.info("\n\nCreating a holiday query. \n ******************** \n\n");
+    public static List<Holidays> createElement() {
 
         Holidays createHoliday = new Holidays(name(), description(), country(), holidayDate(), type(), locations(), states());
         holidayEdition.add(createHoliday);
+
+        STDOUT.info(createHoliday.toString() + "This holiday is created.\n\n");
 
         holidayEdition = sortByDate(holidayEdition);
 
         return holidayEdition;
     }
 
-    private static List<Holidays> readElement() {
-        STDOUT.info("\n\nRead a holidays queries. \n************************ \n\n");
+    // This method may be adapted in future.
+    /*public static List<Holidays> readElement() {
 
         for (Holidays holiday : holidayEdition) {
             System.out.println(holiday.toString());
         }
 
         return holidayEdition;
-    }
+    }*/
 
-    private static List<Holidays> updateElement(Integer holidayIndex) {
+    public static List<Holidays> updateElement() {
+
+        Integer holidayIndex = findHoliday();
 
         if (holidayIndex != null) {
-            STDOUT.info("\n\nUpdate a holiday query. \n************************ \n\n");
 
             Holidays updateHoliday = holidayEdition.get(holidayIndex);
 
-            STDOUT.info(updateHoliday.toString());
+            STDOUT.info(updateHoliday.toString() +  "This holiday is to be edited.\n\n");
 
             Integer usersInput = 0;
 
@@ -112,7 +70,7 @@ public class HolidaysEditor {
 
                     scanner = new Scanner(System.in);
                     usersInput = scanner.nextInt();
-
+                    STDOUT.info("\n");
 
                     if (usersInput < 1 || usersInput > 3) {
                         STDOUT.error("Input not within required range.\n\n");
@@ -144,7 +102,10 @@ public class HolidaysEditor {
                     break;
             }
 
+            STDOUT.info(holidayEdition.get(holidayIndex).toString() + "The edited holiday\n\n");
+
             holidayEdition = sortByDate(holidayEdition);
+
         } else {
             STDOUT.info("You will return to holidays editor menu.\n\n");
         }
@@ -152,18 +113,18 @@ public class HolidaysEditor {
         return holidayEdition;
     }
 
-    private static List<Holidays> deleteElement(Integer holidayIndex) {
+    public static List<Holidays> deleteElement() {
+
+        Integer holidayIndex = findHoliday();
 
         if (holidayIndex != null) {
 
-            STDOUT.info("\n\nDelete a holiday query. \n************************ \n\n");
-
             String decision;
 
-            STDOUT.info(holidayEdition.get(holidayIndex).toString() + "Are you sure you want to delete this query?\n");
+            STDOUT.info(holidayEdition.get(holidayIndex).toString() + "Are you sure you want to delete this query?\n\n");
 
             do {
-                STDOUT.info("\nEnter your decision Y/N\n");
+                STDOUT.info("Enter your decision Y/N\n");
                 scanner = new Scanner(System.in);
                 decision = scanner.nextLine();
                 STDOUT.info("\n");
@@ -396,49 +357,50 @@ public class HolidaysEditor {
         Integer foundHolidaysCounter;
         Integer foundHolidayIndex = 0;
 
-        do{
-        isInputInvalid = false;
-        foundHolidaysCounter = 0;
-        foundHolidayIndex = 0;
-        STDOUT.info("Enter sequence of at least three letters.\n");
+        do {
+            isInputInvalid = false;
+            foundHolidaysCounter = 0;
+            foundHolidayIndex = 0;
+            STDOUT.info("Enter sequence of at least three letters.\n");
 
-        scanner = new Scanner(System.in);
-        searchedHoliday = scanner.nextLine();
+            scanner = new Scanner(System.in);
+            searchedHoliday = scanner.nextLine();
+            STDOUT.info("\n");
 
-        if (searchedHoliday.length() < 3) {
-            STDOUT.error("Input has to got at least 3 letters\n");
-            isInputInvalid = true;
-        } else {
+            if (searchedHoliday.length() < 3) {
+                STDOUT.error("Input has to got at least 3 letters\n");
+                isInputInvalid = true;
+            } else {
 
-            for (Holidays holiday : holidayEdition) {
+                for (Holidays holiday : holidayEdition) {
 
-                if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
-                    foundHolidaysCounter++;
+                    if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
+                        foundHolidaysCounter++;
+                    }
+
+                    if (foundHolidaysCounter == 0) {
+                        foundHolidayIndex++;
+                    }
                 }
 
                 if (foundHolidaysCounter == 0) {
-                    foundHolidayIndex++;
+                    STDOUT.error("No results found.\n");
+                    foundHolidayIndex = null;
+                    isInputInvalid = true;
+                    break;
+                }
+
+                if (foundHolidaysCounter > 1) {
+                    STDOUT.error("More the one result found, narrow your search.\n");
+                    foundHolidayIndex = null;
+                    isInputInvalid = true;
+                    break;
+                }
+
+                if (foundHolidayIndex >= holidayEdition.size()) {
+                    foundHolidayIndex = null;
                 }
             }
-
-            if (foundHolidaysCounter == 0) {
-                STDOUT.error("No results found.\n");
-                foundHolidayIndex = null;
-                isInputInvalid = true;
-                break;
-            }
-
-            if (foundHolidaysCounter > 1) {
-                STDOUT.error("More the one result found, narrow your search.\n");
-                foundHolidayIndex = null;
-                isInputInvalid = true;
-                break;
-            }
-
-            if (foundHolidayIndex >= holidayEdition.size()) {
-                foundHolidayIndex = null;
-            }
-        }
 
 
         }
@@ -448,6 +410,7 @@ public class HolidaysEditor {
         return foundHolidayIndex;
     }
 
+    //May be used in future when this class will be edited.
     private static void printList() {
 
         for (Holidays holiday : holidayEdition) {

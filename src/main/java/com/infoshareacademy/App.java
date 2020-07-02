@@ -1,7 +1,10 @@
 package com.infoshareacademy;
 
+import com.infoshareacademy.api.Printer;
 import com.infoshareacademy.edit.HolidaysEditor;
 import com.infoshareacademy.api.HolidaysJsonData;
+import com.infoshareacademy.menu.MainMenu;
+import com.infoshareacademy.menu.MenuSearch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,17 +20,8 @@ public class App {
 
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
 
-       /* Printer.listBuilder(holidaysJsonData);
+        Printer.listBuilder(holidaysJsonData);
 
-        MenuSearch.menuSearch();
-*/
-
-        holidaysJsonData.getServerResponse().setHolidays(HolidaysEditor.editHolidaysList(holidaysJsonData.getServerResponse().getHolidays()));
-
-
-        holidaysJsonData.getServerResponse().setHolidays(HolidaysEditor.editHolidaysList(holidaysJsonData.getServerResponse().getHolidays()));
-
-
-        holidaysJsonData.getServerResponse().setHolidays(HolidaysEditor.editHolidaysList(holidaysJsonData.getServerResponse().getHolidays()));
+        MainMenu.mainMenu();
     }
 }
