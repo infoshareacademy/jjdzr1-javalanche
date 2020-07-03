@@ -11,6 +11,7 @@ import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
@@ -235,15 +236,19 @@ public class HolidaysEditor {
         Integer requestedYear = 0;
 
         do {
+            isInputInvalid = false;
             try {
-                STDOUT.info("The year has to be series of four numbers:\n");
+                STDOUT.info("The year has to be between 1899 and " + Calendar.getInstance().get(Calendar.YEAR) + ".\n");
+                scanner = new Scanner(System.in);
                 requestedYear = scanner.nextInt();
             } catch (Exception e) {
-                STDOUT.info("Error found:" + e);
+                STDOUT.info("Error found: " + e + "\n");
                 isInputInvalid = true;
             }
 
-            if (requestedYear < 1899) isInputInvalid = true;
+            if (requestedYear < 1899 || requestedYear > Calendar.getInstance().get(Calendar.YEAR)) {
+                isInputInvalid = true;
+            }
         }
         while (isInputInvalid);
 
@@ -256,16 +261,18 @@ public class HolidaysEditor {
 
         do {
             isInputInvalid = false;
-
             try {
                 STDOUT.info("The month has to be a number between 1 and 12:\n");
+                scanner = new Scanner(System.in);
                 requestedMonth = scanner.nextInt();
             } catch (Exception e) {
-                STDOUT.info("Error found:" + e);
+                STDOUT.info("Error found:" + e + "\n");
                 isInputInvalid = true;
             }
 
-            if (requestedMonth < 1 || requestedMonth > 12) isInputInvalid = true;
+            if (requestedMonth < 1 || requestedMonth > 12) {
+                isInputInvalid = true;
+            }
         }
         while (isInputInvalid);
 
@@ -284,15 +291,19 @@ public class HolidaysEditor {
         String requestedDayString;
 
         do {
+            isInputInvalid = false;
             try {
                 STDOUT.info("The day has to be a number between 1 and 31:\n");
+                scanner = new Scanner(System.in);
                 requestedDay = scanner.nextInt();
             } catch (Exception e) {
-                STDOUT.info("Error found:" + e);
+                STDOUT.info("Error found:" + e + "\n");
                 isInputInvalid = true;
             }
 
-            if (requestedDay < 1 || requestedDay > 31) isInputInvalid = true;
+            if (requestedDay < 1 || requestedDay > 31) {
+                isInputInvalid = true;
+            }
         }
         while (isInputInvalid);
 

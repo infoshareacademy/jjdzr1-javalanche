@@ -182,7 +182,7 @@ public class MenuEdit {
                         "1: Create new holiday.\n" +
                         "2: Edit a holiday. \n" +
                         "3: Delete a holiday. \n" +
-                        "4: Back to menu search \n" + "" +
+                        "4: Back to menu edit. \n" + "" +
                         "5: Back to main menu\n"
                 );
 
@@ -194,7 +194,7 @@ public class MenuEdit {
                     isInputInvalid = true;
                 }
             } catch (Exception e) {
-                MainMenu.STDOUT.error("Error found: " + e + "\n" + "Enter a number between 1 and 3:\n");
+                MainMenu.STDOUT.error("Error found: " + e + "\n" + "Enter a number between 1 and 5:\n");
                 isInputInvalid = true;
             }
 
