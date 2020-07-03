@@ -1,8 +1,5 @@
 package com.infoshareacademy.api;
 
-import com.infoshareacademy.search.SearchingInApi;
-import org.slf4j.LoggerFactory;
-
 import java.util.*;
 
 import static com.infoshareacademy.App.STDOUT;
@@ -60,6 +57,8 @@ public class FavoriteHolidaysEditor {
     }
 
     public static List<Holidays> addFavoriteHolidays() {
+        refreshFavoriteHolidays();
+
         STDOUT.info("Add a favorite holiday. \n************************ \n\n");
 
         Holidays favoriteHolidayToAdd = findHoliday();
@@ -93,6 +92,8 @@ public class FavoriteHolidaysEditor {
     }
 
     public static List<Holidays> removeFavoriteHolidays() {
+        refreshFavoriteHolidays();
+
         STDOUT.info("Remove a favorite holiday. \n************************ \n\n");
 
         Holidays favoriteHolidayToRemove = findFavoriteHoliday();
@@ -120,6 +121,7 @@ public class FavoriteHolidaysEditor {
     }
 
     public static void printFavoriteHolidays() {
+        refreshFavoriteHolidays();
 
         favoriteHolidaysList = sortFavoriteHolidays(favoriteHolidaysList);
 
@@ -255,8 +257,7 @@ public class FavoriteHolidaysEditor {
 
     }
 
-    private FavoriteHolidaysEditor() {
-
+    private static void refreshFavoriteHolidays() {
         boolean doHolidayMatch;
 
         for(Holidays favoriteHoliday : favoriteHolidaysList){
