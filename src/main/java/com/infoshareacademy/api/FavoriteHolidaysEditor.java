@@ -9,14 +9,14 @@ import static com.infoshareacademy.App.STDOUT;
 
 public class FavoriteHolidaysEditor {
 
-    private List<Holidays> allHolidaysList = HolidaysJsonData.readDataFromJsonFile().getServerResponse().getHolidays();
-    private List<Holidays> favoriteHolidaysList = new ArrayList<>();
-    private Scanner scanner = new Scanner(System.in);
+    private static List<Holidays> allHolidaysList = HolidaysJsonData.readDataFromJsonFile().getServerResponse().getHolidays();
+    private static List<Holidays> favoriteHolidaysList = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
 
-    boolean isInputInvalid;
-    boolean isDuplicate;
+    static boolean isInputInvalid;
+    static boolean isDuplicate;
 
-    public void editFavoriteHolidays() {
+    public static void editFavoriteHolidays() {
 
         Integer usersInput = 0;
 
@@ -59,7 +59,7 @@ public class FavoriteHolidaysEditor {
         }
     }
 
-    public void addFavoriteHolidays() {
+    public static List<Holidays> addFavoriteHolidays() {
         STDOUT.info("Add a favorite holiday. \n************************ \n\n");
 
         Holidays favoriteHolidayToAdd = findHoliday();
@@ -86,10 +86,13 @@ public class FavoriteHolidaysEditor {
                 STDOUT.info("Holiday added\n\n");
                 favoriteHolidaysList.add(favoriteHolidayToAdd);
             }
+
         }
+
+        return favoriteHolidaysList;
     }
 
-    public void removeFavoriteHolidays() {
+    public static List<Holidays> removeFavoriteHolidays() {
         STDOUT.info("Remove a favorite holiday. \n************************ \n\n");
 
         Holidays favoriteHolidayToRemove = findFavoriteHoliday();
@@ -112,14 +115,19 @@ public class FavoriteHolidaysEditor {
             }
 
         }
+
+        return favoriteHolidaysList;
     }
 
-    public void printFavoriteHolidays() {
+    public static void printFavoriteHolidays() {
 
         favoriteHolidaysList = sortFavoriteHolidays(favoriteHolidaysList);
 
         if(favoriteHolidaysList.size() == 0){
             STDOUT.info("You have no favorite holidays\n\n");
+        }
+        else {
+            STDOUT.info("You have " + favoriteHolidaysList.size() + " favorite holiday(s).\n\n" );
         }
 
         for (Holidays holiday : favoriteHolidaysList) {
@@ -127,7 +135,7 @@ public class FavoriteHolidaysEditor {
         }
     }
 
-    private Holidays findHoliday() {
+    private static Holidays findHoliday() {
 
         Holidays foundHoliday = null;
         String searchedHoliday;
@@ -171,7 +179,7 @@ public class FavoriteHolidaysEditor {
         return foundHoliday;
     }
 
-    private Holidays findFavoriteHoliday() {
+    private static Holidays findFavoriteHoliday() {
 
         Holidays foundHoliday = null;
         String searchedHoliday;
@@ -214,12 +222,12 @@ public class FavoriteHolidaysEditor {
         return foundHoliday;
     }
 
-    private boolean noDuplicates(Holidays checkForDuplicates) {
+    private static boolean noDuplicates(Holidays checkForDuplicates) {
 
         isDuplicate = false;
 
         for (Holidays holiday : favoriteHolidaysList) {
-            if (holiday.getName().equals(checkForDuplicates.getName())) {
+            if (holiday.getHolidayDate().getIso().equals(checkForDuplicates.getHolidayDate().getIso())) {
                 isDuplicate = true;
                 break;
             }
@@ -227,7 +235,7 @@ public class FavoriteHolidaysEditor {
         return isDuplicate;
     }
 
-    private List<Holidays> sortFavoriteHolidays(List<Holidays> listToSort) {
+    private static List<Holidays> sortFavoriteHolidays(List<Holidays> listToSort) {
 
         Collections.sort(listToSort, new Comparator<Holidays>() {
 
@@ -247,7 +255,36 @@ public class FavoriteHolidaysEditor {
 
     }
 
-    private void refreshFavoriteHolidays() {
+    private FavoriteHolidaysEditor() {
+
+        boolean doHolidayMatch;
+
+        for(Holidays favoriteHoliday : favoriteHolidaysList){
+
+            doHolidayMatch = false;
+
+            for(Holidays holiday : allHolidaysList){
+
+                if((holiday.getHolidayDate().getIso().equals(favoriteHoliday.getHolidayDate().getIso()))){
+
+                    if(!(holiday.getName().equals(favoriteHoliday.getName()))){
+                        favoriteHoliday.setName(holiday.getName());
+                    }
+
+                    if(!(holiday.getDescription().equals(favoriteHoliday.getDescription()))){
+                        favoriteHoliday.setDescription(holiday.getDescription());
+                    }
+
+                    doHolidayMatch = true;
+                }
+
+            }
+
+            if (!doHolidayMatch){
+                favoriteHolidaysList.remove(favoriteHoliday);
+            }
+
+        }
     }
 
 }

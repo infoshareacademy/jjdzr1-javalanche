@@ -19,11 +19,9 @@ public class App {
        /* Printer.listBuilder(holidaysJsonData);
         MainMenu.mainMenu();*/
 
-        FavoriteHolidaysEditor favoriteHolidaysEditor = new FavoriteHolidaysEditor();
-
         boolean keep = true;
         while(keep){
-            favoriteHolidaysEditor.editFavoriteHolidays();
+            FavoriteHolidaysEditor.editFavoriteHolidays();
         }
     }
 }
