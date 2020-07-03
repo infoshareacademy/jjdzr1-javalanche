@@ -30,6 +30,7 @@ public class SearchingInApi {
         App.STDOUT.info(String.valueOf(holidaysList));
         App.STDOUT.info("\n\n" + "******* " + numberOfFoundObjects +
                 " object(s) found listed above *******" + "\n\n");
+        holidaysList.clear();
     }
 
     //set holiday date to localDate format
