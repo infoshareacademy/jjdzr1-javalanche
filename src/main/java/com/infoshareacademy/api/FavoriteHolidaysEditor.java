@@ -78,13 +78,15 @@ public class FavoriteHolidaysEditor {
 
 
             if (usersDecision.toLowerCase().equals("n")) {
-                STDOUT.info("Holiday not added\n\n");
+                STDOUT.info("Holiday not added.\n\n");
             } else if (noDuplicates(favoriteHolidayToAdd)) {
-                STDOUT.info("Holiday already in favorites. Holiday not added\n\n");
+                STDOUT.info("The chosen holiday is already in the favorites. Holiday will not be added to the list.\n\n");
             } else {
-                STDOUT.info("Holiday added\n\n");
+                STDOUT.info("Holiday added.\n\n");
                 favoriteHolidaysList.add(favoriteHolidayToAdd);
             }
+
+            STDOUT.info("You will return to favorite holidays editor menu.\n\n");
 
         }
 
@@ -117,6 +119,8 @@ public class FavoriteHolidaysEditor {
 
         }
 
+        STDOUT.info("You will return to favorite holidays editor menu.\n\n");
+
         return favoriteHolidaysList;
     }
 
@@ -135,6 +139,8 @@ public class FavoriteHolidaysEditor {
         for (Holidays holiday : favoriteHolidaysList) {
             STDOUT.info(holiday.toString());
         }
+
+        STDOUT.info("You will return to favorite holidays editor menu.\n\n");
     }
 
     private static Holidays findHoliday() {
