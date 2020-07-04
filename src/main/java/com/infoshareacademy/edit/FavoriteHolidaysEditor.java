@@ -2,6 +2,8 @@ package com.infoshareacademy.edit;
 
 import com.infoshareacademy.api.Holidays;
 import com.infoshareacademy.api.HolidaysJsonData;
+import com.infoshareacademy.menu.MainMenu;
+import com.infoshareacademy.menu.MenuEdit;
 
 import java.util.*;
 
@@ -16,53 +18,8 @@ public class FavoriteHolidaysEditor {
     static boolean isInputInvalid;
     static boolean isDuplicate;
 
-    public static void editFavoriteHolidays() {
-
-        Integer usersInput = 0;
-
-        do {
-
-            isInputInvalid = false;
-
-            try {
-                STDOUT.info("Enter if you would like to:\n" +
-                        "1: Print favorite holidays.\n" +
-                        "2: Add a favorite holiday. \n" +
-                        "3: Remove a holiday. \n");
-
-                scanner = new Scanner(System.in);
-                usersInput = scanner.nextInt();
-                STDOUT.info("\n");
-
-                if (usersInput < 1 || usersInput > 3) {
-                    STDOUT.error("Input not within required range.\n\n");
-                    isInputInvalid = true;
-                }
-            } catch (Exception e) {
-                STDOUT.error("Error found: " + e + "\n" + "Enter a number between 1 and 3:\n");
-                isInputInvalid = true;
-            }
-
-        }
-        while (isInputInvalid);
-
-        switch (usersInput) {
-            case 1:
-                printFavoriteHolidays();
-                break;
-            case 2:
-                addFavoriteHolidays();
-                break;
-            case 3:
-                removeFavoriteHolidays();
-                break;
-        }
-    }
-
     public static List<Holidays> addFavoriteHolidays() {
         refreshFavoriteHolidays();
-
-        STDOUT.info("Add a favorite holiday. \n************************ \n\n");
 
         Holidays favoriteHolidayToAdd = findHoliday();
 
@@ -99,8 +56,6 @@ public class FavoriteHolidaysEditor {
     public static List<Holidays> removeFavoriteHolidays() {
         refreshFavoriteHolidays();
 
-        STDOUT.info("Remove a favorite holiday. \n************************ \n\n");
-
         Holidays favoriteHolidayToRemove = findFavoriteHoliday();
 
         if (favoriteHolidayToRemove != null) {
@@ -132,11 +87,10 @@ public class FavoriteHolidaysEditor {
 
         favoriteHolidaysList = sortFavoriteHolidays(favoriteHolidaysList);
 
-        if(favoriteHolidaysList.size() == 0){
+        if (favoriteHolidaysList.size() == 0) {
             STDOUT.info("You have no favorite holidays\n\n");
-        }
-        else {
-            STDOUT.info("You have " + favoriteHolidaysList.size() + " favorite holiday(s).\n\n" );
+        } else {
+            STDOUT.info("You have " + favoriteHolidaysList.size() + " favorite holiday(s).\n\n");
         }
 
         for (Holidays holiday : favoriteHolidaysList) {
@@ -266,35 +220,38 @@ public class FavoriteHolidaysEditor {
 
     }
 
-    private static void refreshFavoriteHolidays() {
-        boolean doHolidayMatch;
+    private static List<Holidays> refreshFavoriteHolidays() {
+        List<Integer> indexesToRemove = new ArrayList<>();
 
-        for(Holidays favoriteHoliday : favoriteHolidaysList){
+        List<Holidays> refreshedHolidaysList = new ArrayList<>();
 
-            doHolidayMatch = false;
+        for (Holidays favoriteHoliday : favoriteHolidaysList) {
 
-            for(Holidays holiday : allHolidaysList){
+            for (Holidays holiday : HolidaysEditor.getHolidayEdition()) {
 
-                if((holiday.getHolidayDate().getIso().equals(favoriteHoliday.getHolidayDate().getIso()))){
 
-                    if(!(holiday.getName().equals(favoriteHoliday.getName()))){
+                if ((holiday.getHolidayDate().getIso().equals(favoriteHoliday.getHolidayDate().getIso()))) {
+
+                    if (!(holiday.getName().equals(favoriteHoliday.getName()))) {
                         favoriteHoliday.setName(holiday.getName());
                     }
 
-                    if(!(holiday.getDescription().equals(favoriteHoliday.getDescription()))){
+                    if (!(holiday.getDescription().equals(favoriteHoliday.getDescription()))) {
                         favoriteHoliday.setDescription(holiday.getDescription());
                     }
 
-                    doHolidayMatch = true;
+                    refreshedHolidaysList.add(favoriteHoliday);
+
+                    break;
                 }
 
             }
 
-            if (!doHolidayMatch){
-                favoriteHolidaysList.remove(favoriteHoliday);
-            }
+            favoriteHolidaysList = new ArrayList<>(refreshedHolidaysList);
 
         }
+
+        return favoriteHolidaysList;
     }
 
 }

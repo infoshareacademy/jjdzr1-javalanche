@@ -1,7 +1,8 @@
 package com.infoshareacademy;
 
-import com.infoshareacademy.edit.FavoriteHolidaysEditor;
+import com.infoshareacademy.api.Printer;
 import com.infoshareacademy.api.HolidaysJsonData;
+import com.infoshareacademy.menu.MainMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,12 +17,7 @@ public class App {
         STDOUT.info("jAvalanche \n");
 
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
-       /* Printer.listBuilder(holidaysJsonData);
-        MainMenu.mainMenu();*/
-
-        boolean keep = true;
-        while(keep){
-            FavoriteHolidaysEditor.editFavoriteHolidays();
-        }
+        Printer.listBuilder(holidaysJsonData);
+        MainMenu.mainMenu();
     }
 }
