@@ -39,7 +39,7 @@ public class FavoriteHolidaysEditor {
 
             if (usersDecision.toLowerCase().equals("n")) {
                 STDOUT.info("Holiday not added.\n\n");
-            } else if (noDuplicates(favoriteHolidayToAdd)) {
+            } else if (isDuplicate(favoriteHolidayToAdd)) {
                 STDOUT.info("The chosen holiday is already in the favorites. Holiday will not be added to the list.\n\n");
             } else {
                 STDOUT.info("Holiday added.\n\n");
@@ -72,6 +72,7 @@ public class FavoriteHolidaysEditor {
             while (!usersDecision.toLowerCase().equals("y") && !usersDecision.toLowerCase().equals("n"));
 
             if (usersDecision.toLowerCase().equals("y")) {
+                STDOUT.info("This holidays has been removed from your favorites.\n\n");
                 favoriteHolidaysList.remove(favoriteHolidayToRemove);
             }
 
@@ -187,7 +188,7 @@ public class FavoriteHolidaysEditor {
         return foundHoliday;
     }
 
-    private static boolean noDuplicates(Holidays checkForDuplicates) {
+    private static boolean isDuplicate(Holidays checkForDuplicates) {
 
         isDuplicate = false;
 
