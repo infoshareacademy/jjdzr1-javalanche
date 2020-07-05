@@ -1,8 +1,11 @@
 package com.infoshareacademy.menu;
 
+import com.infoshareacademy.edit.FavoriteHolidaysEditor;
 import com.infoshareacademy.edit.HolidaysEditor;
 
 import java.util.Scanner;
+
+import static com.infoshareacademy.App.STDOUT;
 
 public class MenuEdit {
     public static void menuEdit() {
@@ -169,10 +172,11 @@ public class MenuEdit {
         ClearConsole.clearConsole();
 
         Scanner scanner = new Scanner(System.in);
-        Boolean isInputInvalid = false;
+        Boolean isInputInvalid;
         Integer usersInput = null;
 
         do {
+            isInputInvalid = false;
 
             try {
                 MainMenu.STDOUT.info("================================== \n");
@@ -182,12 +186,13 @@ public class MenuEdit {
                         "1: Create new holiday.\n" +
                         "2: Edit a holiday. \n" +
                         "3: Delete a holiday. \n" +
-                        "4: Back to menu edit. \n" + "" +
+                        "4: Back to menu edit. \n" +
                         "5: Back to main menu\n"
                 );
 
                 scanner = new Scanner(System.in);
                 usersInput = scanner.nextInt();
+                STDOUT.info("\n");
 
                 if (usersInput < 1 || usersInput > 5) {
                     MainMenu.STDOUT.error("Input not within required range.\n\n");
@@ -234,10 +239,69 @@ public class MenuEdit {
 
     private static void editFavoriteHolidays() {
         ClearConsole.clearConsole();
-        MainMenu.STDOUT.info("=========================================== \n");
-        MainMenu.STDOUT.info("Main menu -> Edit -> Edit favorite holidays \n");
-        MainMenu.STDOUT.info("=========================================== \n");
-        backToMenu();
+
+        Scanner scanner = new Scanner(System.in);
+        Boolean isInputInvalid;
+        Integer usersInput = null;
+
+        do {
+            isInputInvalid = false;
+
+            try {
+                MainMenu.STDOUT.info("=========================================== \n");
+                MainMenu.STDOUT.info("Main menu -> Edit -> Edit favorite holidays \n");
+                MainMenu.STDOUT.info("=========================================== \n");
+                STDOUT.info("Enter if you would like to:\n" +
+                        "1: Print favorite holidays.\n" +
+                        "2: Add a favorite holiday. \n" +
+                        "3: Remove a holiday.\n" +
+                        "4: Back to menu edit. \n" +
+                        "5: Back to main menu\n");
+
+                scanner = new Scanner(System.in);
+                usersInput = scanner.nextInt();
+                STDOUT.info("\n");
+
+                if (usersInput < 1 || usersInput > 5) {
+                    STDOUT.error("Input not within required range.\n\n");
+                    isInputInvalid = true;
+                }
+            } catch (Exception e) {
+                STDOUT.error("Error found: " + e + "\n" + "Enter a number between 1 and 5:\n");
+                isInputInvalid = true;
+            }
+
+        }
+        while (isInputInvalid);
+
+        switch (usersInput) {
+            case 1:
+                MainMenu.STDOUT.info("====================================================================== \n");
+                MainMenu.STDOUT.info("Main menu -> Edit -> Edit favorite holidays -> Print favorite holidays \n");
+                MainMenu.STDOUT.info("====================================================================== \n");
+                FavoriteHolidaysEditor.printFavoriteHolidays();
+                editFavoriteHolidays();
+                break;
+            case 2:
+                MainMenu.STDOUT.info("=================================================================== \n");
+                MainMenu.STDOUT.info("Main menu -> Edit -> Edit favorite holidays -> Add favorite holiday \n");
+                MainMenu.STDOUT.info("=================================================================== \n");
+                FavoriteHolidaysEditor.addFavoriteHolidays();
+                editFavoriteHolidays();
+                break;
+            case 3:
+                MainMenu.STDOUT.info("====================================================================== \n");
+                MainMenu.STDOUT.info("Main menu -> Edit -> Edit favorite holidays -> Remove favorite holiday \n");
+                MainMenu.STDOUT.info("====================================================================== \n");
+                FavoriteHolidaysEditor.removeFavoriteHolidays();
+                editFavoriteHolidays();
+                break;
+            case 4:
+                MenuEdit.menuEdit();
+                break;
+            case 5:
+                MainMenu.mainMenu();
+        }
     }
 
     private static void loadFromFile() {

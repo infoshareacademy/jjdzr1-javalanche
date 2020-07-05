@@ -38,7 +38,7 @@ public class HolidaysEditor {
     }
 
     // This method may be adapted in future.
-    /*public static List<Holidays> readElement() {
+/*    public static List<Holidays> readElement() {
 
         for (Holidays holiday : holidayEdition) {
             System.out.println(holiday.toString());
@@ -403,4 +403,7 @@ public class HolidaysEditor {
         }
     }
 
+    public static List<Holidays> getHolidayEdition() {
+        return holidayEdition;
+    }
 }
