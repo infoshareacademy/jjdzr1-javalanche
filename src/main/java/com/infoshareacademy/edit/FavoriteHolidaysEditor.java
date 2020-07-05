@@ -105,42 +105,38 @@ public class FavoriteHolidaysEditor {
 
         Holidays foundHoliday = null;
         String searchedHoliday;
-        Integer foundHolidaysCounter;
-        Integer foundHolidayIndex = 0;
+        Integer foundHolidaysCounter = 0;
 
+        do {
+            isInputInvalid = false;
+            STDOUT.info("Enter sequence of at least three letters.\n");
+            scanner = new Scanner(System.in);
+            searchedHoliday = scanner.nextLine();
 
-        isInputInvalid = false;
-        foundHolidaysCounter = 0;
-        STDOUT.info("Enter sequence of at least three letters.\n");
-        scanner = new Scanner(System.in);
-        searchedHoliday = scanner.nextLine();
+            if (searchedHoliday.length() < 3) {
+                STDOUT.error("Input has to got at least 3 letters\n");
+                isInputInvalid = true;
+            } else {
 
-        if (searchedHoliday.length() < 3) {
-            STDOUT.error("Input has to got at least 3 letters\n");
-            isInputInvalid = true;
-        } else {
+                for (Holidays holiday : allHolidaysList) {
 
-            for (Holidays holiday : allHolidaysList) {
+                    if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
+                        foundHolidaysCounter++;
 
-                if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
-                    foundHolidaysCounter++;
-
-                    foundHoliday = holiday;
+                        foundHoliday = holiday;
+                    }
                 }
 
-                if (foundHolidaysCounter == 0) {
-                    foundHolidayIndex++;
+                if (foundHolidaysCounter.equals(0)) {
+                    foundHoliday = null;
+                    STDOUT.error("No results found.\n\n");
+                } else if (!foundHolidaysCounter.equals(1)) {
+                    foundHoliday = null;
+                    STDOUT.error("More than one result found, narrow your search.\n\n");
                 }
-            }
-
-            if (foundHolidaysCounter == 0) {
-                STDOUT.error("No results found.\n\n");
-                isInputInvalid = true;
-            } else if (foundHolidaysCounter != 1) {
-                STDOUT.error("More the one result found, narrow your search.\n\n");
-                isInputInvalid = true;
             }
         }
+        while (isInputInvalid);
 
         return foundHoliday;
     }
@@ -149,41 +145,44 @@ public class FavoriteHolidaysEditor {
 
         Holidays foundHoliday = null;
         String searchedHoliday;
-        Integer foundHolidaysCounter;
-        Integer foundHolidayIndex = 0;
+        Integer foundHolidaysCounter = 0;
 
-        isInputInvalid = false;
-        foundHolidaysCounter = 0;
-        STDOUT.info("Enter sequence of at least three letters.\n");
-        scanner = new Scanner(System.in);
-        searchedHoliday = scanner.nextLine();
 
-        if (searchedHoliday.length() < 3) {
-            STDOUT.error("Input has to got at least 3 letters\n");
-            isInputInvalid = true;
-        } else {
+        do {
+            isInputInvalid = false;
 
-            for (Holidays holiday : favoriteHolidaysList) {
+            STDOUT.info("Enter sequence of at least three letters.\n");
+            scanner = new Scanner(System.in);
+            searchedHoliday = scanner.nextLine();
 
-                if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
-                    foundHolidaysCounter++;
+            if (searchedHoliday.length() < 3) {
+                STDOUT.error("Input has to got at least 3 letters\n");
+                isInputInvalid = true;
+            } else {
 
-                    foundHoliday = holiday;
+                for (Holidays holiday : favoriteHolidaysList) {
+
+                    if (holiday.getName().toLowerCase().contains(searchedHoliday.toLowerCase())) {
+                        foundHolidaysCounter++;
+
+                        foundHoliday = holiday;
+                    }
+
+                    if (foundHolidaysCounter == 0) {
+                    }
                 }
 
-                if (foundHolidaysCounter == 0) {
-                    foundHolidayIndex++;
+                if (foundHolidaysCounter.equals(0)) {
+                    foundHoliday = null;
+                    STDOUT.error("No results found.\n\n");
+                } else if (!foundHolidaysCounter.equals(1)) {
+                    foundHoliday = null;
+                    STDOUT.error("More the one result found, narrow your search.\n\n");
                 }
             }
 
-            if (foundHolidaysCounter == 0) {
-                STDOUT.error("No results found.\n\n");
-                isInputInvalid = true;
-            } else if (foundHolidaysCounter != 1) {
-                STDOUT.error("More the one result found, narrow your search.\n\n");
-                isInputInvalid = true;
-            }
         }
+        while (isInputInvalid);
 
         return foundHoliday;
     }
