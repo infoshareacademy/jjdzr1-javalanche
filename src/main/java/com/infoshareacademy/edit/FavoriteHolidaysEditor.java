@@ -167,9 +167,6 @@ public class FavoriteHolidaysEditor {
 
                         foundHoliday = holiday;
                     }
-
-                    if (foundHolidaysCounter == 0) {
-                    }
                 }
 
                 if (foundHolidaysCounter.equals(0)) {
@@ -221,7 +218,6 @@ public class FavoriteHolidaysEditor {
     }
 
     private static List<Holidays> refreshFavoriteHolidays() {
-        List<Integer> indexesToRemove = new ArrayList<>();
 
         List<Holidays> refreshedHolidaysList = new ArrayList<>();
 
