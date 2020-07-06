@@ -96,9 +96,9 @@ public class Printer {
     }
 
     public static void printOneElementOption(HolidaysJsonData holidaysJsonData) {
-        MainMenu.STDOUT.info("Print chosen holiday details press 1.\n");
-        MainMenu.STDOUT.info("Back to view menu press 2.\n");
-        MainMenu.STDOUT.info("Back to main menu press 3.\n");
+        MainMenu.STDOUT.info("1. Print chosen holiday details.\n");
+        MainMenu.STDOUT.info("2. Back to view menu.\n");
+        MainMenu.STDOUT.info("3. Back to main menu.\n");
         Scanner scanner = new Scanner(System.in);
         String option = scanner.next();
         if (option.charAt(0) == '1') {
@@ -133,6 +133,25 @@ public class Printer {
         } catch (Exception e) {
             printOneElement(holidaysJsonData);
         }
+    }
+
+    public static List<String> getImportantInfoList(HolidaysJsonData holidaysJsonData) {
+        index = 1;
+        MainMenu.STDOUT.info("================================================ \n");
+        MainMenu.STDOUT.info("Main menu -> View calendar -> View all holidays \n");
+        MainMenu.STDOUT.info("================================================ \n");
+        List<String> importantInfoList = new ArrayList<>();
+        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
+            importantInfoList.add(" \n" + index + ". " + holidaysJsonData.getServerResponse().getHolidays().get(i).getName() + " - " + holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getIso()
+                    + "\n" + holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription() + "\n ");
+            index++;
+        }
+
+        String r = importantInfoList.toString().replace("[", "").replace("]", "").
+                replace(" , ", "");
+
+        STDOUT.info(r + "\n");
+        return importantInfoList;
     }
 
 }
