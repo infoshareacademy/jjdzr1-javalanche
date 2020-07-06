@@ -135,18 +135,19 @@ public class Printer {
         }
     }
 
-    public static List<String> getImportantInfoList(HolidaysJsonData holidaysJsonData) {
+    public static List<String> getImportantInfo2ndVersion(HolidaysJsonData holidaysJsonData) {
         index = 1;
         MainMenu.STDOUT.info("================================================ \n");
         MainMenu.STDOUT.info("Main menu -> View calendar -> View all holidays \n");
         MainMenu.STDOUT.info("================================================ \n");
         List<String> importantInfoList = new ArrayList<>();
+
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            importantInfoList.add(" \n" + index + ". " + holidaysJsonData.getServerResponse().getHolidays().get(i).getName() + " - " + holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getIso()
-                    + "\n" + holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription() + "\n ");
+            importantInfoList.add(" \n" + index + ". " + listBuilder(holidaysJsonData).get(i).getName() + " - " +
+                    listBuilder(holidaysJsonData).get(i).getHolidayDate().getIso()
+                    + "\n" + listBuilder(holidaysJsonData).get(i).getDescription() + "\n ");
             index++;
         }
-
         String r = importantInfoList.toString().replace("[", "").replace("]", "").
                 replace(" , ", "");
 
