@@ -28,7 +28,7 @@ public class SearchingInApi {
     public static void objectsFound() {
         App.STDOUT.info("\n\n" + "******* " + numberOfFoundObjects +
                 " object(s) found listed below *******" + "\n\n");
-        App.STDOUT.info(String.valueOf(holidaysList));
+        Printer.getImportantInfo2ndVersion(holidaysList);
         App.STDOUT.info("\n\n" + "******* " + numberOfFoundObjects +
                 " object(s) found listed above *******" + "\n\n");
         holidaysList.clear();
