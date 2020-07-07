@@ -6,8 +6,6 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.UnsupportedTemporalTypeException;
 import java.util.*;
 
 public class PropertiesReader {
@@ -45,7 +43,6 @@ public class PropertiesReader {
 
         scanner = new Scanner(System.in);
         DateTimeFormatter dateTimeFormatter;
-        LocalDate localDate;
 
         boolean isFormatIncorrect;
         String givenDateFormat = null;
@@ -125,10 +122,6 @@ public class PropertiesReader {
         return this.dateFormat;
     }
 
-    public String getSortOrder() {
-        return this.sortOrder;
-    }
-
     public int usersDecisionInterpreter(Integer numberOfOptions) {
 
         int usersDecisionInput = 0;
@@ -156,36 +149,5 @@ public class PropertiesReader {
         while (isFormatIncorrect);
 
         return usersDecisionInput;
-    }
-
-    public String getKeyProperty(String keyTitle) throws IOException {
-
-        String requestedProperty = null;
-
-        try {
-            properties = new Properties();
-
-            inputStream = new FileInputStream(propertiesFileName);
-
-            if (inputStream != null) {
-                properties.load(inputStream);
-
-            } else {
-                throw new FileNotFoundException("File at '" + propertiesFileName + "' has not been found.");
-            }
-
-            requestedProperty = properties.getProperty(keyTitle);
-        } catch (Exception e) {
-            STDOUT.error("Error found:" + e);
-        } finally {
-            inputStream.close();
-        }
-
-        if (requestedProperty == null) {
-            requestedProperty = "";
-            STDOUT.error("Given key doesn't find any match.");
-        }
-        return requestedProperty;
-
     }
 }
