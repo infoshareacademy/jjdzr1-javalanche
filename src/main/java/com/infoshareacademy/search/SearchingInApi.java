@@ -97,7 +97,7 @@ public class SearchingInApi {
     }
 
     public static List<Holidays> searchByDate() {
-        //get date format from properties file
+
         PropertiesReader propertiesReader = new PropertiesReader();
         String dateFormat = propertiesReader.getDateFormat();
 
@@ -113,7 +113,7 @@ public class SearchingInApi {
         while (queryDate.length() < 2);
 
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            //set holiday date to localDate format
+
             LocalDate takenData = getLocalDate(holidaysJsonData, i);
 
             //compare holiday date (takenData) to queryDate both in same format from properties file
