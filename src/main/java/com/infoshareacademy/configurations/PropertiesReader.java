@@ -2,12 +2,9 @@ package com.infoshareacademy.configurations;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.UnsupportedTemporalTypeException;
 import java.util.*;
 
 public class PropertiesReader {

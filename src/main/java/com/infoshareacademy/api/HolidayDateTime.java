@@ -3,8 +3,6 @@ package com.infoshareacademy.api;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.time.LocalDateTime;
-
 public class HolidayDateTime {
     @SerializedName("year")
     @Expose

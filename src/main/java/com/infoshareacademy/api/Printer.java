@@ -1,6 +1,6 @@
 package com.infoshareacademy.api;
 
-import com.infoshareacademy.menu.MainMenu;
+import com.infoshareacademy.menu.MenuMain;
 import com.infoshareacademy.menu.MenuViewHolidays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +22,9 @@ public class Printer {
 
     public static List<String> getImportantInfo(HolidaysJsonData holidaysJsonData) {
         index = 1;
-        MainMenu.STDOUT.info("================================================ \n");
-        MainMenu.STDOUT.info("Main menu -> View calendar -> View all holidays \n");
-        MainMenu.STDOUT.info("================================================ \n");
+        MenuMain.STDOUT.info("================================================ \n");
+        MenuMain.STDOUT.info("Main menu -> View calendar -> View all holidays \n");
+        MenuMain.STDOUT.info("================================================ \n");
         List<String> importantInfoList = new ArrayList<>();
         for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
             importantInfoList.add(" \n" + index + ". " + holidaysJsonData.getServerResponse().getHolidays().get(i).getName() + " - " + holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getIso()
@@ -96,22 +96,22 @@ public class Printer {
     }
 
     public static void printOneElementOption(HolidaysJsonData holidaysJsonData) {
-        MainMenu.STDOUT.info("1. Print chosen holiday details.\n");
-        MainMenu.STDOUT.info("2. Back to view menu.\n");
-        MainMenu.STDOUT.info("3. Back to main menu.\n");
+        MenuMain.STDOUT.info("1. Print chosen holiday details.\n");
+        MenuMain.STDOUT.info("2. Back to view menu.\n");
+        MenuMain.STDOUT.info("3. Back to main menu.\n");
         Scanner scanner = new Scanner(System.in);
         String option = scanner.next();
         if (option.charAt(0) == '1') {
-            MainMenu.STDOUT.info("================================================================================ \n");
-            MainMenu.STDOUT.info("Main menu -> View calendar -> View holidays in this month -> View chosen holiday \n");
-            MainMenu.STDOUT.info("================================================================================ \n");
+            MenuMain.STDOUT.info("================================================================================ \n");
+            MenuMain.STDOUT.info("Main menu -> View calendar -> View holidays in this month -> View chosen holiday \n");
+            MenuMain.STDOUT.info("================================================================================ \n");
             printOneElement(holidaysJsonData);
             printOneElementOption(holidaysJsonData);
 
         } else if (option.charAt(0) == '2') {
             MenuViewHolidays.menuViewHolidays(holidaysJsonData);
         } else if (option.charAt(0) == '3') {
-            MainMenu.mainMenu();
+            MenuMain.mainMenu();
         } else {
             MenuViewHolidays.backToMenu(holidaysJsonData);
         }
@@ -119,15 +119,15 @@ public class Printer {
 
     public static void printOneElement(HolidaysJsonData holidaysJsonData) {
 
-        MainMenu.STDOUT.info("Please choose holiday number.\n");
+        MenuMain.STDOUT.info("Please choose holiday number.\n");
 
         try {
             Scanner scanner = new Scanner(System.in);
             Integer option = scanner.nextInt();
             option--;
-            MainMenu.STDOUT.info("================================================================================ \n");
-            MainMenu.STDOUT.info("Main menu -> View calendar -> View holidays in this month -> View chosen holiday \n");
-            MainMenu.STDOUT.info("================================================================================ \n");
+            MenuMain.STDOUT.info("================================================================================ \n");
+            MenuMain.STDOUT.info("Main menu -> View calendar -> View holidays in this month -> View chosen holiday \n");
+            MenuMain.STDOUT.info("================================================================================ \n");
             STDOUT.info(listBuilder(holidaysJsonData).get(option).toString());
 
         } catch (Exception e) {
@@ -137,9 +137,9 @@ public class Printer {
 
     public static List<String> getImportantInfo2ndVersion(List<Holidays> oneElementViewList) {
         index = 1;
-        MainMenu.STDOUT.info("================================================ \n");
-        MainMenu.STDOUT.info("Main menu -> View calendar -> View all holidays \n");
-        MainMenu.STDOUT.info("================================================ \n");
+        MenuMain.STDOUT.info("================================================ \n");
+        MenuMain.STDOUT.info("Main menu -> View calendar -> View all holidays \n");
+        MenuMain.STDOUT.info("================================================ \n");
         List<String> importantInfoList = new ArrayList<>();
 
         for (int i = 0; i < oneElementViewList.size(); i++) {
