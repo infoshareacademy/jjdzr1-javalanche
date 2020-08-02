@@ -2,7 +2,7 @@ package com.infoshareacademy;
 
 import com.infoshareacademy.api.Printer;
 import com.infoshareacademy.api.HolidaysJsonData;
-import com.infoshareacademy.menu.MainMenu;
+import com.infoshareacademy.menu.MenuMain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +18,6 @@ public class App {
 
         HolidaysJsonData holidaysJsonData = HolidaysJsonData.readDataFromJsonFile();
         Printer.listBuilder(holidaysJsonData);
-        MainMenu.mainMenu();
+        MenuMain.mainMenu();
     }
 }

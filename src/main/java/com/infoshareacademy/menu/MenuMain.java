@@ -3,10 +3,9 @@ package com.infoshareacademy.menu;
 import com.infoshareacademy.api.HolidaysJsonData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Scanner;
 
-public class MainMenu {
+public class MenuMain {
 
     public static final Logger STDOUT = LoggerFactory.getLogger("CONSOLE_OUT");
 
@@ -62,7 +61,7 @@ public class MainMenu {
     }
 
     private static void backToMenu() {
-        MainMenu.STDOUT.info("Back to main menu press 1.\n");
+        MenuMain.STDOUT.info("Back to main menu press 1.\n");
         Scanner scanner = new Scanner(System.in);
         String option = scanner.next();
         if (option.charAt(0) == '1') {
