@@ -21,6 +21,9 @@ public class PropertiesReader {
     private Properties properties;
     private String propertiesFileName = "src/main/resources/formatsConfigurations.properties";
 
+    final private String ASCENDING_ORDER = "ASC";
+    final private String DESCENDING_ORDER = "DESC";
+
     public PropertiesReader() {
 
         properties = new Properties();
@@ -43,44 +46,9 @@ public class PropertiesReader {
 
     public void setDateFormat() {
 
-        scanner = new Scanner(System.in);
-        DateTimeFormatter dateTimeFormatter;
-        LocalDate localDate;
-
-        boolean isFormatIncorrect;
-        String givenDateFormat = null;
-
-        do {
-            try {
-                isFormatIncorrect = false;
-
-                STDOUT.info("Type in the date format.\n");
-                givenDateFormat = scanner.nextLine();
-
-                dateTimeFormatter = DateTimeFormatter.ofPattern(givenDateFormat);
-
-                LocalDate currentDate = LocalDate.now();
-                String exampleDate = currentDate.format(dateTimeFormatter);
-
-                LocalDate.parse(exampleDate, dateTimeFormatter);
-
-            } catch (Exception e) {
-                STDOUT.error("Wrong format: " + e + "\n");
-                isFormatIncorrect = true;
-            }
-        }
-        while (isFormatIncorrect);
-
-        FileWriter output = null;
+        properties.setProperty("dateFormat", dateInputCorrector());
         try {
-            output = new FileWriter(propertiesFileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        properties.setProperty("dateFormat", givenDateFormat);
-        try {
-            properties.store(output, null);
+            properties.store(propertiesLoader(), null);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,27 +57,9 @@ public class PropertiesReader {
 
     public void setSortOrder() {
 
-        String ascendingOrder = "ASC";
-        String descendingOrder = "DESC";
+        FileWriter output = propertiesLoader();
 
-        STDOUT.info("Currently, your elements are sorted by '" + this.sortOrder + "'\n");
-        STDOUT.info("Options are: \n");
-        STDOUT.info("1 - " + ascendingOrder + "\n2 - " + descendingOrder + "\n");
-
-        int decision = usersDecisionInterpreter(2);
-
-        FileWriter output = null;
-        try {
-            output = new FileWriter(propertiesFileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (decision == 1) {
-            properties.setProperty("sortOrder", ascendingOrder);
-        } else {
-            properties.setProperty("sortOrder", descendingOrder);
-        }
+        sortingUpdatedInPropertiesFile(sortingInterface());
 
         try {
             properties.store(output, null);
@@ -125,9 +75,7 @@ public class PropertiesReader {
         return this.dateFormat;
     }
 
-    public String getSortOrder() {
-        return this.sortOrder;
-    }
+    public String getSortOrder() { return this.sortOrder; }
 
     public int usersDecisionInterpreter(Integer numberOfOptions) {
 
@@ -158,34 +106,70 @@ public class PropertiesReader {
         return usersDecisionInput;
     }
 
-    public String getKeyProperty(String keyTitle) throws IOException {
-
-        String requestedProperty = null;
-
+    private FileWriter propertiesLoader(){
+        FileWriter output = null;
         try {
-            properties = new Properties();
+            output = new FileWriter(propertiesFileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            inputStream = new FileInputStream(propertiesFileName);
+        return output;
+    }
 
-            if (inputStream != null) {
-                properties.load(inputStream);
+    private String dateInputCorrector(){
 
-            } else {
-                throw new FileNotFoundException("File at '" + propertiesFileName + "' has not been found.");
+        Scanner scanner = new Scanner(System.in);
+        boolean isFormatIncorrect;
+        String givenDateFormat = null;
+
+        do {
+            try {
+                isFormatIncorrect = false;
+
+                STDOUT.info("Type in the date format.\n");
+                givenDateFormat = scanner.nextLine();
+
+                dateFormatValidator(givenDateFormat);
+
+            } catch (Exception e) {
+                STDOUT.error("Wrong format: " + e + "\n");
+                isFormatIncorrect = true;
             }
-
-            requestedProperty = properties.getProperty(keyTitle);
-        } catch (Exception e) {
-            STDOUT.error("Error found:" + e);
-        } finally {
-            inputStream.close();
         }
+        while (isFormatIncorrect);
 
-        if (requestedProperty == null) {
-            requestedProperty = "";
-            STDOUT.error("Given key doesn't find any match.");
-        }
-        return requestedProperty;
+        return givenDateFormat;
 
     }
+
+    private void dateFormatValidator(String passedDate){
+
+        DateTimeFormatter dateTimeFormatter;
+
+        dateTimeFormatter = DateTimeFormatter.ofPattern(passedDate);
+
+        LocalDate currentDate = LocalDate.now();
+        String exampleDate = currentDate.format(dateTimeFormatter);
+
+        LocalDate.parse(exampleDate, dateTimeFormatter);
+    }
+
+    private void sortingUpdatedInPropertiesFile(int decision){
+        if (decision == 1) {
+            properties.setProperty("sortOrder", ASCENDING_ORDER);
+        } else {
+            properties.setProperty("sortOrder", DESCENDING_ORDER);
+        }
+    }
+
+    private int sortingInterface(){
+
+        STDOUT.info("Currently, your elements are sorted by '" + this.sortOrder + "'\n");
+        STDOUT.info("Options are: \n");
+        STDOUT.info("1 - " + ASCENDING_ORDER + "\n2 - " + DESCENDING_ORDER + "\n");
+
+        return usersDecisionInterpreter(2);
+    }
+
 }
