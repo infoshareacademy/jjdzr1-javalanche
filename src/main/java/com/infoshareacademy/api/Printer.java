@@ -39,51 +39,6 @@ public class Printer {
         return importantInfoList;
     }
 
-    public static List<String> getHolidayDateList(HolidaysJsonData holidaysJsonData) {
-
-        List<String> holidayDateList = new ArrayList<>();
-        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            holidayDateList.add(holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().toString());
-        }
-        return holidayDateList;
-    }
-
-    public static List<String> getHolidayIsoDateList(HolidaysJsonData holidaysJsonData) {
-
-        List<String> holidayIsoDateList = new ArrayList<>();
-        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            holidayIsoDateList.add(holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getIso());
-        }
-        return holidayIsoDateList;
-    }
-
-    public static List<String> getHolidayDescriptionList(HolidaysJsonData holidaysJsonData) {
-
-        List<String> holidayDescriptionList = new ArrayList<>();
-        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            holidayDescriptionList.add(holidaysJsonData.getServerResponse().getHolidays().get(i).getDescription());
-        }
-        return holidayDescriptionList;
-    }
-
-    public static List<String> getHolidayDateTimeList(HolidaysJsonData holidaysJsonData) {
-
-        List<String> holidayDateTimeList = new ArrayList<>();
-        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            holidayDateTimeList.add(holidaysJsonData.getServerResponse().getHolidays().get(i).getHolidayDate().getHolidayDateTime().toString());
-        }
-        return holidayDateTimeList;
-    }
-
-    public static List<String> getHolidayNamesList(HolidaysJsonData holidaysJsonData) {
-
-        List<String> holidayNamesList = new ArrayList<>();
-        for (int i = 0; i < holidaysJsonData.getServerResponse().getHolidays().size(); i++) {
-            holidayNamesList.add(holidaysJsonData.getServerResponse().getHolidays().get(i).getName());
-        }
-        return holidayNamesList;
-    }
-
     public static List<Holidays> getHolidaysInSpecifyMonth(HolidaysJsonData holidaysJsonData, Integer integer) {
 
         List<Holidays> holidaysOnThisMonthList = new ArrayList<>();
@@ -142,10 +97,10 @@ public class Printer {
         MainMenu.STDOUT.info("================================================ \n");
         List<String> importantInfoList = new ArrayList<>();
 
-        for (int i = 0; i < oneElementViewList.size(); i++) {
-           importantInfoList.add(" \n" + index + ". " + oneElementViewList.get(i).getName() + " - " +
-                oneElementViewList.get(i).getHolidayDate().getIso()
-                 + "\n" + oneElementViewList.get(i).getDescription() + "\n ");//           index++;
+        for (Holidays holidays : oneElementViewList) {
+            importantInfoList.add(" \n" + index + ". " + holidays.getName() + " - " +
+                    holidays.getHolidayDate().getIso()
+                    + "\n" + holidays.getDescription() + "\n ");
         }
         String r = importantInfoList.toString().replace("[", "").replace("]", "").
                 replace(" , ", "");
